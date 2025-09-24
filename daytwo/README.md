@@ -8,7 +8,7 @@
 
 ## 📖 Summary
 
-Today, I continued my journey with **backend development** by learning how to set up a **Linux server** for hosting and database management.  
+Today, I continued my journey with **backend development** by learning how to set up a **Linux server** on my old laptop for hosting and database management.  
 The session also covered hosting **Python apps** and ensuring proper security practices.
 
 ---
