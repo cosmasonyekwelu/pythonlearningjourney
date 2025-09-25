@@ -1,4 +1,4 @@
-# Python Learning Journey - Day Two 🐍
+# Python Learning Journey - Day Two
 
 **Date**: September 23, 2025  
 **Instructor**: Mr. Miracle (Orientation on Backend Intro via Zoom)  

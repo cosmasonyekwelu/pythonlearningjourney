@@ -1,7 +1,7 @@
 """
 Python Learning Journey - Day One
 Date: September 22, 2025
-Author: Cosmas
+Author: Cosmas Onyekwelu
 """
 
 # Day One Summary

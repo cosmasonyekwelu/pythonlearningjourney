@@ -5,6 +5,7 @@
 - [Python for Everybody](https://www.py4e.com/) – Free book & course
 - [Corey Schafer Python Tutorials](https://www.youtube.com/user/schafer5) – YouTube
 - [Automate the Boring Stuff](https://automatetheboringstuff.com/) – Practical Python
+- ["10 Important Python Concepts in 20 Minutes"](https://youtu.be/Gx5qb1uHss4) - YouTube
 
 ## Documentation
 
