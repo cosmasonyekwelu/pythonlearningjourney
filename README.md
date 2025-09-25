@@ -1,9 +1,9 @@
-# Python Learning Journey 🐍
+# Python Learning Journey
 
 ![Python Version](https://img.shields.io/badge/python-3.8+-blue.svg)  
 ![License](https://img.shields.io/badge/license-MIT-green.svg)  
 ![Status](https://img.shields.io/badge/status-active-brightgreen.svg)  
-![Days Completed](https://img.shields.io/badge/days-3-orange.svg)
+![Days Completed](https://img.shields.io/badge/days-4-orange.svg)
 
 ---
 

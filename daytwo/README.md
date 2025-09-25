@@ -1,34 +1,46 @@
-# Python Learning Journey - Day Two
+# Day 02 - Python Learning Journey
 
-**Date**: September 23, 2025  
-**Instructor**: Mr. Miracle (Orientation on Backend Intro via Zoom)  
-**Extra Setup**: Google Classroom created ✅
+**Date:** September 23, 2025
 
----
+## Activities
 
-## 📖 Summary
+1. Attended orientation on **Backend Introduction** via Zoom (Instructor: Mr. Miracle)
+2. Set up a **Linux server (Ubuntu)** on my old laptop
+3. Created and joined **Google Classroom** for course activities
+4. Installed web servers (Apache/Nginx) and databases (MySQL/PostgreSQL)
+5. Hosted a basic Flask app and configured persistence using `systemd`
 
-Today, I continued my journey with **backend development** by learning how to set up a **Linux server** on my old laptop for hosting and database management.  
-The session also covered hosting **Python apps** and ensuring proper security practices.
+## Tutorial
 
----
+- **Title:** Backend Orientation & Linux Server Setup
+- **URL:** Zoom Session (Instructor-led)
+- **Topics Covered:**
+  - Linux package managers (`apt`, `yum`, `dnf`)
+  - Web server setup (Apache, Nginx)
+  - Database setup and security (MySQL, PostgreSQL)
+  - Firewall configuration for HTTP, HTTPS, SSH
+  - Hosting Python apps (Flask)
+  - SSL setup using Certbot
+  - Server monitoring & security (fail2ban, Prometheus, Grafana, htop)
 
-## 🔑 Key Learnings
+## Key Learnings
 
-1. Linux distributions use different package managers (`apt`, `yum`, `dnf`).
-2. Installed and configured **Apache/Nginx** for serving websites.
-3. Installed and secured **MySQL/PostgreSQL** for database management.
-4. Configured **firewall rules** to allow HTTP, HTTPS, and database connections.
-5. Hosted a basic **Flask app** and made it persistent with `systemd`.
-6. Learned about SSL setup using **Certbot** and server hardening with **fail2ban**.
-7. Understood the importance of **backups and monitoring** (Prometheus, Grafana, htop).
+- Different Linux distributions use different package managers
+- Installed and configured **Nginx/Apache** for serving applications
+- Installed and secured **MySQL/PostgreSQL** databases
+- Opened firewall ports for secure access (HTTP, HTTPS, SSH)
+- Used `systemd` to keep Flask apps running persistently
+- Understood importance of **SSL certificates, monitoring, and backups**
 
----
-
-## 🛠 Practical Commands I Used
+## Practical Commands
 
 ```bash
 sudo apt update && sudo apt upgrade
 sudo apt install nginx mysql-server python3 python3-pip
-sudo ufw allow 80/tcp && sudo ufw allow 443/tcp && sudo ufw allow 22/tcp
+sudo ufw allow 80/tcp && sudo ufw allow 443/tcp && sudo ufw allow 22/tcp.
+
 ```
+
+## Reflection
+
+Today was all about setting up infrastructure. I learned how to configure a Linux server for hosting Python applications, securing it with firewalls and SSL, and ensuring persistence with systemd. This gave me a solid foundation for deploying future backend projects.
