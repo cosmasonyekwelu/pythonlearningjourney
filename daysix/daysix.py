@@ -1,6 +1,8 @@
 """
-Day 6: Algorithms & File Handling
-Python Learning Journey - Algorithm Fundamentals & File I/O
+Python Learning Journey - Day Six
+Date: September 27, 2025
+Author: Cosmas Onyekwelu
+Topic: Algorithms & File Handling
 """
 
 import csv
