@@ -1,0 +1,4 @@
+Hello World! This is a sample text file.
+Python File Handling is powerful and easy to use.
+We can read, write, and append to files.
+This is line 4 of our sample file.
