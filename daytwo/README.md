@@ -1,4 +1,4 @@
-# Day 02 - Python Learning Journey
+# Day 02 - Python Learning Journey.
 
 **Date:** September 23, 2025
 

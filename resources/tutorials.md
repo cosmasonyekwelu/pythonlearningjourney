@@ -1,4 +1,4 @@
-# Python Learning Resources
+# Python Learning Resources.
 
 ## Tutorials
 

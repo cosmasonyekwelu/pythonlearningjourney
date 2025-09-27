@@ -1,5 +1,5 @@
 """
-Mini-Project: Student Gradebook System
+Mini-Project: Student Gradebook System.
 """
 
 # Initialize gradebook

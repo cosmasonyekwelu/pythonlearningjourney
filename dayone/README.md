@@ -1,4 +1,4 @@
-# Day 01 - Python Learning Journey
+# Day 01 - Python Learning Journey.
 
 **Date:** September 22, 2024
 

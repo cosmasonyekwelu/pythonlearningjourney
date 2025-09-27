@@ -1,4 +1,4 @@
-**Topic**: Setting up a Linux Server for Hosting & Database Management
+**Topic**: Setting up a Linux Server for Hosting & Database Management,
 
 ## 📖 Summary
 

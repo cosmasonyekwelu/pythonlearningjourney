@@ -2,7 +2,7 @@
 Python Learning Journey - Day Two
 Date: September 23, 2025
 Author: Cosmas Onyekwelu
-Topic: Setting up a Linux Server for Hosting & Database Management
+Topic: Setting up a Linux Server for Hosting & Database Management.
 """
 
 # Key concepts reviewed:

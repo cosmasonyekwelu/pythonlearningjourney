@@ -4,7 +4,7 @@ Date: September 22, 2025
 Author: Cosmas Onyekwelu
 """
 
-# Day One Summary
+# Day One Summary.
 day_one = {
     "date": "September 22, 2025",
     "activities": [

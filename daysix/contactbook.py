@@ -1,6 +1,6 @@
 """
 Day 6 Mini-Project: Contact Book System
-Python Learning Journey - File Persistence & Search Algorithms
+Python Learning Journey - File Persistence & Search Algorithms.
 """
 
 import csv

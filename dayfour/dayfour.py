@@ -3,7 +3,7 @@ Python Learning Journey - Day four
 Date: September 25, 2025
 Author: Cosmas Onyekwelu
 Topic: Control Flow Mastery & First Mini-Project
-Building on Python basics with loops, conditionals, and interactive programming
+Building on Python basics with loops, conditionals, and interactive programming.
 """
 
 import random

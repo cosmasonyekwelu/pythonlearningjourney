@@ -3,7 +3,7 @@
 Python Learning Journey - Day Three
 Date: September 24, 2025
 Author: Cosmas Onyekwelu
-Topic: Based on YouTube tutorial Practicing 10 Important Python Concepts
+Topic: Based on YouTube tutorial Practicing 10 Important Python Concepts.
 """
 
 from typing import Final

@@ -1,4 +1,4 @@
-# Day 03 - Python Learning Journey
+# Day 03 - Python Learning Journey.
 
 **Date:** September 24, 2025
 

@@ -3,7 +3,7 @@
 Python Learning Journey - Day five
 Date: September 26, 2025
 Author: Cosmas Onyekwelu
-Topic: Data Structures in Action & Problem Solving
+Topic: Data Structures in Action & Problem Solving.
 """
 
 # --- Lists ---
