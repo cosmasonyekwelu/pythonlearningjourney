@@ -23,12 +23,12 @@ class ContactBook:
                     csv_reader = csv.DictReader(file)
                     self.contacts = list(csv_reader)
                 print(
-                    f"✅ Loaded {len(self.contacts)} contacts from {self.filename}")
+                    f" Loaded {len(self.contacts)} contacts from {self.filename}")
             except Exception as e:
-                print(f"❌ Error loading contacts: {e}")
+                print(f" Error loading contacts: {e}")
                 self.contacts = []
         else:
-            print("📝 No existing contact file found. Starting fresh.")
+            print(" No existing contact file found. Starting fresh.")
             self.contacts = []
 
     def save_contacts(self):
@@ -40,19 +40,19 @@ class ContactBook:
                 writer.writerows(self.contacts)
             return True
         except Exception as e:
-            print(f"❌ Error saving contacts: {e}")
+            print(f" Error saving contacts: {e}")
             return False
 
     def add_contact(self, name: str, phone: str, email: str) -> bool:
         """Add a new contact with validation"""
         # Basic validation
         if not name or not phone:
-            print("❌ Name and phone are required!")
+            print(" Name and phone are required!")
             return False
 
         # Check for duplicates
         if self.linear_search_by_name(name) != -1:
-            print(f"❌ Contact '{name}' already exists!")
+            print(f" Contact '{name}' already exists!")
             return False
 
         new_contact = {
@@ -67,7 +67,7 @@ class ContactBook:
         self.contacts.sort(key=lambda x: x['name'].lower())
 
         if self.save_contacts():
-            print(f"✅ Contact '{name}' added successfully!")
+            print(f" Contact '{name}' added successfully!")
             return True
         else:
             self.contacts.pop()  # Remove if save failed
@@ -102,7 +102,7 @@ class ContactBook:
 
     def search_contact(self, name: str) -> Optional[Dict[str, str]]:
         """Search for contact using both algorithms and compare"""
-        print(f"\n🔍 Searching for '{name}'...")
+        print(f"\n Searching for '{name}'...")
 
         # Linear search
         linear_index = self.linear_search_by_name(name)
@@ -113,23 +113,23 @@ class ContactBook:
         if linear_index != -1 and binary_index != -1:
             contact = self.contacts[binary_index]
             print(
-                f"✅ Found: {contact['name']} | {contact['phone']} | {contact['email']}")
+                f" Found: {contact['name']} | {contact['phone']} | {contact['email']}")
 
             # Demonstrate algorithm difference
             if linear_index == binary_index:
                 print("   Both algorithms found the same contact!")
             return contact
         else:
-            print(f"❌ Contact '{name}' not found.")
+            print(f" Contact '{name}' not found.")
             return None
 
     def display_all_contacts(self):
         """Display all contacts in a formatted table"""
         if not self.contacts:
-            print("📭 No contacts in the address book.")
+            print(" No contacts in the address book.")
             return
 
-        print(f"\n📋 CONTACT BOOK ({len(self.contacts)} contacts)")
+        print(f"\n CONTACT BOOK ({len(self.contacts)} contacts)")
         print("=" * 60)
         print(f"{'Name':<20} {'Phone':<15} {'Email':<25}")
         print("-" * 60)
@@ -144,13 +144,13 @@ class ContactBook:
         """Delete a contact by name"""
         index = self.linear_search_by_name(name)
         if index == -1:
-            print(f"❌ Contact '{name}' not found.")
+            print(f" Contact '{name}' not found.")
             return False
 
         deleted_contact = self.contacts.pop(index)
         if self.save_contacts():
             print(
-                f"✅ Contact '{deleted_contact['name']}' deleted successfully.")
+                f" Contact '{deleted_contact['name']}' deleted successfully.")
             return True
         else:
             # Restore if save failed
@@ -161,7 +161,7 @@ class ContactBook:
         """Update contact information"""
         index = self.linear_search_by_name(name)
         if index == -1:
-            print(f"❌ Contact '{name}' not found.")
+            print(f" Contact '{name}' not found.")
             return False
 
         if new_phone:
@@ -170,16 +170,16 @@ class ContactBook:
             self.contacts[index]['email'] = new_email
 
         if self.save_contacts():
-            print(f"✅ Contact '{name}' updated successfully.")
+            print(f" Contact '{name}' updated successfully.")
             return True
         else:
-            print("❌ Failed to update contact.")
+            print(" Failed to update contact.")
             return False
 
 
 def demo_contact_book():
     """Demonstrate the contact book system"""
-    print("🚀 CONTACT BOOK SYSTEM DEMONSTRATION")
+    print(" CONTACT BOOK SYSTEM DEMONSTRATION")
     print("=" * 50)
 
     # Create contact book instance
@@ -212,7 +212,7 @@ def interactive_contact_book():
 
     while True:
         print("\n" + "=" * 40)
-        print("📞 CONTACT BOOK SYSTEM")
+        print(" CONTACT BOOK SYSTEM")
         print("=" * 40)
         print("1. Add Contact")
         print("2. Search Contact")
@@ -224,21 +224,21 @@ def interactive_contact_book():
         choice = input("\nEnter your choice (1-6): ").strip()
 
         if choice == "1":
-            print("\n➕ ADD NEW CONTACT")
+            print("\n ADD NEW CONTACT")
             name = input("Name: ").strip()
             phone = input("Phone: ").strip()
             email = input("Email (optional): ").strip()
             contact_book.add_contact(name, phone, email)
 
         elif choice == "2":
-            name = input("\n🔍 Enter name to search: ").strip()
+            name = input("\n Enter name to search: ").strip()
             contact_book.search_contact(name)
 
         elif choice == "3":
             contact_book.display_all_contacts()
 
         elif choice == "4":
-            name = input("\n✏️  Enter name to update: ").strip()
+            name = input("\n  Enter name to update: ").strip()
             new_phone = input(
                 "New phone (press Enter to keep current): ").strip()
             new_email = input(
@@ -248,10 +248,10 @@ def interactive_contact_book():
                 contact_book.update_contact(
                     name, new_phone or None, new_email or None)
             else:
-                print("❌ No changes provided.")
+                print(" No changes provided.")
 
         elif choice == "5":
-            name = input("\n🗑️  Enter name to delete: ").strip()
+            name = input("\n  Enter name to delete: ").strip()
             if name:
                 contact_book.delete_contact(name)
 
@@ -260,7 +260,7 @@ def interactive_contact_book():
             break
 
         else:
-            print("❌ Invalid choice! Please try again.")
+            print(" Invalid choice! Please try again.")
 
 
 if __name__ == "__main__":
@@ -269,6 +269,6 @@ if __name__ == "__main__":
 
     # Start interactive version
     print("\n" + "=" * 50)
-    print("🎮 STARTING INTERACTIVE CONTACT BOOK")
+    print(" STARTING INTERACTIVE CONTACT BOOK")
     print("=" * 50)
     interactive_contact_book()

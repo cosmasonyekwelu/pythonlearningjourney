@@ -7,7 +7,7 @@
 
 ---
 
-## 📖 Overview
+## Overview
 
 This repository documents my **daily Python learning journey**, from absolute beginner to proficient developer. Each day contains:
 
@@ -22,7 +22,7 @@ This repository documents my **daily Python learning journey**, from absolute be
 
 ---
 
-## 🎯 Purpose
+## Purpose
 
 - Track progress
 - Share knowledge

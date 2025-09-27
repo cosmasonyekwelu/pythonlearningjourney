@@ -22,18 +22,18 @@ def demonstrate_conditionals() -> None:
 
     # Temperature classifier
     temperatures = [15, 25, -5, 32, 40, 10]
-    print("\n🌡️  Temperature Classification:")
+    print("\n  Temperature Classification:")
     for temp in temperatures:
         if temp < 0:
-            category = "Freezing ❄️"
+            category = "Freezing"
         elif temp < 15:
-            category = "Cold 🥶"
+            category = "Cold"
         elif temp < 25:
-            category = "Moderate 😊"
+            category = "Moderate"
         elif temp < 35:
-            category = "Warm ☀️"
+            category = "Warm"
         else:
-            category = "Hot 🔥"
+            category = "Hot"
         print(f"   {temp}°C: {category}")
 
 
@@ -44,20 +44,20 @@ def demonstrate_loops() -> None:
     print("=" * 50)
 
     # For loop with range
-    print("\n🔢 Counting with for loop:")
+    print("\n Counting with for loop:")
     for i in range(1, 6):
         print(f"   Number {i}")
 
     # While loop with condition
-    print("\n🔄 While loop countdown:")
+    print("\n While loop countdown:")
     counter = 5
     while counter > 0:
         print(f"   T-minus {counter}...")
         counter -= 1
-    print("   Liftoff! 🚀")
+    print("   Liftoff! ")
 
     # Break and continue examples
-    print("\n⏹️  Break/Continue Demo:")
+    print("\n  Break/Continue Demo:")
     print("   Numbers 1-10, skipping evens (continue):")
     for i in range(1, 11):
         if i % 2 == 0:
@@ -79,14 +79,14 @@ def demonstrate_nested_loops() -> None:
     print("=" * 50)
 
     # Multiplication table
-    print("\n📊 Multiplication Table (1-3):")
+    print("\n Multiplication Table (1-3):")
     for i in range(1, 4):
         for j in range(1, 4):
             print(f"   {i} × {j} = {i*j}", end="  ")
         print()
 
     # Pattern printing
-    print("\n🔺 Pattern Printing:")
+    print("\n Pattern Printing:")
     for row in range(1, 6):
         for col in range(1, row + 1):
             print("★", end=" ")
@@ -139,13 +139,13 @@ def run_exercises() -> None:
 
     # Fibonacci
     fib_numbers = fibonacci_sequence(10)
-    print(f"\n🔢 First 10 Fibonacci numbers:")
+    print(f"\n First 10 Fibonacci numbers:")
     for i, num in enumerate(fib_numbers):
         print(f"   {i+1:2d}: {num:>3}")
 
     # String reversal
     test_strings = ["hello", "python", "racecar", "programming"]
-    print(f"\n🔁 String Reversal:")
+    print(f"\n String Reversal:")
     for text in test_strings:
         reversed_text = reverse_string(text)
         palindrome_status = "✓" if is_palindrome(text) else "✗"
@@ -183,14 +183,14 @@ class NumberGuessingGame:
                     return guess
                 else:
                     print(
-                        f"   ❌ Please enter between {self.min_num}-{self.max_num}")
+                        f"    Please enter between {self.min_num}-{self.max_num}")
             except ValueError:
-                print("   ❌ Please enter a valid number!")
+                print("    Please enter a valid number!")
 
     def play_round(self) -> bool:
         """Play one round of guessing"""
         print(
-            f"\n🎯 Game #{self.games_played}: I'm thinking of a number between {self.min_num}-{self.max_num}")
+            f"\n Game #{self.games_played}: I'm thinking of a number between {self.min_num}-{self.max_num}")
 
         while True:
             guess = self.get_user_guess()
@@ -198,13 +198,13 @@ class NumberGuessingGame:
 
             if guess == self.target_number:
                 print(
-                    f"   🎉 Correct! You guessed it in {self.attempts} attempts!")
+                    f"    Correct! You guessed it in {self.attempts} attempts!")
                 self._update_high_score()
                 return True
             elif guess < self.target_number:
-                print("   📈 Too low!", end=" ")
+                print("Too low!", end=" ")
             else:
-                print("   📉 Too high!", end=" ")
+                print("Too high!", end=" ")
 
             # Give progressive hints
             if self.attempts % 3 == 0:
@@ -213,7 +213,7 @@ class NumberGuessingGame:
                     self.min_num, self.target_number - hint_range)
                 upper_bound = min(
                     self.max_num, self.target_number + hint_range)
-                print(f"💡 Hint: It's between {lower_bound}-{upper_bound}")
+                print(f" Hint: It's between {lower_bound}-{upper_bound}")
             else:
                 print()
 
@@ -221,11 +221,11 @@ class NumberGuessingGame:
         """Update high score if current game is better"""
         if self.high_score is None or self.attempts < self.high_score:
             self.high_score = self.attempts
-            print("   🏆 New high score!")
+            print("    New high score!")
 
     def show_stats(self) -> None:
         """Display game statistics"""
-        print(f"\n📊 Game Statistics:")
+        print(f"\n Game Statistics:")
         print(f"   Games played: {self.games_played}")
         if self.high_score:
             print(f"   Best score: {self.high_score} attempts")
@@ -246,7 +246,7 @@ class NumberGuessingGame:
     def run(self) -> None:
         """Main game loop"""
         print("=" * 50)
-        print("🎮 WELCOME TO THE NUMBER GUESSING GAME!")
+        print(" WELCOME TO THE NUMBER GUESSING GAME!")
         print("=" * 50)
 
         while True:
@@ -256,7 +256,7 @@ class NumberGuessingGame:
 
             if not self.play_again():
                 print("\n" + "=" * 50)
-                print("Thanks for playing! 👋")
+                print("Thanks for playing! ")
                 print("=" * 50)
                 break
 

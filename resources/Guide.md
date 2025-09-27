@@ -1,6 +1,6 @@
 **Topic**: Setting up a Linux Server for Hosting & Database Management,
 
-## 📖 Summary
+## Summary
 
 Today, I learned how to set up a **Linux server** for hosting purposes, including web and database services. The focus was on:
 
@@ -14,7 +14,7 @@ Today, I learned how to set up a **Linux server** for hosting purposes, includin
 
 ---
 
-## 🔑 Key Learnings
+## Key Learnings
 
 1. Linux distributions have different package managers (`apt`, `yum`, `dnf`).
 2. Web servers (Apache/Nginx) require proper starting, enabling, and testing.
@@ -25,7 +25,7 @@ Today, I learned how to set up a **Linux server** for hosting purposes, includin
 
 ---
 
-## 🧰 Prerequisites
+## Prerequisites
 
 - A _Linux system_ (Debian/Ubuntu/CentOS/Arch/etc.)
 - Basic terminal skills
@@ -57,7 +57,7 @@ sudo yum update
 
 Depends on what type of server you want to run.
 
-#### 🌐 Web Server (Apache or Nginx)
+#### Web Server (Apache or Nginx)
 
 - _Apache:_
 
@@ -71,7 +71,7 @@ Access it at http://localhost or your machine's IP.
 bash
 sudo apt install nginx
 
-#### 💾 File Server (Samba or FTP)
+#### File Server (Samba or FTP)
 
 - _Samba (for sharing with Windows/macOS):_
 
@@ -83,7 +83,7 @@ sudo apt install samba
 bash
 sudo apt install vsftpd
 
-#### 💬 Game Server (e.g. Minecraft, CS\:GO, Valheim)
+#### Game Server (e.g. Minecraft, CS\:GO, Valheim)
 
 Check the specific server software and installation steps.
 
@@ -258,7 +258,7 @@ Regular backups and monitoring are essential for server maintenance.
 - _Backup_: Use tools like rsync or automated services to back up the database and important files.
 - _Monitoring: Set up monitoring tools like **Prometheus, **Grafana, or simpler tools like \*\*htop_ and _netstat_.
 
-### ✅ _Make it Persistent_
+### _Make it Persistent_
 
 Use _systemd_ to run apps as services:
 
@@ -287,7 +287,7 @@ sudo systemctl start myapp
 
 ---
 
-## 🔒 Bonus: Security Tips
+## Bonus: Security Tips
 
 - Used fail2ban to prevent brute-force attacks:
 

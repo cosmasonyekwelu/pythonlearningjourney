@@ -72,7 +72,7 @@ class AlgorithmMastery:
 
     def compare_search_algorithms(self, data: List[int], target: int):
         """Compare linear vs binary search performance"""
-        print(f"\n🔍 Searching for {target} in list of {len(data)} elements")
+        print(f"\n Searching for {target} in list of {len(data)} elements")
 
         # Linear search
         start_time = time.time()
@@ -174,7 +174,7 @@ class ProblemSolvingExercises:
 
     def demonstrate_algorithms(self):
         """Demonstrate sorting and searching algorithms"""
-        print("🎯 ALGORITHM DEMONSTRATION")
+        print("ALGORITHM DEMONSTRATION")
         print("=" * 50)
 
         # Sample data
@@ -198,7 +198,7 @@ class ProblemSolvingExercises:
         linear_index = algo.linear_search(numbers, target)
         binary_index = algo.binary_search(sorted(numbers), target)
 
-        print(f"\n🔍 Search for {target}:")
+        print(f"\n Search for {target}:")
         print(f"Linear Search index: {linear_index}")
         print(f"Binary Search index: {binary_index}")
 
@@ -208,7 +208,7 @@ class ProblemSolvingExercises:
 
     def demonstrate_file_operations(self):
         """Demonstrate file handling operations"""
-        print("\n📁 FILE HANDLING DEMONSTRATION")
+        print("\n FILE HANDLING DEMONSTRATION")
         print("=" * 50)
 
         file_handler = FileHandling()
@@ -221,7 +221,7 @@ This is line 4 of our sample file."""
 
         # Write to file
         result = file_handler.write_to_file('sample.txt', sample_content)
-        print(f"📝 {result}")
+        print(f" {result}")
 
         # Read entire file
         content = file_handler.read_text_file('sample.txt')
@@ -229,18 +229,18 @@ This is line 4 of our sample file."""
 
         # Read line by line
         lines = file_handler.read_lines('sample.txt')
-        print(f"📄 Lines: {len(lines)} lines read")
+        print(f" Lines: {len(lines)} lines read")
 
         # Word frequency count
         word_freq = file_handler.count_word_frequency('sample.txt')
-        print(f"📊 Top 5 words: {dict(list(word_freq.items())[:5])}")
+        print(f" Top 5 words: {dict(list(word_freq.items())[:5])}")
 
         # CSV operations demonstration
         self.demo_csv_operations()
 
     def demo_csv_operations(self):
         """Demonstrate CSV file operations"""
-        print("\n📊 CSV FILE OPERATIONS")
+        print("\n CSV FILE OPERATIONS")
         print("-" * 30)
 
         file_handler = FileHandling()
@@ -261,14 +261,14 @@ This is line 4 of our sample file."""
 
         # Read from CSV
         contacts = file_handler.read_csv_file('contacts.csv')
-        print(f"📋 CSV Contacts: {len(contacts)} records")
+        print(f" CSV Contacts: {len(contacts)} records")
         for contact in contacts:
             print(f"  - {contact['name']}: {contact['phone']}")
 
 
 def main():
     """Main execution function"""
-    print("🚀 DAY 6: ALGORITHMS & FILE HANDLING")
+    print(" DAY 6: ALGORITHMS & FILE HANDLING")
     print("=" * 60)
 
     # Run algorithm demonstrations
@@ -277,7 +277,7 @@ def main():
     exercises.demonstrate_file_operations()
 
     # Big-O notation introduction
-    print("\n📈 BIG-O NOTATION INTRODUCTION")
+    print("\n BIG-O NOTATION INTRODUCTION")
     print("=" * 40)
     print("""
 O(1)     - Constant time (direct access)

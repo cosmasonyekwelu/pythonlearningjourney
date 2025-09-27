@@ -15,7 +15,7 @@ firewall_ports = {"HTTP": 80, "HTTPS": 443,
 
 
 def recap():
-    print("🔑 Day Two Recap")
+    print("Day Two Recap")
     print("1. Installed and updated Linux server.")
     print("2. Learned web servers:", web_servers)
     print("3. Installed databases:", databases)
@@ -30,7 +30,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "Hello from Flask! Day Two Learning Journey 🚀"
+    return "Hello from Flask! Day Two Learning Journey"
 
 
 if __name__ == "__main__":
