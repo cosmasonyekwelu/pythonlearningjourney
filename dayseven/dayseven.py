@@ -11,44 +11,44 @@ from datetime import datetime, timedelta
 
 class WeekOneReview:
     def __init__(self):
-        self.start_date = datetime(2024, 9, 22)
-        self.end_date = datetime(2024, 9, 28)
+        self.start_date = datetime(2025, 9, 22)
+        self.end_date = datetime(2025, 9, 28)
         self.days_completed = 6
         self.projects_built = 3
 
         self.learning_timeline = {
             "Day 1": {
-                "date": "Sep 22, 2024",
+                "date": "Sep 22, 2025",
                 "focus": "Python Fundamentals & Setup",
                 "topics": ["Variables", "Data Types", "Basic Syntax", "GitHub Setup"],
                 "achievements": ["First Python Program", "Environment Configuration"]
             },
             "Day 2": {
-                "date": "Sep 23, 2024",
+                "date": "Sep 23, 2025",
                 "focus": "Backend Introduction & Linux",
                 "topics": ["Server Setup", "Web Servers", "Database Concepts"],
                 "achievements": ["Backend Orientation", "Server Understanding"]
             },
             "Day 3": {
-                "date": "Sep 24, 2024",
+                "date": "Sep 24, 2025",
                 "focus": "Flask & Web Development",
                 "topics": ["REST APIs", "HTTP Methods", "JSON Handling"],
                 "achievements": ["First Web Application", "API Development"]
             },
             "Day 4": {
-                "date": "Sep 25, 2024",
+                "date": "Sep 25, 2025",
                 "focus": "Control Flow & Algorithms",
                 "topics": ["Conditionals", "Loops", "Problem Solving"],
                 "achievements": ["Number Guessing Game", "Algorithm Practice"]
             },
             "Day 5": {
-                "date": "Sep 26, 2024",
+                "date": "Sep 26, 2025",
                 "focus": "Data Structures Mastery",
                 "topics": ["Lists", "Dictionaries", "Sets", "Tuples"],
                 "achievements": ["Gradebook System", "Data Structure Applications"]
             },
             "Day 6": {
-                "date": "Sep 27, 2024",
+                "date": "Sep 27, 2025",
                 "focus": "Algorithms & File Handling",
                 "topics": ["Sorting", "Searching", "File I/O", "CSV Processing"],
                 "achievements": ["Contact Book", "File Persistence"]
