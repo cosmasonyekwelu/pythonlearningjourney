@@ -225,7 +225,7 @@ This is line 4 of our sample file."""
 
         # Read entire file
         content = file_handler.read_text_file('sample.txt')
-        print(f"📖 File content:\n{content}")
+        print(f"File content:\n{content}")
 
         # Read line by line
         lines = file_handler.read_lines('sample.txt')
@@ -257,7 +257,7 @@ This is line 4 of our sample file."""
         # Write to CSV
         fieldnames = ['name', 'phone', 'email']
         file_handler.write_csv_file('contacts.csv', contacts_data, fieldnames)
-        print("✅ Created contacts.csv")
+        print("Created contacts.csv")
 
         # Read from CSV
         contacts = file_handler.read_csv_file('contacts.csv')

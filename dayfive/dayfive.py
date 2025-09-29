@@ -1,5 +1,4 @@
 """
-
 Python Learning Journey - Day five
 Date: September 26, 2025
 Author: Cosmas Onyekwelu

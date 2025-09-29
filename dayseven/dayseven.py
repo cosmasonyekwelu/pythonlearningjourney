@@ -64,7 +64,7 @@ class WeekOneReview:
             f" Period: {self.start_date.strftime('%b %d')} - {self.end_date.strftime('%b %d, %Y')}")
         print(f" Days Completed: {self.days_completed}")
         print(f" Projects Built: {self.projects_built}")
-        print(f" Current Level: Beginner → Intermediate")
+        print(f" Current Level: Beginner -> Intermediate")
 
         self.display_progress_chart()
         self.display_daily_breakdown()
@@ -123,7 +123,7 @@ class WeekOneReview:
 
     def display_projects_showcase(self):
         """Display projects completed"""
-        print("\n🏆 PROJECTS SHOWCASE")
+        print("\n PROJECTS SHOWCASE")
         print("-" * 50)
 
         projects = {

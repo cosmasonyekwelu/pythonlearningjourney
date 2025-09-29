@@ -2,9 +2,10 @@
 Python Learning Journey - Day One
 Date: September 22, 2025
 Author: Cosmas Onyekwelu
+Beginning my programming journey with Python fundamentals
 """
 
-# Day One Summary.
+# Day One Learning Summary
 day_one = {
     "date": "September 22, 2025",
     "activities": [
@@ -12,135 +13,153 @@ day_one = {
         "Completed 2-hour YouTube Python tutorial"
     ],
     "tutorial_details": {
-        "title": "Python Tutorial",
+        "title": "Python Tutorial - Full Course for Beginners",
         "url": "https://www.youtube.com/watch?v=K5KVEU3aaeQ&t=14s",
         "duration": "2 hours",
         "topics_covered": [
-            "Python basics",
-            "Syntax fundamentals",
+            "Python basics and syntax",
             "Variables and data types",
-            "Basic operations"
+            "Basic operations and calculations",
+            "Working with strings and lists"
         ]
     },
     "key_learnings": [
-        "Python installation and setup",
-        "Basic print statements",
-        "Variable declaration and usage",
+        "Python installation and environment setup",
+        "Basic print statements and output",
+        "Variable declaration and naming conventions",
         "Understanding different data types",
-        "Simple arithmetic operations"
+        "Simple arithmetic operations",
+        "Basic string manipulation"
     ],
     "reflection": """
-        Today marked the beginning of my Python journey. The orientation at Univelcity 
-        provided a good overview of what to expect, and the tutorial gave me solid 
-        foundational knowledge. I'm excited to continue learning and building my 
-        programming skills.
+        Today marked the beginning of my Python programming journey. The orientation 
+        at Univelcity provided a clear roadmap for what lies ahead, and the beginner 
+        tutorial gave me solid foundational knowledge. I was able to set up my 
+        development environment and write my first Python programs. I'm excited to 
+        continue learning and building my programming skills day by day.
     """
 }
-
-# Display Day One Summary
 
 
 def display_day_summary(day_data):
     """Display a formatted summary of the learning day"""
-    print("=" * 50)
-    print(f"PYTHON LEARNING JOURNEY - DAY ONE")
-    print("=" * 50)
+    print("=" * 60)
+    print("PYTHON LEARNING JOURNEY - DAY ONE SUMMARY")
+    print("=" * 60)
+
     print(f"Date: {day_data['date']}")
-    print("\nActivities:")
-    for i, activity in enumerate(day_data['activities'], 1):
-        print(f"  {i}. {activity}")
 
-    print(f"\nTutorial Details:")
-    print(f"  Title: {day_data['tutorial_details']['title']}")
-    print(f"  URL: {day_data['tutorial_details']['url']}")
-    print(f"  Duration: {day_data['tutorial_details']['duration']}")
+    print("\nToday's Activities:")
+    for activity in day_data['activities']:
+        print(f"  - {activity}")
+
+    print("\nTutorial Completed:")
+    tutorial = day_data['tutorial_details']
+    print(f"  Title: {tutorial['title']}")
+    print(f"  Duration: {tutorial['duration']}")
+    print(f"  URL: {tutorial['url']}")
     print("  Topics Covered:")
-    for topic in day_data['tutorial_details']['topics_covered']:
-        print(f"    - {topic}")
+    for topic in tutorial['topics_covered']:
+        print(f"    * {topic}")
 
-    print("\nKey Learnings:")
-    for i, learning in enumerate(day_data['key_learnings'], 1):
-        print(f"  {i}. {learning}")
+    print("\nKey Concepts Learned:")
+    for learning in day_data['key_learnings']:
+        print(f"  - {learning}")
 
-    print(f"\nReflection: {day_data['reflection']}")
-
-# Basic Python Examples
-
-
-def basic_python_examples():
-    """Demonstrate basic Python concepts learned"""
-    print("\n" + "="*30)
-    print("CODE EXAMPLES FROM TODAY")
-    print("="*30)
+    print(f"\nDaily Reflection:")
+    print(f"  {day_data['reflection']}")
 
 
-# Variables and data types
-name = "Python Learner"
-age = 25
-height = 5.9
-is_beginner = True
+def practice_python_basics():
+    """Practice the fundamental Python concepts learned today"""
+    print("\n" + "=" * 40)
+    print("PRACTICE: PYTHON FUNDAMENTALS")
+    print("=" * 40)
 
-print(f"Name: {name}")
-print(f"Age: {age}")
-print(f"Height: {height}")
-print(f"Beginner: {is_beginner}")
+    # Variables and basic data types
+    print("\n--- Variables and Data Types ---")
+    student_name = "Python Learner"
+    student_age = 25
+    student_height = 5.9
+    is_beginner = True
 
-# Different data types
-integer_var = 10
-float_var = 3.14
-string_var = "Hello Python"
-boolean_var = True
-list_var = [1, 2, 3, 4, 5]
+    print(f"Student Name: {student_name}")
+    print(f"Age: {student_age}")
+    print(f"Height: {student_height}")
+    print(f"Beginner Status: {is_beginner}")
 
-print("Data Types Examples:")
-print(f"Integer: {integer_var} - Type: {type(integer_var)}")
-print(f"Float: {float_var} - Type: {type(float_var)}")
-print(f"String: {string_var} - Type: {type(string_var)}")
-print(f"Boolean: {boolean_var} - Type: {type(boolean_var)}")
-print(f"List: {list_var} - Type: {type(list_var)}")
+    # Exploring different data types
+    print("\n--- Exploring Data Types ---")
+    examples = [
+        ("Integer", 42, type(42)),
+        ("Float", 3.14, type(3.14)),
+        ("String", "Hello Python", type("Hello Python")),
+        ("Boolean", False, type(False)),
+        ("List", [1, 2, 3, 4, 5], type([1, 2, 3, 4, 5]))
+    ]
 
-# Basic operations
-a = 10
-b = 3
-print(f"\nBasic Operations:")
-print(f"{a} + {b} = {a + b}")
-print(f"{a} - {b} = {a - b}")
-print(f"{a} * {b} = {a * b}")
-print(f"{a} / {b} = {a / b:.2f}")
+    for data_type, value, type_info in examples:
+        print(f"  {data_type}: {value} (Type: {type_info})")
 
-# STRING OPERATIONS
-print("\n=== STRING OPERATIONS ===")
-first_name = "Alice"
-last_name = "Smith"
+    # Basic mathematical operations
+    print("\n--- Basic Mathematical Operations ---")
+    number_a = 15
+    number_b = 4
 
-full_name = first_name + " " + last_name
-print(f"Full Name: {full_name}")
-print(f"Name in uppercase: {full_name.upper()}")
-print(f"Name in lowercase: {full_name.lower()}")
-print(f"Name length: {len(full_name)} characters")
+    operations = [
+        ("Addition", f"{number_a} + {number_b}", number_a + number_b),
+        ("Subtraction", f"{number_a} - {number_b}", number_a - number_b),
+        ("Multiplication", f"{number_a} * {number_b}", number_a * number_b),
+        ("Division", f"{number_a} / {number_b}", number_a / number_b),
+        ("Floor Division", f"{number_a} // {number_b}", number_a // number_b),
+        ("Modulus", f"{number_a} % {number_b}", number_a % number_b)
+    ]
 
-#  TYPE CONVERSION
-print("\n=== TYPE CONVERSION ===")
-number_str = "123"
-number_int = int(number_str)
-print(f"String '123' converted to integer: {number_int}")
+    for operation_name, expression, result in operations:
+        print(f"  {operation_name}: {expression} = {result}")
 
-float_str = "45.67"
-float_num = float(float_str)
-print(f"String '45.67' converted to float: {float_num}")
+    # String operations practice
+    print("\n--- Working with Strings ---")
+    first_name = "Alice"
+    last_name = "Smith"
 
-#  USER INPUT
-print("\n=== USER INPUT ===")
-# Uncomment to try user input
-# user_name = input("Enter your name: ")
-# user_age = input("Enter your age: ")
-# print(f"Hello {user_name}! You are {user_age} years old.")
+    full_name = first_name + " " + last_name
+    print(f"Full Name: {full_name}")
+    print(f"Uppercase: {full_name.upper()}")
+    print(f"Lowercase: {full_name.lower()}")
+    print(f"Title Case: {full_name.title()}")
+    print(f"Name Length: {len(full_name)} characters")
+    print(f"First Name appears at position: {full_name.find(first_name)}")
+
+    # Type conversion examples
+    print("\n--- Type Conversion Examples ---")
+    string_number = "123"
+    converted_integer = int(string_number)
+    print(
+        f"String '{string_number}' converted to integer: {converted_integer}")
+
+    decimal_string = "45.67"
+    converted_float = float(decimal_string)
+    print(f"String '{decimal_string}' converted to float: {converted_float}")
+
+    number_to_string = str(789)
+    print(f"Integer 789 converted to string: '{number_to_string}'")
 
 
-# Main execution
-if __name__ == "__main__":
+def main():
+    """Main function to run all Day One content"""
+    # Display the day's learning summary
     display_day_summary(day_one)
-    basic_python_examples()
-    print("\n" + "="*50)
-    print("Keep coding! See you tomorrow!")
-    print("="*50)
+
+    # Practice the concepts learned
+    practice_python_basics()
+
+    # Closing message
+    print("\n" + "=" * 60)
+    print("DAY ONE COMPLETED SUCCESSFULLY!")
+    print("Looking forward to continuing this learning journey tomorrow.")
+    print("=" * 60)
+
+
+if __name__ == "__main__":
+    main()

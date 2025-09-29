@@ -1,5 +1,5 @@
 """
-Python Learning Journey - Day four
+Python Learning Journey - Day Four
 Date: September 25, 2025
 Author: Cosmas Onyekwelu
 Topic: Control Flow Mastery & First Mini-Project
@@ -14,7 +14,7 @@ from typing import List, Optional
 # =============================================================================
 
 
-def demonstrate_conditionals() -> None:
+def demonstrate_conditionals():
     """Demonstrate if/elif/else statements with practical examples"""
     print("=" * 50)
     print("PART 1: CONDITIONAL STATEMENTS")
@@ -22,7 +22,7 @@ def demonstrate_conditionals() -> None:
 
     # Temperature classifier
     temperatures = [15, 25, -5, 32, 40, 10]
-    print("\n  Temperature Classification:")
+    print("\nTemperature Classification:")
     for temp in temperatures:
         if temp < 0:
             category = "Freezing"
@@ -34,62 +34,62 @@ def demonstrate_conditionals() -> None:
             category = "Warm"
         else:
             category = "Hot"
-        print(f"   {temp}°C: {category}")
+        print(f"  {temp}°C: {category}")
 
 
-def demonstrate_loops() -> None:
+def demonstrate_loops():
     """Show for loops, while loops, and loop control statements"""
     print("\n" + "=" * 50)
     print("PART 2: LOOPS")
     print("=" * 50)
 
     # For loop with range
-    print("\n Counting with for loop:")
+    print("\nCounting with for loop:")
     for i in range(1, 6):
-        print(f"   Number {i}")
+        print(f"  Number {i}")
 
     # While loop with condition
-    print("\n While loop countdown:")
+    print("\nWhile loop countdown:")
     counter = 5
     while counter > 0:
-        print(f"   T-minus {counter}...")
+        print(f"  T-minus {counter}...")
         counter -= 1
-    print("   Liftoff! ")
+    print("  Liftoff!")
 
     # Break and continue examples
-    print("\n  Break/Continue Demo:")
-    print("   Numbers 1-10, skipping evens (continue):")
+    print("\nBreak and Continue Demo:")
+    print("  Numbers 1-10, skipping even numbers:")
     for i in range(1, 11):
         if i % 2 == 0:
             continue
-        print(f"   {i}", end=" ")
+        print(f"  {i}", end=" ")
 
-    print("\n\n   Stopping at 5 (break):")
+    print("\n\nStopping at 5:")
     for i in range(1, 11):
         if i == 6:
             break
-        print(f"   {i}", end=" ")
+        print(f"  {i}", end=" ")
     print()
 
 
-def demonstrate_nested_loops() -> None:
+def demonstrate_nested_loops():
     """Show nested loops with practical examples"""
     print("\n" + "=" * 50)
     print("PART 3: NESTED LOOPS")
     print("=" * 50)
 
     # Multiplication table
-    print("\n Multiplication Table (1-3):")
+    print("\nMultiplication Table (1-3):")
     for i in range(1, 4):
         for j in range(1, 4):
-            print(f"   {i} × {j} = {i*j}", end="  ")
+            print(f"  {i} × {j} = {i*j}", end="  ")
         print()
 
     # Pattern printing
-    print("\n Pattern Printing:")
+    print("\nPattern Printing:")
     for row in range(1, 6):
         for col in range(1, row + 1):
-            print("★", end=" ")
+            print("*", end=" ")
         print()
 
 # =============================================================================
@@ -97,7 +97,7 @@ def demonstrate_nested_loops() -> None:
 # =============================================================================
 
 
-def fibonacci_sequence(count: int) -> List[int]:
+def fibonacci_sequence(count):
     """Generate Fibonacci sequence using loops"""
     if count <= 0:
         return []
@@ -114,7 +114,7 @@ def fibonacci_sequence(count: int) -> List[int]:
     return sequence
 
 
-def reverse_string(text: str) -> str:
+def reverse_string(text):
     """Reverse a string using loop"""
     reversed_text = ""
     for i in range(len(text)-1, -1, -1):
@@ -122,7 +122,7 @@ def reverse_string(text: str) -> str:
     return reversed_text
 
 
-def is_palindrome(text: str) -> bool:
+def is_palindrome(text):
     """Check if a string is palindrome using loop"""
     text = text.lower().replace(" ", "")
     for i in range(len(text) // 2):
@@ -131,7 +131,7 @@ def is_palindrome(text: str) -> bool:
     return True
 
 
-def run_exercises() -> None:
+def run_exercises():
     """Execute practical exercises"""
     print("\n" + "=" * 50)
     print("PART 4: PRACTICAL EXERCISES")
@@ -139,17 +139,18 @@ def run_exercises() -> None:
 
     # Fibonacci
     fib_numbers = fibonacci_sequence(10)
-    print(f"\n First 10 Fibonacci numbers:")
+    print(f"\nFirst 10 Fibonacci numbers:")
     for i, num in enumerate(fib_numbers):
-        print(f"   {i+1:2d}: {num:>3}")
+        print(f"  Position {i+1}: {num}")
 
     # String reversal
     test_strings = ["hello", "python", "racecar", "programming"]
-    print(f"\n String Reversal:")
+    print(f"\nString Reversal:")
     for text in test_strings:
         reversed_text = reverse_string(text)
-        palindrome_status = "✓" if is_palindrome(text) else "✗"
-        print(f"   '{text}' → '{reversed_text}' {palindrome_status}")
+        palindrome_status = "Palindrome" if is_palindrome(
+            text) else "Not palindrome"
+        print(f"  '{text}' -> '{reversed_text}' ({palindrome_status})")
 
 # =============================================================================
 # PART 3: INTERACTIVE MINI-PROJECT - NUMBER GUESSING GAME
@@ -159,47 +160,46 @@ def run_exercises() -> None:
 class NumberGuessingGame:
     """Interactive number guessing game with scoring"""
 
-    def __init__(self, min_num: int = 1, max_num: int = 50):
+    def __init__(self, min_num=1, max_num=50):
         self.min_num = min_num
         self.max_num = max_num
-        self.target_number: Optional[int] = None
+        self.target_number = None
         self.attempts = 0
         self.high_score = None
         self.games_played = 0
 
-    def generate_number(self) -> None:
+    def generate_number(self):
         """Generate a new random number for the game"""
         self.target_number = random.randint(self.min_num, self.max_num)
         self.attempts = 0
         self.games_played += 1
 
-    def get_user_guess(self) -> int:
+    def get_user_guess(self):
         """Safely get and validate user input"""
         while True:
             try:
                 guess = int(
-                    input(f"   Enter guess ({self.min_num}-{self.max_num}): "))
+                    input(f"Enter your guess ({self.min_num}-{self.max_num}): "))
                 if self.min_num <= guess <= self.max_num:
                     return guess
                 else:
                     print(
-                        f"    Please enter between {self.min_num}-{self.max_num}")
+                        f"Please enter a number between {self.min_num} and {self.max_num}")
             except ValueError:
-                print("    Please enter a valid number!")
+                print("Please enter a valid number!")
 
-    def play_round(self) -> bool:
+    def play_round(self):
         """Play one round of guessing"""
         print(
-            f"\n Game #{self.games_played}: I'm thinking of a number between {self.min_num}-{self.max_num}")
+            f"\nGame #{self.games_played}: I'm thinking of a number between {self.min_num} and {self.max_num}")
 
         while True:
             guess = self.get_user_guess()
             self.attempts += 1
 
             if guess == self.target_number:
-                print(
-                    f"    Correct! You guessed it in {self.attempts} attempts!")
-                self._update_high_score()
+                print(f"Correct! You guessed it in {self.attempts} attempts!")
+                self.update_high_score()
                 return True
             elif guess < self.target_number:
                 print("Too low!", end=" ")
@@ -213,40 +213,40 @@ class NumberGuessingGame:
                     self.min_num, self.target_number - hint_range)
                 upper_bound = min(
                     self.max_num, self.target_number + hint_range)
-                print(f" Hint: It's between {lower_bound}-{upper_bound}")
+                print(f"Hint: It's between {lower_bound} and {upper_bound}")
             else:
                 print()
 
-    def _update_high_score(self) -> None:
+    def update_high_score(self):
         """Update high score if current game is better"""
         if self.high_score is None or self.attempts < self.high_score:
             self.high_score = self.attempts
-            print("    New high score!")
+            print("New high score!")
 
-    def show_stats(self) -> None:
+    def show_stats(self):
         """Display game statistics"""
-        print(f"\n Game Statistics:")
-        print(f"   Games played: {self.games_played}")
+        print(f"\nGame Statistics:")
+        print(f"  Games played: {self.games_played}")
         if self.high_score:
-            print(f"   Best score: {self.high_score} attempts")
+            print(f"  Best score: {self.high_score} attempts")
         else:
-            print(f"   Best score: No wins yet")
+            print(f"  Best score: No wins yet")
 
-    def play_again(self) -> bool:
+    def play_again(self):
         """Ask user if they want to play another round"""
         while True:
-            choice = input("\n   Play again? (y/n): ").lower().strip()
+            choice = input("\nPlay again? (y/n): ").lower().strip()
             if choice in ['y', 'yes']:
                 return True
             elif choice in ['n', 'no']:
                 return False
             else:
-                print("   Please enter 'y' or 'n'")
+                print("Please enter 'y' or 'n'")
 
-    def run(self) -> None:
+    def run(self):
         """Main game loop"""
         print("=" * 50)
-        print(" WELCOME TO THE NUMBER GUESSING GAME!")
+        print("WELCOME TO THE NUMBER GUESSING GAME!")
         print("=" * 50)
 
         while True:
@@ -256,7 +256,7 @@ class NumberGuessingGame:
 
             if not self.play_again():
                 print("\n" + "=" * 50)
-                print("Thanks for playing! ")
+                print("Thanks for playing!")
                 print("=" * 50)
                 break
 
@@ -265,7 +265,7 @@ class NumberGuessingGame:
 # =============================================================================
 
 
-def main() -> None:
+def main():
     """Main function to run all Day 4 content"""
     print("=" * 60)
     print("DAY 4: CONTROL FLOW MASTERY & INTERACTIVE PROGRAMMING")
@@ -289,14 +289,14 @@ def main() -> None:
 
     # Final summary
     print("\n" + "=" * 60)
-    print("DAY 4 COMPLETED! 🎓")
+    print("DAY 4 COMPLETED!")
     print("You've mastered:")
-    print("  ✓ Conditional statements (if/elif/else)")
-    print("  ✓ Loops (for/while) and control flow")
-    print("  ✓ Nested loops and pattern printing")
-    print("  ✓ Practical algorithms (Fibonacci, palindrome)")
-    print("  ✓ Interactive programming with user input")
-    print("  ✓ Building a complete mini-game!")
+    print("  - Conditional statements (if/elif/else)")
+    print("  - Loops (for/while) and control flow")
+    print("  - Nested loops and pattern printing")
+    print("  - Practical algorithms (Fibonacci, palindrome)")
+    print("  - Interactive programming with user input")
+    print("  - Building a complete mini-game!")
     print("=" * 60)
 
 
