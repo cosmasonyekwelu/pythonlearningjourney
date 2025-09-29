@@ -2,7 +2,7 @@
 Python Learning Journey - Day Eight
 Date: September 29, 2025
 Author: Cosmas Onyekwelu
-Topic: Comprehensive String Operations & Advanced Strings & Variables Mastery
+Topic: Comprehensive String Operations & Advanced Strings & Variables Mastery.
 """
 
 

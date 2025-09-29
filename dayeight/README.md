@@ -42,4 +42,4 @@
 
 Today I leveled up my Python knowledge by mastering **strings and variables**.  
 The **String Analyzer mini-project** gave me hands-on experience with real-world string manipulation.  
-I now feel confident working with text data — an essential skill for any Python project.
+I now feel confident working with text data, an essential skill for any Python project.
