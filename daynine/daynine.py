@@ -2,7 +2,7 @@
 Python Learning Journey - Day Nine
 Date: September 30, 2025
 Author: Cosmas Onyekwelu
-Topic: Mastery of Conditional Statements & Loop Constructs
+Topic: Mastery of Conditional Statements & Loop Constructs.
 """
 
 

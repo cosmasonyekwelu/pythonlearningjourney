@@ -13,8 +13,10 @@
    - `while` loops for repetition
    - `break` and `continue` statements
 3. Solved practice problems:
-   - FizzBuzz
-   - Number Guessing Game
+   - FizzBuzz: Implemented the classic interview problem with multiple conditional branches
+   - Number Guessing Game: Built an interactive game with input validation and multiple difficulty levels
+   - Grade Calculator: Created a program that calculates letter grades based on score ranges
+   - Prime Number Checker: Developed a function to identify prime numbers using loops and conditions
 
 ## Tutorial
 
@@ -35,5 +37,4 @@
 
 ## Reflection
 
-Today I reinforced my understanding of **flow control** in Python.  
-FizzBuzz tested logical conditions, while the number guessing game showed how to combine loops, conditionals, and user input into an interactive program.
+Today I reinforced my understanding of flow control in Python. FizzBuzz tested logical conditions, the grade calculator applied real-world branching, and the number guessing game showed how to combine loops, conditionals, and user input into an interactive program.
