@@ -108,7 +108,7 @@ class ConditionalMastery:
         print(f"x >= y: {x >= y}")
 
         # String comparisons
-        name1 = "Alibaba"
+        name1 = "Ali"
         name2 = "Bobo"
 
         print(f"\nname1 = '{name1}', name2 = '{name2}'")
