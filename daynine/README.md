@@ -20,7 +20,7 @@
 
 ## Tutorial
 
-- **Title:** Advanced Conditionals & Loops in Python
+- **Title:** Advanced Conditionals & Loops in Python.
 - **URL:** Self-practice + roadmap.sh/python
 - **Topics Covered:**
   - Conditionals with multiple branches
