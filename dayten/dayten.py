@@ -1,6 +1,8 @@
 """
-Day 10: Advanced Lists & List Comprehensions
-Python Learning Journey - Comprehensive List Operations
+Python Learning Journey - Day Ten
+Date: October 1, 2025
+Author: Cosmas Onyekwelu
+Topic: Advanced Lists & List Comprehensions Mastery.
 """
 
 
