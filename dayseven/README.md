@@ -1,4 +1,4 @@
-# Day 7: Week 1 Summary & Comprehensive Review
+# Day 7: Week One Summary & Comprehensive Review
 
 ## Journey Overview
 

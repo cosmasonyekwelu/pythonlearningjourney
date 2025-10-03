@@ -7,6 +7,7 @@
 - [Automate the Boring Stuff](https://automatetheboringstuff.com/) – Practical Python
 - ["10 Important Python Concepts in 20 Minutes"](https://youtu.be/Gx5qb1uHss4) - YouTube
 - [Freecodecamp](https://www.freecodecamp.org/news/learn-python-free-python-courses-for-beginners/)
+- [Back-end Developer Path in Python & TypeScript](https://www.boot.dev/tracks/backend-python-typescript)
 
 ## Documentation
 
