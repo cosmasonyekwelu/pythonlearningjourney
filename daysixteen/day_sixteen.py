@@ -366,12 +366,12 @@ class EncapsulationFundamentals:
 
 
 class BankAccountProject:
-    """Practice Project: Enhanced BankAccount class with property-based validation"""
+    """Practice Project: Enhanced Bank Account class with property-based validation"""
 
     def create_enhanced_bank_account(self):
-        """Comprehensive BankAccount with encapsulation and properties"""
+        """Comprehensive Bank Account with encapsulation and properties"""
         print("\n" + "=" * 60)
-        print("Enhanced BankAccount Project")
+        print("Enhanced Bank Account Project")
         print("=" * 60)
 
         class BankAccount:
@@ -578,7 +578,7 @@ class BankAccountProject:
             def __repr__(self):
                 return f"BankAccount('{self.account_holder}', {self.__balance}, '{self.account_type}')"
 
-        # Demonstrate the enhanced BankAccount
+        # Demonstrate the enhanced Bank Account
         print("Creating bank accounts with encapsulation:")
 
         # Create accounts
@@ -757,7 +757,7 @@ def main():
     encapsulation_demo.demonstrate_private_attributes()
     encapsulation_demo.demonstrate_comprehensive_validation()
 
-    # BankAccount project
+    # Bank Account project
     print("\n" + "=" * 70)
     print("PRACTICE PROJECT: ENHANCED BANKACCOUNT")
     print("=" * 70)

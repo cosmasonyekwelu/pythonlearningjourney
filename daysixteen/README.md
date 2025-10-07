@@ -6,13 +6,13 @@
 
 - Mastered encapsulation concepts: private and protected attributes
 
-- Implemented getter and setter methods using @property decorator
+- Implemented getter and setter methods using `@property` decorator
 
 - Practiced data validation through property-based encapsulation
 
 - Explored name mangling with double underscores for private attributes
 
-- Built an enhanced BankAccount class with comprehensive property-based validation
+- Built an enhanced Bank Account class with comprehensive property-based validation
 
 - Applied encapsulation principles to create robust, secure class designs
 
@@ -22,7 +22,7 @@
 
 **URL:** Self-practice with Python OOP documentation
 
-Topics Covered:
+## Topics Covered:
 
 - Private and protected attribute conventions
 
@@ -40,13 +40,13 @@ Topics Covered:
 
 - Understanding the importance of encapsulation for data protection
 
-- Mastering @property decorator for creating Pythonic getters/setters
+- Mastering `@property` decorator for creating Pythonic getters/setters
 
 - Implementing robust data validation in setter methods
 
-- Using protected attributes (\_prefix) for internal use
+- Using protected attributes `(\_prefix)` for internal use
 
-- Applying name mangling (\_\_prefix) for attribute privacy
+- Applying name mangling `(\_\_prefix)` for attribute privacy
 
 - Designing classes with proper access control and validation
 
@@ -127,4 +127,4 @@ class Circle:
 
 ## Reflection
 
-Today's focus on encapsulation revealed how proper data protection leads to more robust and maintainable code. The @property decorator provided an elegant way to implement getters and setters while maintaining Pythonic syntax. Data validation in setters proved crucial for ensuring object integrity. Name mangling offered true attribute privacy, while protected attributes established clear conventions for internal use. The BankAccount project demonstrated how encapsulation transforms simple classes into production-ready components with proper access control and validation.
+Today's focus on encapsulation revealed how proper data protection leads to more robust and maintainable code. The `@property` decorator provided an elegant way to implement getters and setters while maintaining Pythonic syntax. Data validation in setters proved crucial for ensuring object integrity. Name mangling offered true attribute privacy, while protected attributes established clear conventions for internal use. The Bank Account project demonstrated how encapsulation transforms simple classes into production-ready components with proper access control and validation.
