@@ -1,6 +1,8 @@
 """
-Day 16: Advanced OOP - Encapsulation and Properties
-Python Learning Journey - Protecting and Controlling Access to Data
+Python Learning Journey - Day Sixteen
+Date: October 7 2025
+Author: Cosmas Onyekwelu
+Topic: Advanced OOP - Encapsulation and Properties: Protecting and Controlling Access to Data
 """
 
 

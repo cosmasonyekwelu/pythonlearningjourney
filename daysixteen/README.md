@@ -18,9 +18,9 @@
 
 ## Tutorial
 
-Title: Advanced OOP: Encapsulation and Properties
+**Title:** Advanced OOP: Encapsulation and Properties
 
-URL: Self-practice with Python OOP documentation
+**URL:** Self-practice with Python OOP documentation
 
 Topics Covered:
 
