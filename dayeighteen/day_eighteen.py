@@ -1,14 +1,45 @@
+"""
+Day 18 — Working with APIs and Web Data
+Weather Fetcher for Lagos, Nigeria (or any city)
+-------------------------------------------------
+This script fetches and logs current weather data using the OpenWeatherMap API.
+
+Features:
+- Reads API key from .env file (OPEN_WEATHER_API_KEY)
+- Fetches real-time weather data for any city
+- Handles errors and timeouts gracefully
+- Saves a local weather log with timestamp
+
+Author: Cosmas Onyekwelu
+Date: October 9, 2025
+"""
+
+import os
 import requests
 from datetime import datetime
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 
 def get_weather(city="Lagos"):
     """
-    Fetches current weather data for a given city using OpenWeatherMap API.
-    Requires a valid API key from https://openweathermap.org/api.
-    """
+    Fetch current weather data for a given city using OpenWeatherMap API.
 
-    API_KEY = "82b584e5405d5d9aec26457c8753e389"
+    Args:
+        city (str): The name of the city to fetch weather for. Defaults to 'Lagos'.
+
+    Returns:
+        dict | None: Weather data if successful, otherwise None.
+    """
+    API_KEY = os.getenv("OPEN_WEATHER_API_KEY")
+
+    if not API_KEY:
+        print(
+            "Error: Missing API key. Please add 'OPEN_WEATHER_API_KEY' to your .env file.")
+        return None
+
     base_url = "https://api.openweathermap.org/data/2.5/weather"
     params = {
         "q": city,
@@ -17,51 +48,73 @@ def get_weather(city="Lagos"):
     }
 
     try:
-        # Send GET request to API
-        response = requests.get(base_url, params=params, timeout=5)
-        response.raise_for_status()  # Raises error for non-200 responses
+        print(f"\nFetching weather data for {city}...")
+        response = requests.get(base_url, params=params, timeout=10)
+        response.raise_for_status()
         data = response.json()
 
-        # Extract important data
-        weather_desc = data["weather"][0]["description"].capitalize()
+        # Extract weather details
+        city_name = data.get("name", city)
+        country = data["sys"].get("country", "")
+        description = data["weather"][0]["description"].capitalize()
         temperature = data["main"]["temp"]
         feels_like = data["main"]["feels_like"]
         humidity = data["main"]["humidity"]
         wind_speed = data["wind"]["speed"]
 
-        # Display formatted results
-        print("\n--- Current Weather Report ---")
-        print(f"City: {city}")
-        print(f"Weather: {weather_desc}")
-        print(f"Temperature: {temperature}°C")
-        print(f"Feels Like: {feels_like}°C")
-        print(f"Humidity: {humidity}%")
-        print(f"Wind Speed: {wind_speed} m/s")
+        # Display formatted weather info
+        print("\n" + "=" * 50)
+        print(f"WEATHER REPORT — {city_name}, {country}")
+        print("=" * 50)
+        print(f"Conditions:    {description}")
+        print(f"Temperature:   {temperature}°C")
+        print(f"Feels Like:    {feels_like}°C")
+        print(f"Humidity:      {humidity}%")
+        print(f"Wind Speed:    {wind_speed} m/s")
+        print("=" * 50)
 
-        # Save results to a local log file
+        # Log to file
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        with open("weather_log.txt", "a") as log_file:
-            log_file.write(
-                f"[{timestamp}] {city} - {weather_desc}, Temp: {temperature}°C, "
-                f"Feels Like: {feels_like}°C, Humidity: {humidity}%, Wind: {wind_speed} m/s\n"
+        with open("weather_log.txt", "a", encoding="utf-8") as f:
+            f.write(
+                f"[{timestamp}] {city_name}, {country}: {description}, "
+                f"Temp={temperature}°C, FeelsLike={feels_like}°C, "
+                f"Humidity={humidity}%, Wind={wind_speed} m/s\n"
             )
+        print("Weather data saved to 'weather_log.txt'.")
 
-        print("\nWeather data saved to 'weather_log.txt'.")
+        return data
 
     except requests.exceptions.HTTPError as e:
-        print("HTTP Error:", e)
+        if response.status_code == 401:
+            print("Invalid API key. Please verify your OpenWeatherMap key.")
+        elif response.status_code == 404:
+            print("City not found. Please check the spelling.")
+        else:
+            print(f" HTTP Error: {e}")
     except requests.exceptions.Timeout:
-        print("The request timed out. Please check your network connection.")
+        print("The request timed out. Please try again later.")
+    except requests.exceptions.ConnectionError:
+        print("Connection error. Check your internet connection.")
     except requests.exceptions.RequestException as e:
-        print("Error fetching data:", e)
-    except KeyError:
-        print(
-            "Unexpected data format from the API. Please verify your API key or city name.")
+        print(f" Request error: {e}")
+    except KeyError as e:
+        print(f" Missing key in response: {e}")
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+
+    return None
+
+
+def main():
+    """Main entry point for the weather app."""
+    print("=======================================")
+    print("   WEATHER APP — OpenWeatherMap API")
+    print("=======================================")
+    city = input(
+        "Enter city name (press Enter for Lagos): ").strip() or "Lagos"
+    get_weather(city)
 
 
 if __name__ == "__main__":
-    print("Weather App - Lagos, Nigeria")
-    city_input = input("Enter city name (press Enter for Lagos): ").strip()
-    if not city_input:
-        city_input = "Lagos"
-    get_weather(city_input)
+    main()
