@@ -1,0 +1,90 @@
+# ==================================================
+# PYTHON PROJECT .GITIGNORE (2025 UPDATED)
+# ==================================================
+
+# ---------------------------
+# Python cache & compiled files
+# ---------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+
+# ---------------------------
+# Virtual environments
+# ---------------------------
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# ---------------------------
+# Dependency and environment files
+# ---------------------------
+*.env
+*.env.local
+*.env.*.backup
+
+# ---------------------------
+# Logs & temporary files
+# ---------------------------
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*.pid
+
+# ---------------------------
+# Jupyter notebooks checkpoints
+# ---------------------------
+.ipynb_checkpoints/
+
+# ---------------------------
+# Build, distribution & packaging
+# ---------------------------
+build/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.manifest
+*.spec
+
+# ---------------------------
+# IDE & editor settings
+# ---------------------------
+.vscode/
+.idea/
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# ---------------------------
+# System & OS files
+# ---------------------------
+.DS_Store
+.DS_Store?
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ---------------------------
+# Backup & misc
+# ---------------------------
+*.old
+*.orig
+*.rej
+*.bak
+*~
