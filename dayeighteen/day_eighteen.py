@@ -1,17 +1,8 @@
 """
-Day 18 — Working with APIs and Web Data
-Weather Fetcher for Lagos, Nigeria (or any city)
--------------------------------------------------
-This script fetches and logs current weather data using the OpenWeatherMap API.
-
-Features:
-- Reads API key from .env file (OPEN_WEATHER_API_KEY)
-- Fetches real-time weather data for any city
-- Handles errors and timeouts gracefully
-- Saves a local weather log with timestamp
-
+Python Learning Journey - Day Eighteen
+Date: October 9 2025
 Author: Cosmas Onyekwelu
-Date: October 9, 2025
+Topic: Working with APIs and Web Data
 """
 
 import os
