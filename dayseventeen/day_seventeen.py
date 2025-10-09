@@ -1,6 +1,8 @@
 """
-Day 17: File I/O and Data Persistence
-Python Learning Journey - Reading, Writing, and Storing Structured Data
+Python Learning Journey - Day Seventeen
+Date: October 8 2025
+Author: Cosmas Onyekwelu
+Topic: File I/O and Data Persistence- Reading, Writing, and Storing Structured Data
 """
 
 import json
