@@ -1,0 +1,2 @@
+2025-10-10 07:06:20,265 - ERROR - ValueError: Invalid integer input: 12.2 | Input: 12.2
+2025-10-10 07:06:51,268 - INFO - Power operation: 3.0 ** 3.0 = 27.0
