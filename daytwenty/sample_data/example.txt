@@ -1,0 +1,7 @@
+This is an example text file for the Utility Toolkit project.
+
+It is used to demonstrate file reading, writing, and basic text manipulation
+within the day_twenty module. You can modify this file or create copies for testing.
+
+Line 1: Sample data input
+Line 2: End of file

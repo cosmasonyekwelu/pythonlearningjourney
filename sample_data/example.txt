@@ -1,0 +1,2 @@
+This is a sample text file.
+Created by the file_utils module.

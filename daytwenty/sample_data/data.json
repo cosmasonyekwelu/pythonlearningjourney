@@ -1,0 +1,21 @@
+{
+  "project": "Utility Toolkit",
+  "author": "Cosmas Onyekwelu",
+  "version": "1.0",
+  "features": [
+    "Mathematical calculations",
+    "File handling utilities",
+    "Reusability demonstration"
+  ],
+  "statistics": {
+    "completed_tasks": 5,
+    "pending_tasks": 2,
+    "success_rate": 71.4
+  },
+  "contributors": [
+    {
+      "name": "Cosmas Onyekwelu",
+      "role": "Developer"
+    }
+  ]
+}
