@@ -1,12 +1,8 @@
 """
-Day 20 - Modules and Packages
-Utility Toolkit: A helper module for file and math operations
-
-Demonstrates:
-- Built-in module usage
-- Custom module creation and import
-- External package management
-- Virtual environments
+Python Learning Journey - Day Twenty
+Date: October 11 2025
+Author: Cosmas Onyekwelu
+Topic: Modules and Packages
 """
 
 import math

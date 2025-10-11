@@ -1,3 +1,9 @@
+"""
+Python Learning Journey - Day Nineteen
+Date: October 10 2025
+Author: Cosmas Onyekwelu
+Topic: Error Handling and Debugging Mastery
+"""
 import logging
 import pdb
 from datetime import datetime
