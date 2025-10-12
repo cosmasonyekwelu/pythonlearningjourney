@@ -52,7 +52,7 @@ _From Python fundamentals to deployed AI trading systems_
 
 - **Day 22**: Flask Fundamentals & Routing
 - **Day 23**: Django Setup & ORM
-- **Day 24**: Database Design with SQLite/PostgreSQL
+- **Day 24**: Database Design with SQLite/PostgreSQL,MongoDB,MySQL
 - **Day 25**: User Authentication & Sessions
 - **Day 26**: API Development(REST, ETC)
 - **Day 27**: Frontend Integration & Templates
