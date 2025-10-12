@@ -1,11 +1,16 @@
 # Python Learning Journey.
 
+- 100 Days from Fundamentals to AI Trading
+- A structured, project-based roadmap from Python basics to advanced AI trading systems.
+
 ![Python Version](https://img.shields.io/badge/python-3.8+-blue.svg)  
 ![License](https://img.shields.io/badge/license-MIT-green.svg)  
 ![Status](https://img.shields.io/badge/status-active-brightgreen.svg)  
 ![Days Completed](https://img.shields.io/badge/days-21-orange.svg)
 
 ---
+
+_100-Day Intensive Program | From Zero to Deployed AI Trading Systems_
 
 ## Overview
 
