@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ title }}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <h1>{{ title }}</h1>
+    <p>This page contains a detailed breakdown of the topics studied.</p>
+
+    {% for section in summary.values() %}
+    <div class="section">
+      <h2>{{ section.title }}</h2>
+      <ul>
+        {% for point in section.points %}
+        <li>{{ point }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+
+    <a href="{{ url_for('home') }}">← Back to Dashboard</a>
+  </body>
+</html>
