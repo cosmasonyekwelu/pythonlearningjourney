@@ -1,4 +1,6 @@
-# Python & Algorithmic Trading Mastery – 100-Days of Code Curriculum
+# Python & Algorithmic Trading Mastery
+
+- 100-Days of Code Curriculum
 
 _From Python fundamentals to deployed AI trading systems_
 
@@ -8,7 +10,7 @@ _From Python fundamentals to deployed AI trading systems_
 
 ## Detailed Weekly Breakdown
 
-### Week 1 — Python Fundamentals
+### Week 1: Python Fundamentals
 
 **Days 1–7** | _Building programming foundations_
 
@@ -20,7 +22,7 @@ _From Python fundamentals to deployed AI trading systems_
 - **Day 6**: Algorithms & File Handling.
 - **Day 7**: Week One Comprehensive Review & Progress Assessment
 
-### Week 2 — Intermediate Python
+### Week 2: Intermediate Python
 
 **Days 8–14** | _Building robust applications_
 
@@ -32,7 +34,7 @@ _From Python fundamentals to deployed AI trading systems_
 - **Day 13**: Introduction to Object-Oriented Programming: Classes, Objects, and OOP Fundamentals
 - **Day 14**: Methods & Weekly Review Project
 
-### Week 3 — Advanced OOP & Real-World Applications
+### Week 3: Advanced OOP & Real-World Applications
 
 **Days 15–21** | _Professional-grade Python_
 
@@ -44,7 +46,7 @@ _From Python fundamentals to deployed AI trading systems_
 - **Day 20**: Modules and Packages
 - **Day 21**: Weekly Review and Project Polish
 
-### Week 4 — Web Development & Data Systems
+### Week 4: Web Development & Data Systems
 
 **Days 22–30** | _Full-stack development foundations_
 
@@ -58,7 +60,7 @@ _From Python fundamentals to deployed AI trading systems_
 - **Day 29**: Real-time Data Updates
 - **Day 30**: Weekly Project – Trading Journal Web App
 
-### Week 5 — Financial Programming Essentials
+### Week 5: Financial Programming Essentials
 
 **Days 31–37** | _Working with financial data_
 
@@ -70,7 +72,7 @@ _From Python fundamentals to deployed AI trading systems_
 - **Day 36**: Portfolio Performance Metrics
 - **Day 37**: Weekly Project – Stock Data Analyzer
 
-### Week 6 — Networking & Security
+### Week 6: Networking & Security
 
 **Days 38–44** | _Secure communication & systems_
 
@@ -82,7 +84,7 @@ _From Python fundamentals to deployed AI trading systems_
 - **Day 43**: Network Scanning & Monitoring
 - **Day 44**: Weekly Project – Secure Portfolio Tracker
 
-### Week 7 — Trading Automation & Scripting
+### Week 7: Trading Automation & Scripting
 
 **Days 45–51** | _Algorithmic trading foundations_
 
@@ -94,7 +96,7 @@ _From Python fundamentals to deployed AI trading systems_
 - **Day 50**: Portfolio Rebalancing Scripts
 - **Day 51**: Weekly Project – Automated Trading Bot
 
-### Week 8 — Data Science & Machine Learning
+### Week 8: Data Science & Machine Learning
 
 **Days 52–58** | _Predictive modeling & analytics_
 
@@ -106,7 +108,7 @@ _From Python fundamentals to deployed AI trading systems_
 - **Day 57**: Trading Strategy Backtesting
 - **Day 58**: Weekly Project – Predictive Market Model
 
-### Week 9 — Deep Learning & NLP
+### Week 9: Deep Learning & NLP
 
 **Days 59–65** | _Advanced AI techniques_
 
@@ -118,7 +120,7 @@ _From Python fundamentals to deployed AI trading systems_
 - **Day 64**: Strategy Optimization with RL
 - **Day 65**: Weekly Project – AI Trading Agent
 
-### Week 10 — Blockchain & Smart Contracts
+### Week 10: Blockchain & Smart Contracts
 
 **Days 66–72** | _Cryptocurrency integration_
 
@@ -130,7 +132,7 @@ _From Python fundamentals to deployed AI trading systems_
 - **Day 71**: Crypto Trading Strategies
 - **Day 72**: Weekly Project – Crypto Portfolio Manager
 
-### Week 11 — Testing & Backtesting
+### Week 11: Testing & Backtesting
 
 **Days 73–85** | _Strategy validation & reliability_
 
@@ -148,7 +150,7 @@ _From Python fundamentals to deployed AI trading systems_
 - **Day 84**: Reporting & Analytics
 - **Day 85**: Weekly Project – Comprehensive Backtesting Suite
 
-### Week 12 — Full System Deployment
+### Week 12: Full System Deployment
 
 **Days 86–100** | _Production-ready trading system_
 
@@ -170,9 +172,9 @@ _From Python fundamentals to deployed AI trading systems_
 
 ---
 
-##  Specialized Knowledge Areas
+## Specialized Knowledge Areas
 
-###  Financial Competencies
+### Financial Competencies
 
 - Market data acquisition & processing
 - Technical analysis & indicators
@@ -180,7 +182,7 @@ _From Python fundamentals to deployed AI trading systems_
 - Backtesting methodologies
 - Execution algorithms & order types
 
-###  AI & Machine Learning
+### AI & Machine Learning
 
 - Predictive modeling for markets
 - Natural language processing for sentiment
@@ -188,7 +190,7 @@ _From Python fundamentals to deployed AI trading systems_
 - Neural networks for pattern recognition
 - Feature engineering for financial data
 
-###  Blockchain & DeFi
+### Blockchain & DeFi
 
 - Cryptocurrency market structure
 - Smart contract development
@@ -196,7 +198,7 @@ _From Python fundamentals to deployed AI trading systems_
 - DeFi protocol integration
 - Cross-chain interoperability
 
-###  DevOps & Production
+### DevOps & Production
 
 - Cloud infrastructure management
 - CI/CD pipelines for trading systems
@@ -206,7 +208,7 @@ _From Python fundamentals to deployed AI trading systems_
 
 ---
 
-##  Technology Stack
+## Technology Stack
 
 **Programming:** Python 3.9+
 **Web Frameworks:** Flask, Django, FastAPI
@@ -219,17 +221,17 @@ _From Python fundamentals to deployed AI trading systems_
 
 ---
 
-##  Learning Outcomes
+## Learning Outcomes
 
 By completing this 100-day program, you'll be able to:
 
--  Design and implement complete algorithmic trading strategies
--  Build and deploy machine learning models for financial markets
--  Develop secure, scalable web applications for trading
--  Integrate blockchain and cryptocurrency capabilities
--  Create automated trading systems with proper risk management
--  Implement professional backtesting and validation frameworks
--  Deploy production-ready AI trading systems to cloud infrastructure
+- Design and implement complete algorithmic trading strategies
+- Build and deploy machine learning models for financial markets
+- Develop secure, scalable web applications for trading
+- Integrate blockchain and cryptocurrency capabilities
+- Create automated trading systems with proper risk management
+- Implement professional backtesting and validation frameworks
+- Deploy production-ready AI trading systems to cloud infrastructure
 
 ---
 
