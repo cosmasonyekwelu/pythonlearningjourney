@@ -1,0 +1,11 @@
+{
+  "total_books": 0,
+  "available_books": 0,
+  "borrowed_books": 0,
+  "overdue_books": 0,
+  "ebooks_count": 0,
+  "print_books_count": 0,
+  "genre_distribution": {},
+  "author_distribution": {},
+  "utilization_rate": 0
+}

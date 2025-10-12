@@ -1,0 +1,20 @@
+{
+  "books": [
+    {
+      "id": "51e07bec-2caf-4133-9c37-26ba36a489ba",
+      "title": "The New Millionaire's Playbook",
+      "author": "Gordy Bal",
+      "isbn": "9781401976309",
+      "genre": "Business & Economics",
+      "publication_year": 2023,
+      "is_available": true,
+      "date_added": "2025-10-12T10:27:07.209038",
+      "borrowing_history": [],
+      "type": "EBook",
+      "file_size": 2.5,
+      "file_format": "EPUB",
+      "download_link": null,
+      "reading_progress": 0
+    }
+  ]
+}

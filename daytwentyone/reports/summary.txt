@@ -1,0 +1,14 @@
+LIBRARY SUMMARY REPORT
+==================================================
+
+Total Books: 0
+Available Books: 0
+Borrowed Books: 0
+Overdue Books: 0
+E-Books: 0
+Print Books: 0
+Utilization Rate: 0%
+
+GENRE DISTRIBUTION:
+
+TOP AUTHORS:
