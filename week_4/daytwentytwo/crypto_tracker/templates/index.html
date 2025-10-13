@@ -1,0 +1,148 @@
+{% extends "base.html" %} {% block title %}{{ title }}{% endblock %} {% block
+content %}
+<div class="row">
+  <div class="col-md-8">
+    <h1>Welcome to Your Trading Dashboard</h1>
+    <p class="lead">Track your investments and analyze market trends.</p>
+
+    {% if portfolio_value %}
+    <div class="row mt-4">
+      <div class="col-md-4">
+        <div class="card text-white bg-primary portfolio-card">
+          <div class="card-body">
+            <h5 class="card-title">Portfolio Value</h5>
+            <h2 class="portfolio-value">
+              {{ "%.2f"|format(portfolio_value) }}
+            </h2>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div
+          class="card text-white {% if daily_change >= 0 %}bg-success profit-card{% else %}bg-danger loss-card{% endif %}"
+        >
+          <div class="card-body">
+            <h5 class="card-title">Total P&L</h5>
+            <h2 class="portfolio-value">{{ "%.2f"|format(daily_change) }}</h2>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card text-white bg-warning">
+          <div class="card-body">
+            <h5 class="card-title">Active Trades</h5>
+            <h2>{{ active_trades }}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="mt-4">
+      <h3>Quick Actions</h3>
+      <div class="d-grid gap-2 d-md-block">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary"
+          >View Dashboard</a
+        >
+        <a href="{{ url_for('crypto_prices') }}" class="btn btn-success"
+          >Crypto Prices</a
+        >
+        <a href="{{ url_for('trades_list') }}" class="btn btn-info"
+          >View Trades</a
+        >
+        <a href="{{ url_for('contact') }}" class="btn btn-outline-secondary"
+          >Contact</a
+        >
+      </div>
+    </div>
+
+    {% if trades %}
+    <div class="mt-5">
+      <h3>Recent Trades</h3>
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <thead class="table-dark">
+            <tr>
+              <th>Symbol</th>
+              <th>Quantity</th>
+              <th>Entry Price</th>
+              <th>Current Price</th>
+              <th>P&L</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for trade in trades %}
+            <tr
+              class="trade-row"
+              data-trade-id="{{ trade.id }}"
+              style="cursor: pointer"
+            >
+              <td><strong>{{ trade.symbol }}</strong></td>
+              <td>{{ trade.quantity }}</td>
+              <td>${{ "%.2f"|format(trade.entry_price) }}</td>
+              <td>${{ "%.2f"|format(trade.current_price) }}</td>
+              <td
+                class="{% if trade.profit_loss >= 0 %}text-profit{% else %}text-loss{% endif %}"
+              >
+                ${{ "%.2f"|format(trade.profit_loss) }}
+              </td>
+              <td>
+                <span
+                  class="badge {% if trade.status == 'Active' %}bg-success{% else %}bg-secondary{% endif %}"
+                >
+                  {{ trade.status }}
+                </span>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <a href="{{ url_for('trades_list') }}" class="btn btn-outline-primary"
+        >View All Trades</a
+      >
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <h5>System Info</h5>
+      </div>
+      <div class="card-body">
+        <p>
+          <strong>Current Time:</strong> {{ current_time.strftime('%Y-%m-%d
+          %H:%M:%S') }}
+        </p>
+        <p><strong>Server:</strong> Flask Development</p>
+        <p>
+          <strong>Status:</strong> <span class="badge bg-success">Online</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="card mt-3">
+      <div class="card-header">
+        <h5>Quick Links</h5>
+      </div>
+      <div class="card-body">
+        <div class="d-grid gap-2">
+          <a
+            href="{{ url_for('crypto_prices') }}"
+            class="btn btn-outline-success"
+            >💰 Crypto Prices</a
+          >
+          <a href="{{ url_for('api_portfolio') }}" class="btn btn-outline-info"
+            >📊 Portfolio API</a
+          >
+          <a href="/crypto/api/prices" class="btn btn-outline-warning"
+            >🔗 Crypto API</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

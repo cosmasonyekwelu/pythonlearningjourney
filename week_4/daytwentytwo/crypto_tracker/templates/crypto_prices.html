@@ -1,0 +1,145 @@
+{% extends "base.html" %} {% block title %}{{ title }}{% endblock %} {% block
+content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1>💰 Cryptocurrency Prices</h1>
+  <div>
+    <a
+      href="{{ url_for('crypto_api_prices') }}"
+      class="btn btn-info"
+      target="_blank"
+      >JSON API</a
+    >
+    <a href="{{ url_for('dashboard') }}" class="btn btn-secondary"
+      >← Dashboard</a
+    >
+  </div>
+</div>
+
+{% if show_welcome %}
+<div class="alert alert-info">
+  <h4>Welcome to Crypto Tracker!</h4>
+  <p class="mb-0">
+    View real-time cryptocurrency prices and market data. Click the button below
+    to load current prices.
+  </p>
+</div>
+<div class="text-center">
+  <a href="{{ url_for('crypto_prices') }}" class="btn btn-primary btn-lg"
+    >Load Crypto Prices</a
+  >
+</div>
+{% elif crypto_detail %}
+<div class="card">
+  <div class="card-header">
+    <h4>{{ crypto_detail.name }} ({{ crypto_detail.symbol }})</h4>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+        <p>
+          <strong>Current Price:</strong> ${{
+          "{:,.2f}".format(crypto_detail.current_price) }}
+        </p>
+        <p>
+          <strong>24h Change:</strong>
+          <span
+            class="{% if crypto_detail.price_change_24h >= 0 %}crypto-positive{% else %}crypto-negative{% endif %}"
+          >
+            ${{ "{:,.2f}".format(crypto_detail.price_change_24h) }} ({{
+            "{:,.2f}".format(crypto_detail.price_change_percentage_24h) }}%)
+          </span>
+        </p>
+      </div>
+      <div class="col-md-6">
+        <p>
+          <strong>Market Cap:</strong> ${{
+          "{:,.0f}".format(crypto_detail.market_cap) }}
+        </p>
+        <p><strong>Rank:</strong> #1</p>
+      </div>
+    </div>
+  </div>
+</div>
+<a href="{{ url_for('crypto_prices') }}" class="btn btn-secondary mt-3"
+  >← Back to All Prices</a
+>
+{% else %}
+<p class="text-muted">Last updated: {{ last_updated }}</p>
+
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>Cryptocurrency</th>
+        <th>Symbol</th>
+        <th>Current Price</th>
+        <th>24h Change</th>
+        <th>24h Change %</th>
+        <th>Market Cap</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for crypto in crypto_data %}
+      <tr>
+        <td><strong>{{ crypto.name }}</strong></td>
+        <td><code>{{ crypto.symbol }}</code></td>
+        <td>${{ "{:,.2f}".format(crypto.current_price) }}</td>
+        <td
+          class="{% if crypto.price_change_24h >= 0 %}crypto-positive{% else %}crypto-negative{% endif %}"
+        >
+          ${{ "{:,.2f}".format(crypto.price_change_24h) }}
+        </td>
+        <td
+          class="{% if crypto.price_change_percentage_24h >= 0 %}crypto-positive{% else %}crypto-negative{% endif %}"
+        >
+          {{ "{:,.2f}".format(crypto.price_change_percentage_24h) }}%
+        </td>
+        <td>${{ "{:,.0f}".format(crypto.market_cap) }}</td>
+        <td>
+          <a
+            href="{{ url_for('crypto_detail', symbol=crypto.symbol) }}"
+            class="btn btn-sm btn-outline-primary"
+            >Details</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="mt-4">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">API Access</h5>
+          <p class="card-text">Access cryptocurrency data via JSON API:</p>
+          <a
+            href="{{ url_for('crypto_api_prices') }}"
+            class="btn btn-sm btn-info"
+            target="_blank"
+            >View JSON API</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Refresh Data</h5>
+          <p class="card-text">
+            Prices update automatically every time you visit this page.
+          </p>
+          <a
+            href="{{ url_for('crypto_prices') }}"
+            class="btn btn-sm btn-success"
+            >Refresh Now</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %} {% endblock %}

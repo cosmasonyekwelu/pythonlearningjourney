@@ -1,0 +1,149 @@
+{% extends "base.html" %} {% block title %}{{ title }}{% endblock %} {% block
+content %} {% if trade %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1>Trade #{{ trade.id }} - {{ trade.symbol }}</h1>
+  <a href="{{ url_for('trades_list') }}" class="btn btn-secondary"
+    >← Back to All Trades</a
+  >
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title mb-0">Trade Information</h5>
+      </div>
+      <div class="card-body">
+        <table class="table table-borderless">
+          <tr>
+            <th>Symbol:</th>
+            <td><strong>{{ trade.symbol }}</strong></td>
+          </tr>
+          <tr>
+            <th>Quantity:</th>
+            <td>{{ trade.quantity }} shares</td>
+          </tr>
+          <tr>
+            <th>Entry Price:</th>
+            <td>${{ "%.2f"|format(trade.entry_price) }}</td>
+          </tr>
+          <tr>
+            <th>Current Price:</th>
+            <td>${{ "%.2f"|format(trade.current_price) }}</td>
+          </tr>
+          <tr>
+            <th>Entry Date:</th>
+            <td>{{ trade.entry_date }}</td>
+          </tr>
+          <tr>
+            <th>Profit/Loss:</th>
+            <td
+              class="{% if trade.profit_loss >= 0 %}text-profit{% else %}text-loss{% endif %}"
+            >
+              <strong>${{ "%.2f"|format(trade.profit_loss) }}</strong>
+            </td>
+          </tr>
+          <tr>
+            <th>Status:</th>
+            <td>
+              <span
+                class="badge {% if trade.status == 'Active' %}bg-success{% else %}bg-secondary{% endif %}"
+              >
+                {{ trade.status }}
+              </span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title mb-0">Quick Actions</h5>
+      </div>
+      <div class="card-body">
+        <div class="d-grid gap-2">
+          <button class="btn btn-primary">Edit Trade</button>
+          <button class="btn btn-success">Close Trade</button>
+          <button class="btn btn-info">View Chart</button>
+          <button class="btn btn-outline-danger">Delete Trade</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mt-3">
+      <div class="card-header">
+        <h5 class="card-title mb-0">Performance</h5>
+      </div>
+      <div class="card-body">
+        <div class="progress mb-2">
+          <div class="progress-bar bg-success" style="width: 75%">
+            75% Success Rate
+          </div>
+        </div>
+        <small class="text-muted"
+          >Sample trade for demonstration purposes.</small
+        >
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1>All Trades</h1>
+  <a href="{{ url_for('dashboard') }}" class="btn btn-secondary"
+    >← Back to Dashboard</a
+  >
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Symbol</th>
+        <th>Quantity</th>
+        <th>Entry Price</th>
+        <th>Current Price</th>
+        <th>P&L</th>
+        <th>Entry Date</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for trade in trades %}
+      <tr>
+        <td>{{ trade.id }}</td>
+        <td><strong>{{ trade.symbol }}</strong></td>
+        <td>{{ trade.quantity }}</td>
+        <td>${{ "%.2f"|format(trade.entry_price) }}</td>
+        <td>${{ "%.2f"|format(trade.current_price) }}</td>
+        <td
+          class="{% if trade.profit_loss >= 0 %}text-profit{% else %}text-loss{% endif %}"
+        >
+          ${{ "%.2f"|format(trade.profit_loss) }}
+        </td>
+        <td>{{ trade.entry_date }}</td>
+        <td>
+          <span
+            class="badge {% if trade.status == 'Active' %}bg-success{% else %}bg-secondary{% endif %}"
+          >
+            {{ trade.status }}
+          </span>
+        </td>
+        <td>
+          <a
+            href="{{ url_for('trade_detail', trade_id=trade.id) }}"
+            class="btn btn-sm btn-outline-primary"
+            >View</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %} {% endblock %}
