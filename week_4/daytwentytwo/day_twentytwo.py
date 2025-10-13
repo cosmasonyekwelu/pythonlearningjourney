@@ -1,14 +1,6 @@
 """
 Day 22 - Flask Fundamentals & Routing
 Date: October 13, 2025
-
-COMPREHENSIVE LEARNING SUMMARY
-Resources Studied:
-- Flask Official Documentation
-- Flask Mega-Tutorial by Miguel Grinberg
-- Real Python Flask Tutorials
-- GeeksforGeeks Flask Tutorial
-- Tutorialspoint Flask Guide
 """
 
 from flask import Flask, render_template, request, redirect, url_for, jsonify, flash
