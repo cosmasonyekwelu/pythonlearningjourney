@@ -1,6 +1,7 @@
 """
 Day 24 — Database Design with SQLite, PostgreSQL, MySQL, and MongoDB
 Focus: Designing and connecting multi-database systems for scalability
+Date: October 15, 2025
 """
 
 # --------------------------------------------------------
@@ -47,7 +48,8 @@ class Portfolio(db.Model):
     balance = db.Column(db.Float, default=0.0)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    transactions = db.relationship('Transaction', backref='portfolio', lazy=True)
+    transactions = db.relationship(
+        'Transaction', backref='portfolio', lazy=True)
 
 
 class Asset(db.Model):
@@ -61,8 +63,10 @@ class Asset(db.Model):
 class Transaction(db.Model):
     __tablename__ = 'transactions'
     id = db.Column(db.Integer, primary_key=True)
-    portfolio_id = db.Column(db.Integer, db.ForeignKey('portfolios.id'), nullable=False)
-    asset_id = db.Column(db.Integer, db.ForeignKey('assets.id'), nullable=False)
+    portfolio_id = db.Column(db.Integer, db.ForeignKey(
+        'portfolios.id'), nullable=False)
+    asset_id = db.Column(db.Integer, db.ForeignKey(
+        'assets.id'), nullable=False)
     type = db.Column(db.String(10), nullable=False)  # buy or sell
     amount = db.Column(db.Float, nullable=False)
     price = db.Column(db.Float, nullable=False)
@@ -123,11 +127,13 @@ def get_assets():
 @app.route('/portfolios', methods=['POST'])
 def create_portfolio():
     data = request.json
-    portfolio = Portfolio(user_id=data['user_id'], balance=data.get('balance', 0.0))
+    portfolio = Portfolio(
+        user_id=data['user_id'], balance=data.get('balance', 0.0))
     db.session.add(portfolio)
     db.session.commit()
 
-    log_action("create_portfolio", f"Portfolio created for user {data['user_id']}.")
+    log_action("create_portfolio",
+               f"Portfolio created for user {data['user_id']}.")
     return jsonify({"message": "Portfolio created"}), 201
 
 
@@ -135,7 +141,8 @@ def create_portfolio():
 def get_portfolios():
     portfolios = Portfolio.query.all()
     return jsonify([
-        {"id": p.id, "user_id": p.user_id, "balance": p.balance, "created_at": p.created_at}
+        {"id": p.id, "user_id": p.user_id,
+            "balance": p.balance, "created_at": p.created_at}
         for p in portfolios
     ])
 
@@ -154,7 +161,8 @@ def create_transaction():
     db.session.add(txn)
     db.session.commit()
 
-    log_action("create_transaction", f"Transaction {data['type']} recorded for portfolio {data['portfolio_id']}.")
+    log_action("create_transaction",
+               f"Transaction {data['type']} recorded for portfolio {data['portfolio_id']}.")
     return jsonify({"message": "Transaction recorded"}), 201
 
 
