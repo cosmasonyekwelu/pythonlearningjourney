@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% block title %}Record Trade{% endblock %} {% block
+content %}
+<h3>Record New Trade</h3>
+<form method="POST">
+  <div class="mb-3">
+    <label class="form-label">Symbol</label>
+    <input type="text" name="symbol" class="form-control" />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Action</label>
+    <select name="action" class="form-select">
+      <option>BUY</option>
+      <option>SELL</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Amount</label>
+    <input type="number" name="amount" class="form-control" step="0.01" />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Price (USD)</label>
+    <input type="number" name="price" class="form-control" />
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+{% if message %}
+<div class="alert alert-info mt-3">{{ message }}</div>
+{% endif %} {% endblock %}

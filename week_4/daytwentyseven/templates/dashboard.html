@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% block title %}Dashboard{% endblock %} {% block
+content %}
+<h2>Welcome, {{ data.username }}!</h2>
+<h4>Portfolio Balance: ${{ data.balance }}</h4>
+
+<h5 class="mt-4">Holdings</h5>
+<table class="table table-bordered">
+  <tr>
+    <th>Symbol</th>
+    <th>Amount</th>
+    <th>Value (USD)</th>
+  </tr>
+  {% for item in data.holdings %}
+  <tr>
+    <td>{{ item.symbol }}</td>
+    <td>{{ item.amount }}</td>
+    <td>${{ item.value_usd }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<h5 class="mt-4">Recent Trades</h5>
+<ul>
+  {% for trade in data.recent_trades %}
+  <li>
+    {{ trade.action }} {{ trade.amount }} {{ trade.symbol }} @ ${{ trade.price
+    }}
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
