@@ -1,0 +1,114 @@
+{% extends "base.html" %} {% block title %}Dashboard - Trading Portfolio{%
+endblock %} {% block content %}
+<div class="row">
+  <div class="col-12">
+    <h1 class="mb-4">Trading Dashboard</h1>
+    <p>Welcome, {{ current_user.username }}!</p>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">Your Trades</h5>
+      </div>
+      <div class="card-body">
+        {% if trades %}
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>Type</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for trade in trades %}
+              <tr>
+                <td>{{ trade.symbol }}</td>
+                <td>
+                  <span
+                    class="badge {% if trade.trade_type == 'BUY' %}bg-success{% else %}bg-danger{% endif %}"
+                  >
+                    {{ trade.trade_type }}
+                  </span>
+                </td>
+                <td>{{ trade.quantity }}</td>
+                <td>{{ trade.price | format_currency }}</td>
+                <td>{{ trade.timestamp | format_datetime }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <p class="text-muted">
+          No trades found. Start trading to see your activity here.
+        </p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">Quick Actions</h5>
+      </div>
+      <div class="card-body">
+        <button class="btn btn-primary w-100 mb-2" onclick="addTrade()">
+          Add New Trade
+        </button>
+        <button class="btn btn-outline-primary w-100" onclick="viewPortfolio()">
+          View Portfolio
+        </button>
+      </div>
+    </div>
+
+    <div class="card mt-4">
+      <div class="card-header">
+        <h5 class="mb-0">Market Data</h5>
+      </div>
+      <div class="card-body">
+        <div id="market-data">
+          <p>Loading market data...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function addTrade() {
+    alert("Trade functionality would be implemented here!");
+    // In a real app, this would open a modal or navigate to a trade form
+  }
+
+  function viewPortfolio() {
+    alert("Portfolio view would be implemented here!");
+  }
+
+  // Fetch market data
+  fetch("/api/crypto-prices")
+    .then((response) => response.json())
+    .then((data) => {
+      const marketDiv = document.getElementById("market-data");
+      let html = "";
+      if (data.bitcoin) {
+        html += `<p><strong>BTC:</strong> $${data.bitcoin.usd.toLocaleString()}</p>`;
+      }
+      if (data.ethereum) {
+        html += `<p><strong>ETH:</strong> $${data.ethereum.usd.toLocaleString()}</p>`;
+      }
+      marketDiv.innerHTML = html;
+    })
+    .catch((error) => {
+      document.getElementById("market-data").innerHTML =
+        '<p class="text-danger">Error loading market data</p>';
+    });
+</script>
+{% endblock %}

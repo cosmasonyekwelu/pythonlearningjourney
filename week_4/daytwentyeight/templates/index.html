@@ -1,0 +1,64 @@
+{% extends "base.html" %} {% block title %}Home - Trading Portfolio{% endblock
+%} {% block content %}
+<div class="row">
+  <div class="col-md-8 mx-auto text-center">
+    <h1 class="mb-4">Welcome to Trading Portfolio</h1>
+    <p class="lead">
+      Track your cryptocurrency trades and portfolio performance
+    </p>
+
+    <div class="row mt-5">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Bitcoin Price</h5>
+            <div id="btc-price">Loading...</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Ethereum Price</h5>
+            <div id="eth-price">Loading...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% if not current_user.is_authenticated %}
+    <div class="mt-5">
+      <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg me-3"
+        >Get Started</a
+      >
+      <a href="{{ url_for('login') }}" class="btn btn-outline-primary btn-lg"
+        >Login</a
+      >
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+  // Fetch crypto prices
+  fetch("/api/crypto-prices")
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.bitcoin) {
+        document.getElementById(
+          "btc-price"
+        ).textContent = `$${data.bitcoin.usd.toLocaleString()}`;
+      }
+      if (data.ethereum) {
+        document.getElementById(
+          "eth-price"
+        ).textContent = `$${data.ethereum.usd.toLocaleString()}`;
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching prices:", error);
+      document.getElementById("btc-price").textContent = "Error loading price";
+      document.getElementById("eth-price").textContent = "Error loading price";
+    });
+</script>
+{% endblock %}
