@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Crypto Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🚀 Live Crypto Price Dashboard</h1>
+        <div class="status">
+          <span id="connection-status" class="status-disconnected"
+            >Disconnected</span
+          >
+          <span id="last-update">Last update: --:--:--</span>
+        </div>
+      </header>
+
+      <div class="stats-bar">
+        <div class="stat">
+          <span class="stat-label">Messages:</span>
+          <span id="message-count">0</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Symbols:</span>
+          <span id="symbol-count">0</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Status:</span>
+          <span id="ws-status">Disconnected</span>
+        </div>
+      </div>
+
+      <div class="price-grid" id="price-grid">
+        <!-- Prices will be populated by JavaScript -->
+      </div>
+
+      <div class="chart-container">
+        <canvas id="price-chart"></canvas>
+      </div>
+
+      <footer>
+        <p>Real-time cryptocurrency prices from Binance WebSocket API</p>
+        <p>Auto-refreshes every 2 seconds</p>
+      </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+  </body>
+</html>
