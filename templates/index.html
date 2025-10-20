@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .card { background: #f5f5f5; padding: 20px; margin: 10px 0; border-radius: 8px; }
+        .nav { background: #333; padding: 10px; margin-bottom: 20px; }
+        .nav a { color: white; text-decoration: none; margin-right: 15px; }
+        .flash { background: #d4edda; padding: 10px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="/">Home</a>
+        <a href="/form-demo">Form Demo</a>
+        <a href="/products">Products</a>
+        <a href="/search">Search</a>
+        <a href="/session-demo">Session</a>
+        <a href="/api/v1/">API</a>
+    </div>
+    
+    <h1>{{ title }}</h1>
+    <div class="card">
+        <p>Current Time: {{ current_time.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+        <p>Users: {{ user_count }} | Products: {{ product_count }}</p>
+    </div>
+    
+    <div class="card">
+        <h3>Quick Links:</h3>
+        <ul>
+            <li><a href="/user/1">User Profile Example</a></li>
+            <li><a href="/greet/John">Dynamic Greeting</a></li>
+            <li><a href="/methods-demo">HTTP Methods Demo</a></li>
+            <li><a href="/query-demo?name=Alice&page=2">Query Parameters</a></li>
+            <li><a href="/custom-response">Custom Response</a></li>
+        </ul>
+    </div>
+</body>
+</html>
+        

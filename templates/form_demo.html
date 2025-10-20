@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+</head>
+<body>
+    <div class="nav">
+        <a href="/">Home</a>
+        <a href="/form-demo">Form Demo</a>
+    </div>
+    
+    <h1>{{ title }}</h1>
+    
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    
+    <form method="POST">
+        <div>
+            <label>Username:</label>
+            <input type="text" name="username" required>
+        </div>
+        <div>
+            <label>Email:</label>
+            <input type="email" name="email" required>
+        </div>
+        <div>
+            <label>
+                <input type="checkbox" name="newsletter">
+                Subscribe to newsletter
+            </label>
+        </div>
+        <button type="submit">Register</button>
+    </form>
+</body>
+</html>
+        
