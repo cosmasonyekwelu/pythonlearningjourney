@@ -1,34 +1,34 @@
-# Day 26 - API Development (REST, etc.)
+# Day 26: API Development
 
 A complete RESTful API implementation for a trading platform with user authentication, trade management, portfolio tracking, and market data.
 
 ## Features
 
-- **User Authentication**: JWT-based registration and login
-- **Trade Management**: Full CRUD operations for trades
-- **Portfolio Tracking**: Real-time portfolio summary with P&L
-- **Market Data**: Real-time (mock) market data
-- **Pagination & Filtering**: Efficient data retrieval
-- **Error Handling**: Comprehensive error responses
-- **CORS Support**: Cross-origin resource sharing
+- User Authentication: JWT-based registration and login
+- Trade Management: Full CRUD operations for trades
+- Portfolio Tracking: Real-time portfolio summary with P&L
+- Market Data: Real-time (mock) market data
+- Pagination and Filtering: Efficient data retrieval
+- Error Handling: Comprehensive error responses
+- CORS Support: Cross-origin resource sharing
 
 ## Tech Stack
 
-- **Backend**: Flask, Flask-RESTful, SQLAlchemy
-- **Authentication**: JWT (JSON Web Tokens)
-- **Database**: SQLite (with SQLAlchemy ORM)
-- **Security**: Password hashing, JWT tokens
-- **Documentation**: OpenAPI/Swagger compatible
+- Backend: Flask, Flask-RESTful, SQLAlchemy
+- Authentication: JWT (JSON Web Tokens)
+- Database: SQLite (with SQLAlchemy ORM)
+- Security: Password hashing, JWT tokens
+- Documentation: OpenAPI/Swagger compatible
 
-## Installation & Setup
+## Installation and Setup
 
-1. **Install dependencies**:
+1. Install dependencies:
 
 ```bash
 pip install flask flask-restful flask-sqlalchemy flask-jwt-extended flask-cors
 ```
 
-2. **Initialize the database**:
+2. Initialize the database:
 
 ```bash
 python day_twentysix.py
@@ -36,7 +36,7 @@ python day_twentysix.py
 
 This will automatically create the database tables.
 
-3. **Run the application**:
+3. Run the application:
 
 ```bash
 python day_twentysix.py
@@ -52,22 +52,22 @@ flask --app day_twentysix run --port 5000 --debug
 
 ### Authentication
 
-- `POST /api/register` - Register new user
-- `POST /api/login` - User login
+- POST /api/register – Register new user
+- POST /api/login – User login
 
 ### Trades (Require JWT Authentication)
 
-- `GET /api/trades` - Get all trades (with pagination/filtering)
-- `POST /api/trades` - Create new trade
-- `GET /api/trades/<id>` - Get specific trade
-- `PUT /api/trades/<id>` - Update trade
-- `DELETE /api/trades/<id>` - Delete trade
+- GET /api/trades – Get all trades (with pagination/filtering)
+- POST /api/trades – Create new trade
+- GET /api/trades/<id> – Get specific trade
+- PUT /api/trades/<id> – Update trade
+- DELETE /api/trades/<id> – Delete trade
 
-### Portfolio & Market Data
+### Portfolio and Market Data
 
-- `GET /api/portfolio` - Get user portfolio summary
-- `GET /api/market-data` - Get market data
-- `GET /api/health` - Health check
+- GET /api/portfolio – Get user portfolio summary
+- GET /api/market-data – Get market data
+- GET /api/health – Health check
 
 ## Usage Examples
 
@@ -132,55 +132,55 @@ curl -X GET "http://localhost:5000/api/market-data?symbols=AAPL,GOOGL,MSFT"
 
 ### User Model
 
-- `id`: Primary key
-- `username`: Unique username
-- `email`: Unique email
-- `password`: Hashed password
-- `created_at`: Account creation timestamp
+- id: Primary key
+- username: Unique username
+- email: Unique email
+- password: Hashed password
+- created_at: Account creation timestamp
 
 ### Trade Model
 
-- `id`: Primary key
-- `symbol`: Stock symbol (e.g., AAPL)
-- `quantity`: Number of shares
-- `price`: Trade price per share
-- `trade_type`: BUY or SELL
-- `timestamp`: Trade timestamp
-- `user_id`: Foreign key to User
+- id: Primary key
+- symbol: Stock symbol (e.g., AAPL)
+- quantity: Number of shares
+- price: Trade price per share
+- trade_type: BUY or SELL
+- timestamp: Trade timestamp
+- user_id: Foreign key to User
 
 ## Query Parameters
 
 ### Trades Endpoint
 
-- `page`: Page number (default: 1)
-- `per_page`: Items per page (default: 10)
-- `symbol`: Filter by symbol
-- `trade_type`: Filter by trade type (BUY/SELL)
+- page: Page number (default: 1)
+- per_page: Items per page (default: 10)
+- symbol: Filter by symbol
+- trade_type: Filter by trade type (BUY/SELL)
 
 ### Market Data Endpoint
 
-- `symbols`: Comma-separated list of symbols
+- symbols: Comma-separated list of symbols
 
 ## Error Handling
 
 The API returns appropriate HTTP status codes:
 
-- `200`: Success
-- `201`: Created
-- `400`: Bad Request (validation errors)
-- `401`: Unauthorized (authentication required)
-- `404`: Not Found
-- `500`: Internal Server Error
+- 200: Success
+- 201: Created
+- 400: Bad Request (validation errors)
+- 401: Unauthorized (authentication required)
+- 404: Not Found
+- 500: Internal Server Error
 
 ## Security Notes
 
-⚠️ **Important Security Considerations**:
+Important Security Considerations:
 
-1. **Passwords**: Currently stored in plain text. In production, use proper hashing (bcrypt, Argon2)
-2. **JWT Secret**: Change the JWT secret key in production
-3. **HTTPS**: Always use HTTPS in production
-4. **Input Validation**: Implement comprehensive input validation
-5. **Rate Limiting**: Add rate limiting to prevent abuse
+1. Passwords: Currently stored in plain text. In production, use proper hashing (bcrypt, Argon2).
+2. JWT Secret: Change the JWT secret key in production.
+3. HTTPS: Always use HTTPS in production.
+4. Input Validation: Implement comprehensive input validation.
+5. Rate Limiting: Add rate limiting to prevent abuse.
 
 ## Sample Data
 
@@ -192,12 +192,12 @@ flask --app day_twentysix create-sample-data
 
 This creates:
 
-- Demo user: `demo` / `password`
+- Demo user: demo / password
 - Sample trades for popular stocks
 
 ## Testing with Postman
 
-1. Import the following collection:
+Import the following collection:
 
 ```json
 {
@@ -239,25 +239,16 @@ This creates:
 }
 ```
 
-## Project Structure
-
-```
-day_twentysix/
-├── day_twentysix.py    # Main application file
-├── trading.db          # SQLite database (created automatically)
-└── README.md          # This file
-```
-
 ## Learning Objectives Covered
 
-- ✅ REST API principles and CRUD architecture
-- ✅ Flask RESTful setup and configuration
-- ✅ Serializers and data validation
-- ✅ JWT authentication implementation
-- ✅ Pagination and filtering
-- ✅ API testing preparation
-- ✅ Database models and relationships
-- ✅ Error handling and response formatting
+- REST API principles and CRUD architecture
+- Flask RESTful setup and configuration
+- Serializers and data validation
+- JWT authentication implementation
+- Pagination and filtering
+- API testing preparation
+- Database models and relationships
+- Error handling and response formatting
 
 ## Next Steps
 
@@ -269,16 +260,16 @@ day_twentysix/
 6. Implement rate limiting
 7. Add database migrations
 
-## Common Issues & Solutions
+## Common Issues and Solutions
 
-1. **Port already in use**: Change port with `--port 5001`
-2. **Database errors**: Delete `trading.db` and reinitialize
-3. **Import errors**: Ensure all dependencies are installed
-4. **JWT errors**: Check token expiration and secret key
+1. Port already in use: Change port with `--port 5001`
+2. Database errors: Delete `trading.db` and reinitialize
+3. Import errors: Ensure all dependencies are installed
+4. JWT errors: Check token expiration and secret key
 
 ## Contributing
 
-Feel free to extend this API with additional features like:
+You can extend this API with additional features such as:
 
 - Real market data integration
 - Advanced portfolio analytics
@@ -286,24 +277,22 @@ Feel free to extend this API with additional features like:
 - Multi-currency support
 - WebSocket real-time updates
 
-````
-
 ## How to Run
 
-1. **Save both files** in the same directory
-2. **Install dependencies**:
+1. Save both files in the same directory.
+2. Install dependencies:
+
 ```bash
 pip install flask flask-restful flask-sqlalchemy flask-jwt-extended flask-cors
-````
+```
 
-3. **Run the application**:
+3. Run the application:
 
 ```bash
 python day_twentysix.py
 ```
 
-4. **Access the API** at `http://localhost:5000`
+4. Access the API at [http://localhost:5000](http://localhost:5000)
+5. Test endpoints using the provided curl commands or Postman.
 
-5. **Test endpoints** using the provided curl commands or Postman
-
-The API provides a complete trading platform with user management, trade operations, portfolio tracking, and market data - perfect for learning REST API development!
+The API provides a complete trading platform with user management, trade operations, portfolio tracking, and market data. It is an excellent foundation for learning REST API development.

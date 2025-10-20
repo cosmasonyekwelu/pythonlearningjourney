@@ -1,4 +1,4 @@
-# Day 27 — Frontend Integration & Templates
+# Day 27  Frontend Integration & Templates
 
 ## **Focus**
 

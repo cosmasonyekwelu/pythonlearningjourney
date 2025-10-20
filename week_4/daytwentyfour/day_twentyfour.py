@@ -1,11 +1,12 @@
 """
-Day 24 — Database Design with SQLite, PostgreSQL, MySQL, and MongoDB
-Focus: Designing and connecting multi-database systems for scalability
+Python Learning Journey - Day Twenty Four
+Topic: Database Design with SQLite, PostgreSQL, MySQL, and MongoDB
 Date: October 15, 2025
+Author: Cosmas Onyekwelu
 """
 
 # --------------------------------------------------------
-# 🧱 IMPORTS AND CONFIGURATION
+# IMPORTS AND CONFIGURATION
 # --------------------------------------------------------
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
@@ -15,7 +16,7 @@ from pymongo import MongoClient
 app = Flask(__name__)
 
 # --------------------------------------------------------
-# 🎛️ DATABASE CONNECTIONS
+# DATABASE CONNECTIONS
 # --------------------------------------------------------
 # SQLAlchemy - connect to PostgreSQL (replace credentials)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhost/portfolio_db'
@@ -29,7 +30,7 @@ activity_logs = mongo_db['activity_logs']
 
 
 # --------------------------------------------------------
-# 🧩 MODELS (SQLAlchemy ORM)
+# MODELS (SQLAlchemy ORM)
 # --------------------------------------------------------
 class User(db.Model):
     __tablename__ = 'users'
@@ -76,7 +77,7 @@ class Transaction(db.Model):
 
 
 # --------------------------------------------------------
-# 🔧 ROUTES — CRUD API EXAMPLES
+# ROUTES — CRUD API EXAMPLES
 # --------------------------------------------------------
 
 @app.route('/')
@@ -183,7 +184,7 @@ def get_transactions():
 
 
 # --------------------------------------------------------
-# 🧠 HELPER FUNCTION — MongoDB Logging
+# HELPER FUNCTION — MongoDB Logging
 # --------------------------------------------------------
 def log_action(action, message):
     log_entry = {
@@ -196,7 +197,7 @@ def log_action(action, message):
 
 
 # --------------------------------------------------------
-# 🚀 RUN SERVER
+# RUN SERVER
 # --------------------------------------------------------
 if __name__ == '__main__':
     with app.app_context():

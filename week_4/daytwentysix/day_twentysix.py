@@ -1,7 +1,8 @@
 """
-Day 26 - API Development (REST, etc.)
-Trading API with Flask and SQLAlchemy
+Python Learning Journey - Day Twenty Six
+Topic: API Development
 Date: October 17, 2025
+Author: Cosmas Onyekwelu
 """
 
 from flask import Flask, request, jsonify

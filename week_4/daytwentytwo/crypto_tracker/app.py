@@ -1,5 +1,5 @@
 """
-Day 22 - Flask Fundamentals & Routing
+Day 22: Flask Fundamentals and Routing
 Complete Trading Journal with Crypto Tracker
 Date: October 13, 2025
 """
@@ -113,8 +113,7 @@ def get_sample_crypto_data():
 
 def calculate_portfolio_stats():
     """Calculate portfolio statistics from sample trades"""
-    total_value = sum(trade['quantity'] * trade['current_price']
-                      for trade in SAMPLE_TRADES)
+    total_value = sum(trade['quantity'] * trade['current_price'] for trade in SAMPLE_TRADES)
     total_profit_loss = sum(trade['profit_loss'] for trade in SAMPLE_TRADES)
     active_trades = len(SAMPLE_TRADES)
 
@@ -123,10 +122,6 @@ def calculate_portfolio_stats():
         'total_profit_loss': total_profit_loss,
         'active_trades': active_trades
     }
-
-# =============================================================================
-# MAIN ROUTES
-# =============================================================================
 
 
 @app.route('/')
@@ -141,7 +136,6 @@ def home():
 def dashboard():
     """Trading dashboard with portfolio overview"""
     portfolio_stats = calculate_portfolio_stats()
-
     return render_template('index.html',
                            title='Trading Dashboard',
                            portfolio_value=portfolio_stats['total_value'],
@@ -171,10 +165,6 @@ def trade_detail(trade_id):
         flash('Trade not found!', 'danger')
         return redirect(url_for('trades_list'))
 
-# =============================================================================
-# CRYPTO ROUTES
-# =============================================================================
-
 
 @app.route('/crypto')
 def crypto_home():
@@ -190,7 +180,6 @@ def crypto_prices():
     """Display current cryptocurrency prices"""
     crypto_data = get_crypto_prices()
     last_updated = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-
     return render_template('crypto_prices.html',
                            crypto_data=crypto_data,
                            last_updated=last_updated,
@@ -211,9 +200,7 @@ def crypto_api_prices():
 def crypto_detail(symbol):
     """Detail page for a specific cryptocurrency"""
     crypto_data = get_crypto_prices()
-    crypto = next(
-        (c for c in crypto_data if c['symbol'].lower() == symbol.lower()), None)
-
+    crypto = next((c for c in crypto_data if c['symbol'].lower() == symbol.lower()), None)
     if crypto:
         return render_template('crypto_prices.html',
                                crypto_detail=crypto,
@@ -221,10 +208,6 @@ def crypto_detail(symbol):
     else:
         flash(f'Cryptocurrency {symbol.upper()} not found!', 'danger')
         return redirect(url_for('crypto_prices'))
-
-# =============================================================================
-# UTILITY ROUTES
-# =============================================================================
 
 
 @app.route('/contact', methods=['GET', 'POST'])
@@ -234,10 +217,7 @@ def contact():
         name = request.form.get('name', 'Anonymous')
         email = request.form.get('email', 'Not provided')
         message = request.form.get('message', 'No message')
-
-        # In a real app, you'd save this to a database
         flash(f'Thank you {name}! Your message has been received.', 'success')
-
         return redirect(url_for('contact'))
 
     return '''
@@ -274,10 +254,6 @@ def api_portfolio():
         'timestamp': datetime.now().isoformat()
     })
 
-# =============================================================================
-# ERROR HANDLERS
-# =============================================================================
-
 
 @app.errorhandler(404)
 def page_not_found(error):
@@ -292,15 +268,11 @@ def internal_error(error):
                            error_code=500,
                            error_message="Something went wrong on our end."), 500
 
-# =============================================================================
-# APPLICATION START
-# =============================================================================
-
 
 if __name__ == '__main__':
-    print("🚀 Starting Flask Trading Journal...")
-    print("📊 Dashboard: http://localhost:5000")
-    print("💰 Crypto Prices: http://localhost:5000/crypto/prices")
-    print("🔧 Debug mode: ON")
-    print("⏰ Started at:", datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+    print("Starting Flask Trading Journal...")
+    print("Dashboard: http://localhost:5000")
+    print("Crypto Prices: http://localhost:5000/crypto/prices")
+    print("Debug mode: ON")
+    print("Started at:", datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
     app.run(debug=True, host='0.0.0.0', port=5000)

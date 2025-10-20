@@ -1,11 +1,12 @@
 """
-Day 25 — User Authentication & Sessions
-Focus: Implementing secure login and user management systems
+Python Learning Journey  Day Twenty Five
+Topic: User Authentication & Sessions
 Date: October 16, 2025
+Author: Cosmas Onyekwelu
 """
 
 # --------------------------------------------------------
-# 🧱 IMPORTS
+# IMPORTS
 # --------------------------------------------------------
 from flask import Flask, jsonify, request, session, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
@@ -17,7 +18,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import timedelta, datetime
 
 # --------------------------------------------------------
-# ⚙️ APP CONFIGURATION
+# APP CONFIGURATION
 # --------------------------------------------------------
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///day25_auth.db'
@@ -31,7 +32,7 @@ login_manager.login_view = 'login'
 
 
 # --------------------------------------------------------
-# 👤 USER MODEL
+# USER MODEL
 # --------------------------------------------------------
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
@@ -57,7 +58,7 @@ def load_user(user_id):
 
 
 # --------------------------------------------------------
-# 🧠 HELPER FUNCTIONS
+# HELPER FUNCTIONS
 # --------------------------------------------------------
 def validate_user_input(data, required_fields):
     """Ensure all required fields are provided"""
@@ -68,7 +69,7 @@ def validate_user_input(data, required_fields):
 
 
 # --------------------------------------------------------
-# 🧱 AUTH ROUTES
+# AUTH ROUTES
 # --------------------------------------------------------
 
 @app.route('/')
@@ -141,7 +142,7 @@ def deactivate_user():
 
 
 # --------------------------------------------------------
-# 🚀 RUN APP
+# RUN APP
 # --------------------------------------------------------
 if __name__ == '__main__':
     with app.app_context():

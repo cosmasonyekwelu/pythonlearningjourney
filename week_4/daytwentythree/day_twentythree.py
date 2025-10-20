@@ -1,6 +1,8 @@
 """
-Day 23 - Django Setup & ORM Mastery
+Python Learning Journey - Day Twenty Three
+Topic: Django Setup & ORM Mastery
 Date: October 14, 2025
+Author: Cosmas Onyekwelu
 """
 
 import os

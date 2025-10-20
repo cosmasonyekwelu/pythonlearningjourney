@@ -1,10 +1,8 @@
 """
-Day 27 — Frontend Integration & Templates
-
-Focus:
-Connecting backend logic with frontend presentation.
-Using Jinja2 (Flask) and Django Templates to render dynamic content.
+Python Learning Journey - Day Twenty Seven
+Topic: Frontend Integration & Templates
 Date: October 18, 2025
+Author: Cosmas Onyekwelu
 """
 
 from flask import Flask, render_template, request

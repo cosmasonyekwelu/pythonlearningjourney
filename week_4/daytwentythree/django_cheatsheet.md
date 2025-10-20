@@ -1,6 +1,7 @@
 # Django Quick Reference Cheatsheet
 
 ## 🏗️ Project Structure
+
 ```
 project/
 ├── manage.py                 # Django command-line utility
@@ -23,6 +24,7 @@ project/
 ## 🚀 Common Commands
 
 ### Project Management
+
 ```bash
 # Create new project
 django-admin startproject myproject
@@ -37,6 +39,7 @@ python manage.py runserver 0.0.0.0:8000  # External access
 ```
 
 ### Database Operations
+
 ```bash
 # Create migrations from model changes
 python manage.py makemigrations
@@ -55,6 +58,7 @@ python manage.py createsuperuser
 ```
 
 ### Development Utilities
+
 ```bash
 # Django shell (with models loaded)
 python manage.py shell
@@ -73,6 +77,7 @@ python manage.py check
 ## 📊 Model Field Types
 
 ### Basic Fields
+
 ```python
 from django.db import models
 
@@ -81,23 +86,23 @@ class MyModel(models.Model):
     name = models.CharField(max_length=100)           # Short text
     description = models.TextField()                  # Long text
     slug = models.SlugField()                         # URL-friendly text
-    
+
     # Numeric Fields
     age = models.IntegerField()                       # Whole numbers
     price = models.DecimalField(max_digits=10, decimal_places=2)
     percentage = models.FloatField()                  # Floating point
     balance = models.PositiveIntegerField()           # Positive only
-    
+
     # Date/Time Fields
     created = models.DateTimeField(auto_now_add=True) # Set on create
     updated = models.DateTimeField(auto_now=True)     # Set on save
     birthday = models.DateField()                     # Date only
     time = models.TimeField()                         # Time only
-    
+
     # Boolean Fields
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-    
+
     # Specialized Fields
     email = models.EmailField()                       # Email validation
     website = models.URLField()                       # URL validation
@@ -107,6 +112,7 @@ class MyModel(models.Model):
 ```
 
 ### Relationship Fields
+
 ```python
 class Author(models.Model):
     name = models.CharField(max_length=100)
@@ -115,10 +121,10 @@ class Book(models.Model):
     title = models.CharField(max_length=200)
     # One-to-Many: Book has one author, Author has many books
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
-    
+
     # Many-to-Many: Book can have multiple categories
     categories = models.ManyToManyField('Category')
-    
+
     # One-to-One: Each book has one unique detail record
     details = models.OneToOneField('BookDetails', on_delete=models.CASCADE)
 
@@ -137,11 +143,11 @@ class Product(models.Model):
     name = models.CharField(max_length=100)                    # Required
     description = models.TextField(blank=True)                 # Optional in forms
     sku = models.CharField(max_length=50, null=True)          # Optional in DB
-    
+
     # Default Values
     is_available = models.BooleanField(default=True)
     priority = models.IntegerField(default=1)
-    
+
     # Choices (Dropdown)
     STATUS_CHOICES = [
         ('DRAFT', 'Draft'),
@@ -149,18 +155,18 @@ class Product(models.Model):
         ('ARCHIVED', 'Archived'),
     ]
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='DRAFT')
-    
+
     # Help Text & Labels
     price = models.DecimalField(
-        max_digits=10, 
+        max_digits=10,
         decimal_places=2,
         verbose_name="Retail Price",
         help_text="Price in USD"
     )
-    
+
     # Database Indexing
     code = models.CharField(max_length=20, db_index=True)     # Single field index
-    
+
     class Meta:
         indexes = [
             models.Index(fields=['name', 'status']),          # Composite index
@@ -171,6 +177,7 @@ class Product(models.Model):
 ## 🔍 QuerySet Operations
 
 ### Basic Retrieval
+
 ```python
 # Get all objects
 all_objects = MyModel.objects.all()
@@ -190,6 +197,7 @@ count = MyModel.objects.count()
 ```
 
 ### Filtering & Excluding
+
 ```python
 # Basic filtering
 active_users = User.objects.filter(is_active=True)
@@ -215,6 +223,7 @@ products = Product.objects.filter(created__year=2024)      # Date lookups
 ```
 
 ### Sorting & Limiting
+
 ```python
 # Ordering
 products = Product.objects.order_by('name')                # Ascending
@@ -230,6 +239,7 @@ categories = Product.objects.values_list('category', flat=True).distinct()
 ```
 
 ### Aggregation & Annotation
+
 ```python
 from django.db.models import Count, Sum, Avg, Max, Min
 
@@ -259,6 +269,7 @@ categories = Product.objects.values('category').annotate(
 ```
 
 ### Performance Optimization
+
 ```python
 # select_related (Foreign Key - One-to-One)
 books = Book.objects.select_related('author')              # Single SQL query
@@ -277,6 +288,7 @@ books = Book.objects.defer('description')                  # Load all except
 ## 🎨 Template System
 
 ### Basic Syntax
+
 ```django
 <!-- Variables -->
 <p>Hello, {{ user.username }}!</p>
@@ -309,6 +321,7 @@ books = Book.objects.defer('description')                  # Load all except
 ```
 
 ### Template Inheritance
+
 ```django
 <!-- base.html -->
 <!DOCTYPE html>
@@ -335,6 +348,7 @@ books = Book.objects.defer('description')                  # Load all except
 ```
 
 ### URL Handling in Templates
+
 ```django
 <!-- Basic URL -->
 <a href="{% url 'home' %}">Home</a>
@@ -354,6 +368,7 @@ books = Book.objects.defer('description')                  # Load all except
 ## 🎯 Class-Based Views
 
 ### Common Generic Views
+
 ```python
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -363,7 +378,7 @@ class ProductListView(ListView):
     template_name = 'products/product_list.html'
     context_object_name = 'products'  # Default: object_list
     paginate_by = 20
-    
+
     def get_queryset(self):
         # Custom queryset
         return Product.objects.filter(is_active=True).order_by('-created')
@@ -377,7 +392,7 @@ class ProductCreateView(CreateView):
     fields = ['name', 'description', 'price', 'category']
     template_name = 'products/product_form.html'
     success_url = reverse_lazy('product_list')
-    
+
     def form_valid(self, form):
         # Custom logic before saving
         form.instance.created_by = self.request.user
@@ -395,6 +410,7 @@ class ProductDeleteView(DeleteView):
 ```
 
 ### Function-Based Views
+
 ```python
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
@@ -422,6 +438,7 @@ def product_create(request):
 ## 🔗 URL Configuration
 
 ### Project URLs
+
 ```python
 # project/urls.py
 from django.contrib import admin
@@ -437,6 +454,7 @@ urlpatterns = [
 ```
 
 ### App URLs
+
 ```python
 # products/urls.py
 from django.urls import path
@@ -448,18 +466,19 @@ urlpatterns = [
     # Function-based views
     path('', views.product_list, name='product_list'),
     path('<int:pk>/', views.product_detail, name='product_detail'),
-    
+
     # Class-based views
     path('create/', views.ProductCreateView.as_view(), name='product_create'),
     path('<int:pk>/edit/', views.ProductUpdateView.as_view(), name='product_update'),
     path('<int:pk>/delete/', views.ProductDeleteView.as_view(), name='product_delete'),
-    
+
     # API endpoints
     path('api/', views.product_api_list, name='product_api_list'),
 ]
 ```
 
 ### URL Patterns
+
 ```python
 # Basic patterns
 path('about/', views.about, name='about'),
@@ -478,6 +497,7 @@ re_path(r'^articles/(?P<year>[0-9]{4})/$', views.year_archive, name='year_archiv
 ## ⚙️ Admin Interface
 
 ### Basic Registration
+
 ```python
 from django.contrib import admin
 from .models import Product, Category
@@ -495,7 +515,7 @@ class ProductAdmin(admin.ModelAdmin):
     readonly_fields = ['created', 'updated']
     list_editable = ['price', 'is_active']
     list_per_page = 20
-    
+
     fieldsets = (
         (None, {
             'fields': ('name', 'description', 'category')
@@ -508,24 +528,25 @@ class ProductAdmin(admin.ModelAdmin):
             'fields': ('is_active', 'created', 'updated')
         }),
     )
-    
+
     # Custom methods
     def get_queryset(self, request):
         return super().get_queryset(request).select_related('category')
 ```
 
 ### Admin Actions
+
 ```python
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     # Custom admin actions
     actions = ['make_active', 'make_inactive']
-    
+
     def make_active(self, request, queryset):
         updated = queryset.update(is_active=True)
         self.message_user(request, f'{updated} products activated.')
     make_active.short_description = "Activate selected products"
-    
+
     def make_inactive(self, request, queryset):
         updated = queryset.update(is_active=False)
         self.message_user(request, f'{updated} products deactivated.')
@@ -535,6 +556,7 @@ class ProductAdmin(admin.ModelAdmin):
 ## 🔧 Settings Configuration
 
 ### Essential Settings
+
 ```python
 # settings.py
 
@@ -551,10 +573,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     # Third-party apps
     'rest_framework',
-    
+
     # Local apps
     'products',
     'users',
@@ -616,6 +638,7 @@ USE_TZ = True
 ## 🛡️ Security & Best Practices
 
 ### Security Middleware
+
 ```python
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -629,6 +652,7 @@ MIDDLEWARE = [
 ```
 
 ### CSRF Protection
+
 ```django
 <!-- In templates -->
 <form method="post">
@@ -648,6 +672,7 @@ def my_api_view(request):
 ```
 
 ### Authentication
+
 ```python
 from django.contrib.auth.decorators import login_required, permission_required
 
@@ -670,6 +695,7 @@ class ProtectedView(LoginRequiredMixin, CreateView):
 ## 📝 Common Patterns
 
 ### get_object_or_404 Pattern
+
 ```python
 from django.shortcuts import get_object_or_404
 
@@ -680,6 +706,7 @@ def product_detail(request, pk):
 ```
 
 ### Success Messages
+
 ```python
 from django.contrib import messages
 
@@ -696,6 +723,7 @@ def create_product(request):
 ```
 
 ### Form Handling
+
 ```python
 from django import forms
 from .models import Product
@@ -707,7 +735,7 @@ class ProductForm(forms.ModelForm):
         widgets = {
             'description': forms.Textarea(attrs={'rows': 4}),
         }
-    
+
     def clean_price(self):
         price = self.cleaned_data['price']
         if price < 0:
@@ -715,4 +743,4 @@ class ProductForm(forms.ModelForm):
         return price
 ```
 
-This cheatsheet covers the most essential Django concepts and patterns 
+This cheatsheet covers the most essential Django concepts and patterns

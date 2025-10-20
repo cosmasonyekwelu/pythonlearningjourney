@@ -1,52 +1,62 @@
-## Day 25 — User Authentication & Sessions
+## Day 25 User Authentication & Sessions
 
-### 🎯 Focus
+### Focus
 
 Implementing **secure login and user management systems** using Flask-Login and Django Authentication.
 
 ---
 
-## 🧩 Key Concepts
+## Key Concepts
 
-### 🔐 1. Authentication vs Authorization
+### 1. Authentication vs Authorization
 
-- **Authentication** — verifies _who_ the user is (login, password, identity).
-- **Authorization** — defines _what_ actions they can perform (admin access, restricted pages).
+- **Authentication** verifies _who_ the user is (login, password, identity).
+- **Authorization** defines _what_ actions they can perform (admin access, restricted pages).
 
 ---
 
-### ⚙️ 2. Flask Authentication Workflow
+### 2. Flask Authentication Workflow
 
 1. **User Registration**
+
    - Accept email, username, and password.
    - Hash passwords using `werkzeug.security.generate_password_hash()`.
+
 2. **Login**
+
    - Verify password using `check_password_hash()`.
    - Create a session via Flask-Login’s `login_user()`.
+
 3. **Session**
+
    - Stored in browser cookies.
    - Can be made permanent (`session.permanent = True`) and auto-expire.
+
 4. **Logout**
+
    - `logout_user()` clears the session.
+
 5. **Access Control**
+
    - Use `@login_required` to protect private routes.
 
 ---
 
-### 🧠 3. Secure Password Handling
+### 3. Secure Password Handling
 
 ```python
 from werkzeug.security import generate_password_hash, check_password_hash
 
 hashed = generate_password_hash("password123")
-check_password_hash(hashed, "password123")  # ✅ True
+check_password_hash(hashed, "password123")  # True
 ```
 
 Hashing ensures raw passwords are **never stored** in the database.
 
-### 🔄 4. Flask-Login Essentials
+---
 
-````
+### 4. Flask-Login Essentials
+
 | Function           | Description                                   |
 | ------------------ | --------------------------------------------- |
 | `LoginManager()`   | Initializes login system                      |
@@ -58,9 +68,9 @@ Hashing ensures raw passwords are **never stored** in the database.
 
 ---
 
-### 🧩 5. Django Authentication Overview
+### 5. Django Authentication Overview
 
-Django provides authentication out of the box:
+Django provides authentication out of the box.
 
 #### Configure in `settings.py`
 
@@ -70,7 +80,7 @@ INSTALLED_APPS = [
   'django.contrib.contenttypes',
   'django.contrib.sessions',
 ]
-````
+```
 
 #### Example: Login View
 
@@ -99,12 +109,12 @@ def logout_view(request):
 
 ---
 
-### 🧾 6. Session Management
+### 6. Session Management
 
-| Framework  | Mechanism         | Storage                  |
-| ---------- | ----------------- | ------------------------ |
-| **Flask**  | `session` dict    | Signed cookies           |
-| **Django** | Session framework | DB, cache, or file-based |
+| Framework  | Mechanism         | Storage                        |
+| ---------- | ----------------- | ------------------------------ |
+| **Flask**  | `session` dict    | Signed cookies                 |
+| **Django** | Session framework | Database, cache, or file-based |
 
 **Set timeout (Flask):**
 
@@ -120,7 +130,7 @@ SESSION_COOKIE_AGE = 1800  # 30 minutes
 
 ---
 
-### ⚙️ 7. Security Best Practices (OWASP)
+### 7. Security Best Practices (OWASP)
 
 - Use **bcrypt** or **PBKDF2** for hashing.
 - Implement **CSRF protection** (`@csrf_protect` in Django, Flask-WTF in Flask).
@@ -130,7 +140,7 @@ SESSION_COOKIE_AGE = 1800  # 30 minutes
 
 ---
 
-### 🔧 8. Common Flask Routes in `day_twentyfive.py`
+### 8. Common Flask Routes in `day_twentyfive.py`
 
 | Route         | Method | Description                   |
 | ------------- | ------ | ----------------------------- |
@@ -142,17 +152,17 @@ SESSION_COOKIE_AGE = 1800  # 30 minutes
 
 ---
 
-## 🧰 Tools Used
+## Tools Used
 
-- **Flask** — lightweight Python web framework
-- **Flask-Login** — session-based authentication
-- **Werkzeug Security** — password hashing utilities
-- **SQLite** — test database
-- **Django Auth System** — for comparative learning
+- **Flask** lightweight Python web framework
+- **Flask-Login** session-based authentication
+- **Werkzeug Security** password hashing utilities
+- **SQLite** test database
+- **Django Auth System** —for comparative learning
 
 ---
 
-## 📚 Learning Resources
+## Learning Resources
 
 - [Flask-Login Documentation](https://flask-login.readthedocs.io/)
 - [Django Authentication System](https://docs.djangoproject.com/en/stable/topics/auth/)
