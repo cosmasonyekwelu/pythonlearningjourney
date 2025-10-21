@@ -1,6 +1,8 @@
 """
-Day 29 - Real-time Data Updates with Yahoo & CoinGecko API Comparison
-Shows results from both APIs and compares prices
+Python Learning Journey - Day Twenty Nine
+Topic: Real-time Data Updates with Yahoo & CoinGecko API Comparison
+Date: October 20, 2025
+Author: Cosmas Onyekwelu
 """
 
 import requests

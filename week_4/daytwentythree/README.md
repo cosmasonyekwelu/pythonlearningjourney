@@ -1,6 +1,5 @@
 # Day 23: Django Setup and ORM Mastery
 
-**Week:** 4 — Web Development and Data Systems
 **Focus:** Full-Stack Web Framework with Database Integration
 
 ## Overview
