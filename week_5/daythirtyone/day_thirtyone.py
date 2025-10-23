@@ -1,6 +1,8 @@
 """
-Day 31 - Pandas for Financial Data & Basic Financial Calculations
-Mastering pandas for financial analysis and calculations
+Python Learning Journey - Day Thirty One
+Topic: Pandas for Financial Data & Basic Financial Calculations
+Date: October 22, 2025
+Author: Cosmas Onyekwelu
 """
 
 import pandas as pd

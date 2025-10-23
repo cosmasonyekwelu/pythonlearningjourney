@@ -1,0 +1,19 @@
+{
+  "portfolio": {
+    "AAPL": 0.25,
+    "GOOGL": 0.20,
+    "MSFT": 0.15,
+    "AMZN": 0.10,
+    "TSLA": 0.08,
+    "JNJ": 0.07,
+    "JPM": 0.06,
+    "V": 0.05,
+    "PG": 0.04
+  },
+  "benchmarks": {
+    "SPY": "S&P 500",
+    "QQQ": "Nasdaq 100",
+    "IWM": "Russell 2000"
+  },
+  "risk_free_rate": 0.02
+}
