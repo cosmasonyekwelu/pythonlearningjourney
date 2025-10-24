@@ -18,7 +18,7 @@ import pandas as pd
 load_dotenv()
 
 
-class PortfolioAnalyzer:
+class PortfolioAnalyzer: 
     def __init__(self, api_key=None):
         self.api_key = api_key
 
