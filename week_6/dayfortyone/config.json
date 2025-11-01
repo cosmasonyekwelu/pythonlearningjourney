@@ -1,0 +1,16 @@
+{
+  "scan_settings": {
+    "common_ports": [21, 22, 23, 25, 53, 80, 110, 443, 993, 995, 3389],
+    "scan_timeout": 2,
+    "max_threads": 50
+  },
+  "monitoring_settings": {
+    "check_interval": 30,
+    "packet_count": 100,
+    "security_event_severities": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]
+  },
+  "network_settings": {
+    "default_network": "192.168.1.0/24",
+    "trusted_subnets": ["192.168.1.0/24", "10.0.0.0/8"]
+  }
+}
