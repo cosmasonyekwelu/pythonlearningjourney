@@ -73,7 +73,7 @@ pip install flask bcrypt cryptography email-validator
 ### Start the Demo Server
 
 ```bash
-python day40_web_security.py
+python day_forty.py
 ```
 
 ### Access the Application
