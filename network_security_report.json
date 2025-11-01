@@ -1,0 +1,14 @@
+{
+  "scan_date": "2025-11-01T21:07:40.090197",
+  "scan_duration_seconds": 6.024621,
+  "hosts_discovered": 0,
+  "packets_analyzed": 0,
+  "security_events": 0,
+  "open_ports_by_host": {},
+  "event_summary": {
+    "CRITICAL": 0,
+    "HIGH": 0,
+    "MEDIUM": 0,
+    "LOW": 0
+  }
+}
