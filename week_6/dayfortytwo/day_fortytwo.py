@@ -1,8 +1,7 @@
 """
-Python Learning Journey - Day Forty Two
-Week 6 Summary - Networking & Security.
-Date: November 2, 2025
-Author: Cosmas Onyekwelu
+Python Learning Journey - Day 42
+Week 6 Summary - Networking & Security
+Date: Nov 2, 2025 | Author: Cosmas Onyekwelu
 """
 
 from flask import Flask, request, jsonify
