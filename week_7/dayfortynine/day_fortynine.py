@@ -1,5 +1,7 @@
 """
-Day 49 – Automated Trading Bot (Paper Mode)
+Python Learning Journey - Day 49
+Week 7 Summary - Trading Automation & Scripting
+Date: Nov 9, 2025 | Author: Cosmas Onyekwelu
 """
 
 import os
@@ -13,9 +15,9 @@ import logging
 import datetime as dt
 from dataclasses import dataclass, field
 from typing import Optional, Dict, Any, List, Tuple
-
 import numpy as np
 import pandas as pd
+
 
 try:
     import ccxt  # optional
@@ -37,7 +39,8 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s | %(levelname)s | %(message)s",
     handlers=[
-        logging.FileHandler(os.path.join(LOG_DIR, f"bot_{dt.date.today()}.log")),
+        logging.FileHandler(os.path.join(
+            LOG_DIR, f"bot_{dt.date.today()}.log")),
         logging.StreamHandler()
     ],
 )
@@ -46,7 +49,8 @@ logging.basicConfig(
 # Config loader
 # -----------------------------
 DEFAULT_CONFIG = {
-    "mode": "paper",                           # "paper" or "live" (live requires ccxt + exchange config)
+    # "paper" or "live" (live requires ccxt + exchange config)
+    "mode": "paper",
     "symbol": "BTC/USDT",
     "exchange": "binance",                     # used if ccxt is enabled
     "timeframe": "1h",                         # used if ccxt is enabled
@@ -72,6 +76,7 @@ DEFAULT_CONFIG = {
     "save_equity_csv": "equity_curve.csv"
 }
 
+
 def load_config(path: str = "config.json") -> Dict[str, Any]:
     if os.path.exists(path):
         with open(path, "r", encoding="utf-8") as f:
@@ -87,13 +92,16 @@ def load_config(path: str = "config.json") -> Dict[str, Any]:
 # -----------------------------
 # Data feed
 # -----------------------------
+
+
 class DataFeed:
     def __init__(self, cfg: Dict[str, Any]):
         self.cfg = cfg
         self.exchange = None
         if ccxt and cfg.get("mode") != "paper":  # live mode (or ccxt usage)
             ex_name = cfg.get("exchange", "binance")
-            self.exchange = getattr(ccxt, ex_name)() if hasattr(ccxt, ex_name) else None
+            self.exchange = getattr(ccxt, ex_name)(
+            ) if hasattr(ccxt, ex_name) else None
             # If you want auth: self.exchange.apiKey = os.getenv("API_KEY"); self.exchange.secret = ...
         # Cache last candles
         self.df = None
@@ -108,12 +116,16 @@ class DataFeed:
             symbol = self.cfg["symbol"]
             timeframe = self.cfg["timeframe"]
             limit = self.cfg["fetch_limit"]
-            logging.info(f"Fetching OHLCV via ccxt: {symbol} {timeframe} limit={limit}")
-            ohlcv = self.exchange.fetch_ohlcv(symbol, timeframe=timeframe, limit=limit)
+            logging.info(
+                f"Fetching OHLCV via ccxt: {symbol} {timeframe} limit={limit}")
+            ohlcv = self.exchange.fetch_ohlcv(
+                symbol, timeframe=timeframe, limit=limit)
             df = pd.DataFrame(
-                ohlcv, columns=["timestamp", "open", "high", "low", "close", "volume"]
+                ohlcv, columns=["timestamp", "open",
+                                "high", "low", "close", "volume"]
             )
-            df["timestamp"] = pd.to_datetime(df["timestamp"], unit="ms", utc=True)
+            df["timestamp"] = pd.to_datetime(
+                df["timestamp"], unit="ms", utc=True)
             self.df = df
             return df
 
@@ -128,21 +140,27 @@ class DataFeed:
         df = pd.read_csv(csv_path)
         # Expect 'timestamp' as ISO string or epoch ms
         if np.issubdtype(df["timestamp"].dtype, np.number):
-            df["timestamp"] = pd.to_datetime(df["timestamp"], unit="ms", utc=True)
+            df["timestamp"] = pd.to_datetime(
+                df["timestamp"], unit="ms", utc=True)
         else:
             df["timestamp"] = pd.to_datetime(df["timestamp"], utc=True)
-        self.df = df[["timestamp", "open", "high", "low", "close", "volume"]].copy()
+        self.df = df[["timestamp", "open", "high",
+                      "low", "close", "volume"]].copy()
         return self.df
 
 # -----------------------------
 # Indicators & strategies
 # -----------------------------
+
+
 def ma(series: pd.Series, n: int) -> pd.Series:
     return series.rolling(n, min_periods=n).mean()
+
 
 class Strategy:
     def generate_signal(self, df: pd.DataFrame) -> Optional[str]:
         raise NotImplementedError
+
 
 class MovingAverageCrossover(Strategy):
     def __init__(self, short_n: int, long_n: int):
@@ -169,6 +187,7 @@ class MovingAverageCrossover(Strategy):
             return "sell"
         return None
 
+
 class MeanReversion(Strategy):
     def __init__(self, lookback: int, threshold_pct: float):
         self.lookback = lookback
@@ -178,7 +197,8 @@ class MeanReversion(Strategy):
         if len(df) < self.lookback:
             return None
         data = df.copy()
-        data["mean"] = data["close"].rolling(self.lookback, min_periods=self.lookback).mean()
+        data["mean"] = data["close"].rolling(
+            self.lookback, min_periods=self.lookback).mean()
         last = data.dropna().iloc[-1] if len(data.dropna()) else None
         if last is None:
             return None
@@ -193,6 +213,8 @@ class MeanReversion(Strategy):
 # -----------------------------
 # OMS + Paper Broker
 # -----------------------------
+
+
 @dataclass
 class Order:
     id: str
@@ -201,8 +223,10 @@ class Order:
     qty: float
     status: str = "PENDING"
     price: Optional[float] = None
-    ts: dt.datetime = field(default_factory=lambda: dt.datetime.now(dt.timezone.utc))
+    ts: dt.datetime = field(
+        default_factory=lambda: dt.datetime.now(dt.timezone.utc))
     filled_ts: Optional[dt.datetime] = None
+
 
 @dataclass
 class Position:
@@ -210,11 +234,13 @@ class Position:
     qty: float = 0.0
     avg_price: float = 0.0
 
+
 class PaperBroker:
     """
     Super-simple paper broker that fills at last price +/- slippage.
     Tracks equity based on last known price for the symbol.
     """
+
     def __init__(self, starting_equity: float, slippage_pct: float):
         self.cash = starting_equity
         self.positions: Dict[str, Position] = {}
@@ -230,7 +256,8 @@ class PaperBroker:
     def place_order(self, symbol: str, side: str, qty: float, last_price: float) -> Order:
         order_id = str(uuid.uuid4())
         fill_price = self._apply_slippage(last_price, side)
-        o = Order(id=order_id, symbol=symbol, side=side, qty=qty, price=fill_price, status="FILLED")
+        o = Order(id=order_id, symbol=symbol, side=side,
+                  qty=qty, price=fill_price, status="FILLED")
         o.filled_ts = dt.datetime.now(dt.timezone.utc)
         self.orders[o.id] = o
 
@@ -245,7 +272,8 @@ class PaperBroker:
                 return o
             # new avg
             new_qty = pos.qty + qty
-            pos.avg_price = (pos.avg_price * pos.qty + qty * fill_price) / new_qty if new_qty != 0 else 0.0
+            pos.avg_price = (pos.avg_price * pos.qty + qty *
+                             fill_price) / new_qty if new_qty != 0 else 0.0
             pos.qty = new_qty
             self.cash -= total_cost
         else:  # sell
@@ -262,7 +290,8 @@ class PaperBroker:
             self.cash += proceeds
 
         self.positions[symbol] = pos
-        logging.info(f"FILLED {side.upper()} {qty:.6f} {symbol} @ {fill_price:.2f} | cash={self.cash:.2f}")
+        logging.info(
+            f"FILLED {side.upper()} {qty:.6f} {symbol} @ {fill_price:.2f} | cash={self.cash:.2f}")
         return o
 
     def mark_to_market(self, symbol: str, last_price: float):
@@ -270,12 +299,14 @@ class PaperBroker:
         pos = self.positions.get(symbol)
         pos_val = (pos.qty * last_price) if pos else 0.0
         equity = self.cash + pos_val
-        self.equity_curve.append((dt.datetime.now(dt.timezone.utc), float(equity)))
+        self.equity_curve.append(
+            (dt.datetime.now(dt.timezone.utc), float(equity)))
         return equity
 
     def position_value(self, symbol: str, last_price: float) -> float:
         pos = self.positions.get(symbol)
         return (pos.qty * last_price) if pos else 0.0
+
 
 class OMS:
     def __init__(self, broker: PaperBroker, orders_csv: str, trades_csv: str):
@@ -285,9 +316,11 @@ class OMS:
         self.trades_csv = trades_csv
         # Ensure CSVs exist with headers
         if not os.path.exists(self.orders_csv):
-            pd.DataFrame(columns=["id","symbol","side","qty","price","status","ts","filled_ts"]).to_csv(self.orders_csv, index=False)
+            pd.DataFrame(columns=["id", "symbol", "side", "qty", "price",
+                         "status", "ts", "filled_ts"]).to_csv(self.orders_csv, index=False)
         if not os.path.exists(self.trades_csv):
-            pd.DataFrame(columns=["ts","symbol","side","qty","price"]).to_csv(self.trades_csv, index=False)
+            pd.DataFrame(columns=["ts", "symbol", "side", "qty", "price"]).to_csv(
+                self.trades_csv, index=False)
 
     def submit(self, symbol: str, side: str, qty: float):
         self.queue.put((symbol, side, qty))
@@ -305,18 +338,22 @@ class OMS:
             "id": o.id, "symbol": o.symbol, "side": o.side, "qty": o.qty, "price": o.price,
             "status": o.status, "ts": o.ts.isoformat(), "filled_ts": o.filled_ts.isoformat() if o.filled_ts else ""
         }
-        pd.DataFrame([row]).to_csv(self.orders_csv, mode="a", index=False, header=False)
+        pd.DataFrame([row]).to_csv(self.orders_csv,
+                                   mode="a", index=False, header=False)
 
     def _record_trade(self, o: Order):
         row = {
             "ts": o.filled_ts.isoformat() if o.filled_ts else dt.datetime.now(dt.timezone.utc).isoformat(),
             "symbol": o.symbol, "side": o.side, "qty": o.qty, "price": o.price
         }
-        pd.DataFrame([row]).to_csv(self.trades_csv, mode="a", index=False, header=False)
+        pd.DataFrame([row]).to_csv(self.trades_csv,
+                                   mode="a", index=False, header=False)
 
 # -----------------------------
 # Risk Manager
 # -----------------------------
+
+
 class RiskManager:
     def __init__(self, cfg: Dict[str, Any], broker: PaperBroker):
         self.cfg = cfg
@@ -325,12 +362,14 @@ class RiskManager:
         self.stop_pct = cfg["risk"]["per_trade_stop_pct"] / 100.0
         self.tp_pct = cfg["risk"]["per_trade_take_profit_pct"] / 100.0
         self.dd_pct = cfg["risk"]["max_daily_drawdown_pct"] / 100.0
-        self.equity_start_day = cfg["starting_equity"]  # naive: could reset daily in production
+        # naive: could reset daily in production
+        self.equity_start_day = cfg["starting_equity"]
 
     def can_trade(self, current_equity: float) -> bool:
         dd = (self.equity_start_day - current_equity) / self.equity_start_day
         if dd >= self.dd_pct:
-            logging.warning(f"Daily drawdown {dd*100:.2f}% >= {self.dd_pct*100:.2f}% — HALTING trading for the day.")
+            logging.warning(
+                f"Daily drawdown {dd*100:.2f}% >= {self.dd_pct*100:.2f}% — HALTING trading for the day.")
             return False
         return True
 
@@ -347,33 +386,42 @@ class RiskManager:
 # -----------------------------
 # Reporter
 # -----------------------------
+
+
 class Reporter:
     def __init__(self, report_dir: str, equity_csv: str):
         self.report_dir = report_dir
         self.equity_csv = equity_csv
         os.makedirs(report_dir, exist_ok=True)
         if not os.path.exists(self.equity_csv):
-            pd.DataFrame(columns=["ts","equity"]).to_csv(self.equity_csv, index=False)
+            pd.DataFrame(columns=["ts", "equity"]).to_csv(
+                self.equity_csv, index=False)
 
     def save_equity(self, ts: dt.datetime, equity: float):
-        pd.DataFrame([{"ts": ts.isoformat(), "equity": equity}]).to_csv(self.equity_csv, mode="a", index=False, header=False)
+        pd.DataFrame([{"ts": ts.isoformat(), "equity": equity}]).to_csv(
+            self.equity_csv, mode="a", index=False, header=False)
 
     def daily_summary(self, broker: PaperBroker, symbol: str, last_price: float):
         pos_val = broker.position_value(symbol, last_price)
         equity = broker.mark_to_market(symbol, last_price)
         self.save_equity(dt.datetime.now(dt.timezone.utc), equity)
-        logging.info(f"[REPORT] Equity={equity:.2f} | Cash={broker.cash:.2f} | PosVal={pos_val:.2f} | RealizedPnL={broker.realized_pnl:.2f}")
+        logging.info(
+            f"[REPORT] Equity={equity:.2f} | Cash={broker.cash:.2f} | PosVal={pos_val:.2f} | RealizedPnL={broker.realized_pnl:.2f}")
 
 # -----------------------------
 # Trading Bot
 # -----------------------------
+
+
 class TradingBot:
     def __init__(self, cfg: Dict[str, Any]):
         self.cfg = cfg
         self.symbol = cfg["symbol"]
         self.feed = DataFeed(cfg)
-        self.broker = PaperBroker(starting_equity=cfg["starting_equity"], slippage_pct=cfg["simulate_slippage_pct"])
-        self.oms = OMS(self.broker, cfg["save_orders_csv"], cfg["save_trades_csv"])
+        self.broker = PaperBroker(
+            starting_equity=cfg["starting_equity"], slippage_pct=cfg["simulate_slippage_pct"])
+        self.oms = OMS(
+            self.broker, cfg["save_orders_csv"], cfg["save_trades_csv"])
         self.reporter = Reporter(cfg["report_dir"], cfg["save_equity_csv"])
         self.strategy = self._build_strategy(cfg)
         self.risk = RiskManager(cfg, self.broker)
@@ -426,7 +474,8 @@ class TradingBot:
                     if not pos or pos.qty <= 0:
                         logging.info("No long position to sell; skipping.")
                     else:
-                        self.oms.submit(self.symbol, "sell", pos.qty)  # close entire long
+                        # close entire long
+                        self.oms.submit(self.symbol, "sell", pos.qty)
                 else:
                     self.oms.submit(self.symbol, "buy", qty)
 
@@ -452,10 +501,12 @@ class TradingBot:
         stop = self.stop_levels.get(self.symbol)
         take = self.tp_levels.get(self.symbol)
         if stop and last_price <= stop:
-            logging.info(f"STOP triggered @ {last_price:.2f} <= {stop:.2f} — closing position.")
+            logging.info(
+                f"STOP triggered @ {last_price:.2f} <= {stop:.2f} — closing position.")
             self.oms.submit(self.symbol, "sell", pos.qty)
         elif take and last_price >= take:
-            logging.info(f"TAKE-PROFIT triggered @ {last_price:.2f} >= {take:.2f} — closing position.")
+            logging.info(
+                f"TAKE-PROFIT triggered @ {last_price:.2f} >= {take:.2f} — closing position.")
             self.oms.submit(self.symbol, "sell", pos.qty)
 
     def run_loop(self):
@@ -469,6 +520,7 @@ class TradingBot:
             except Exception as e:
                 logging.exception(f"Loop error: {e}")
             time.sleep(interval)
+
 
 # -----------------------------
 # Main
