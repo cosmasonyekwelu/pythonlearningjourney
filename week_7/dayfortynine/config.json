@@ -1,0 +1,26 @@
+{
+  "mode": "paper",
+  "symbol": "BTC/USDT",
+  "exchange": "binance",
+  "timeframe": "1h",
+  "fetch_limit": 300,
+  "data_csv": "sample_data.csv",
+  "strategy": "ma_crossover",
+  "ma_short": 20,
+  "ma_long": 50,
+  "mr_lookback": 20,
+  "mr_threshold_pct": 2.0,
+  "risk": {
+    "max_position_pct": 10.0,
+    "per_trade_stop_pct": 2.0,
+    "per_trade_take_profit_pct": 4.0,
+    "max_daily_drawdown_pct": 5.0
+  },
+  "starting_equity": 10000.0,
+  "report_dir": "reports",
+  "poll_interval_seconds": 60,
+  "simulate_slippage_pct": 0.02,
+  "save_orders_csv": "orders.csv",
+  "save_trades_csv": "trades.csv",
+  "save_equity_csv": "equity_curve.csv"
+}
