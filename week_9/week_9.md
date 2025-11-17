@@ -1,201 +1,277 @@
-# Week 9: Deep Learning & NLP
+# **Week 9: Deep Learning & NLP**
 
-**Days 57-63** | _Advanced AI techniques_
+**Days 57–63** | *Advanced AI Techniques*
 
-This week advances your quantitative trading toolkit into the realm of deep learning and natural language processing. You'll transition from traditional machine learning to neural networks, sequence modeling, sentiment analysis, and reinforcement learning - building AI systems that can capture complex market patterns and adapt to changing conditions.
+Week 9 represents a significant evolution in your quantitative trading journey, transitioning from classical machine learning to sophisticated deep learning architectures and natural language processing. This week focuses on building intelligent systems capable of learning complex temporal patterns, understanding market sentiment, and optimizing decision-making through adaptive reinforcement learning.
 
-By the end of this week, you'll have developed a sophisticated AI trading agent that integrates multiple advanced techniques for market prediction and decision-making.
-
----
-
-## Overview
-
-Week 9 focuses on cutting-edge AI methodologies applied to financial markets. You'll learn how to:
-
-- Design and train neural networks for financial forecasting
-- Implement LSTMs for time series prediction and pattern recognition
-- Extract trading signals from news and social media using NLP
-- Build reinforcement learning systems that learn optimal trading policies
-- Design reward functions that align with trading objectives
-- Optimize strategies using adaptive AI techniques
-
-Your end goal: create an intelligent trading system that combines deep learning, sentiment analysis, and reinforcement learning for sophisticated market interaction.
+By the end of this week, you will have constructed a comprehensive AI Trading Agent that integrates multiple advanced techniques for market prediction, sentiment analysis, and automated decision optimization.
 
 ---
 
-## Day 57: Neural Networks Fundamentals
+## **Overview**
 
-### Objective
+This week introduces cutting-edge AI methodologies that form the backbone of modern quantitative trading systems. You will master:
 
-Master the core concepts of neural networks and their application to financial prediction tasks.
+* Neural network architecture design and training methodologies for financial data
+* Advanced sequence modeling using recurrent networks for temporal pattern recognition
+* Natural language processing techniques for extracting market sentiment from textual data
+* Reinforcement learning fundamentals and their application to trading strategy optimization
+* Reward system design that aligns with financial objectives and risk management
+* Integration of multiple AI components into a cohesive trading system
 
-### Core Concepts
-
-- Neural network architecture: layers, neurons, activation functions
-- Feedforward networks and backpropagation
-- Activation functions: ReLU, sigmoid, tanh, softmax
-- Loss functions and optimization algorithms
-- Overfitting prevention: dropout, batch normalization, early stopping
-- Building neural networks with TensorFlow/Keras
-
-### Hands-On Activity
-
-- Tutorial: Build a multi-layer perceptron for stock return prediction using Keras
-- Challenge: Compare neural network performance against traditional ML models on the same dataset
+The transition from traditional machine learning to deep learning represents a paradigm shift in modeling capability, enabling capture of non-linear relationships and complex temporal dependencies that elude conventional approaches.
 
 ---
 
-## Day 58: LSTM for Time Series Prediction
+## **Day 57: Neural Networks Fundamentals**
 
-### Objective
+### **Objective**
 
-Implement Long Short-Term Memory networks for capturing temporal dependencies in financial time series.
+Establish comprehensive understanding of neural network architecture, training mechanics, and practical implementation for financial prediction tasks using modern deep learning frameworks.
 
-### Core Concepts
+### **Core Concepts**
 
-- Recurrent Neural Networks (RNNs) and their limitations
-- LSTM architecture: gates, cells, and memory mechanisms
-- Sequence modeling for financial data
-- Multi-step forecasting and sequence-to-sequence models
-- Handling non-stationarity with deep learning
-- Attention mechanisms for time series
+* **Neural Architecture**: Input layers, hidden layers, output layers, and connectivity patterns
+* **Activation Functions**: ReLU, Leaky ReLU, Sigmoid, Tanh, Softmax properties and use cases
+* **Forward Propagation**: Computation graphs, matrix operations, and layer-wise transformations
+* **Backpropagation**: Gradient computation, chain rule application, and weight update mechanisms
+* **Loss Functions**: Mean Squared Error (MSE), Binary Cross-Entropy, Categorical Cross-Entropy for regression and classification
+* **Optimization Algorithms**: Stochastic Gradient Descent (SGD), Momentum, Adam, RMSProp convergence properties
+* **Regularization Techniques**: L1/L2 regularization, dropout, batch normalization, early stopping
+* **Hyperparameter Tuning**: Learning rates, batch sizes, network depth, and width optimization
 
-### Hands-On Activity
+### **Hands-On Activity**
 
-- Tutorial: Build an LSTM model for multi-day price forecasting
-- Challenge: Implement a bidirectional LSTM and compare performance with unidirectional architecture
-
----
-
-## Day 59: Sentiment Analysis with NLP
-
-### Objective
-
-Extract market sentiment from textual data and incorporate it into trading decisions.
-
-### Core Concepts
-
-- Text preprocessing: tokenization, stemming, lemmatization
-- Word embeddings: Word2Vec, GloVe, BERT
-- Sentiment classification techniques
-- Financial lexicon-based approaches
-- Real-time news sentiment analysis
-- Social media sentiment and market impact
-
-### Hands-On Activity
-
-- Tutorial: Build a sentiment analysis pipeline for financial news headlines
-- Challenge: Create a trading signal based on sentiment scores and measure correlation with price movements
+* **Tutorial**: Construct a multi-layer perceptron using PyTorch for next-day return prediction, implementing custom training loops and validation procedures
+* **Challenge**: Perform architectural search across different network depths and widths, comparing performance against traditional machine learning models on identical financial datasets
 
 ---
 
-## Day 60: Reinforcement Learning Basics
+## **Day 58: LSTM for Time Series Prediction**
 
-### Objective
+### **Objective**
 
-Understand reinforcement learning fundamentals and their application to trading strategy development.
+Master Long Short-Term Memory networks and their application to financial time series forecasting, capturing complex temporal dependencies and market regime changes.
 
-### Core Concepts
+### **Core Concepts**
 
-- Markov Decision Processes (MDPs)
-- States, actions, rewards, and policies
-- Value functions and Q-learning
-- Exploration vs exploitation trade-off
-- Deep Q-Networks (DQN) architecture
-- Policy gradient methods
+* **RNN Fundamentals**: Hidden states, sequential processing, and temporal backpropagation
+* **LSTM Architecture**: Input gate, forget gate, output gate, cell state mechanisms, and gradient flow
+* **GRU Networks**: Simplified gating mechanisms and computational efficiency trade-offs
+* **Sequence Modeling**: Many-to-one, one-to-many, and many-to-many architectures for financial applications
+* **Time Series Windowing**: Rolling window construction, sequence length selection, and overlap strategies
+* **Multivariate Modeling**: Integrating multiple time series with different frequencies and characteristics
+* **Stateful vs Stateless Training**: Maintaining hidden states across batches for long-term dependency capture
+* **Attention Mechanisms**: Self-attention and transformer components for focusing on relevant time steps
 
-### Hands-On Activity
+### **Hands-On Activity**
 
-- Tutorial: Implement a simple Q-learning agent for a toy trading environment
-- Challenge: Build a DQN agent that learns to trade in a simulated market
-
----
-
-## Day 61: Reward System Design
-
-### Objective
-
-Design effective reward functions that align with trading objectives and risk preferences.
-
-### Core Concepts
-
-- Sharpe ratio-based rewards
-- Drawdown penalties and risk-adjusted returns
-- Sparse vs dense reward signals
-- Reward shaping techniques
-- Multi-objective reward functions
-- Handling transaction costs in reward design
-
-### Hands-On Activity
-
-- Tutorial: Implement different reward functions and compare agent behavior
-- Challenge: Design a composite reward function that balances returns, volatility, and drawdowns
+* **Tutorial**: Build a stacked LSTM architecture for multi-day price forecasting with proper sequence preprocessing and walk-forward validation
+* **Challenge**: Implement bidirectional LSTM with attention mechanisms and compare forecasting accuracy, training stability, and computational requirements against standard unidirectional architectures
 
 ---
 
-## Day 62: Strategy Optimization with RL
+## **Day 59: Sentiment Analysis with NLP**
 
-### Objective
+### **Objective**
 
-Apply advanced reinforcement learning techniques to optimize trading strategies in complex market environments.
+Develop sophisticated natural language processing pipelines to extract and quantify market sentiment from financial text data, integrating textual signals into trading strategies.
 
-### Core Concepts
+### **Core Concepts**
 
-- Proximal Policy Optimization (PPO)
-- Actor-Critic methods
-- Multi-agent reinforcement learning
-- Transfer learning in trading
-- Risk-sensitive RL policies
-- Backtest-driven policy improvement
+* **Text Preprocessing**: Tokenization, stop word removal, stemming, lemmatization, and financial-specific cleaning
+* **Word Embeddings**: Word2Vec skip-gram and CBOW architectures, GloVe global co-occurrence statistics, FastText subword information
+* **Contextual Embeddings**: BERT, FinBERT, and RoBERTa architectures pre-trained on financial corpora
+* **Sentiment Classification**: Lexicon-based approaches (VADER, Loughran-McDonald), machine learning classifiers, and deep learning models
+* **Aspect-Based Sentiment**: Entity recognition and targeted sentiment extraction for specific stocks or sectors
+* **Temporal Aggregation**: Converting document-level sentiment to time-series signals with proper alignment
+* **Multimodal Integration**: Combining textual sentiment with numerical market data in unified models
+* **Real-time Processing**: Streaming sentiment analysis and low-latency feature extraction
 
-### Hands-On Activity
+### **Hands-On Activity**
 
-- Tutorial: Implement a PPO agent for position sizing optimization
-- Challenge: Build an ensemble of RL agents trading different timeframes
-
----
-
-## Day 63: Weekly Project - AI Trading Agent
-
-### Objective
-
-Build and document a comprehensive AI trading agent that integrates deep learning, NLP, and reinforcement learning techniques.
-
-### Project Requirements
-
-1. **Data Integration**: Combine price data with sentiment signals from news/social media
-2. **Multi-Model Architecture**: Implement ensemble of LSTM forecasts and sentiment analysis
-3. **RL Decision Engine**: Build reinforcement learning agent for trade execution
-4. **Risk Management**: Incorporate position sizing and drawdown controls
-5. **Backtesting Framework**: Test agent performance across market regimes
-6. **Performance Analysis**: Compare against benchmark strategies
-
-### Deliverables
-
-- **Codebase**: Modular AI trading system with clear interfaces
-- **AGENT_REPORT.md** containing:
-  - Architecture design and component integration
-  - Training methodology and hyperparameter selection
-  - Performance metrics across different market conditions
-  - Ablation studies showing component contributions
-  - Risk analysis and failure mode documentation
+* **Tutorial**: Construct end-to-end sentiment analysis pipeline using FinBERT on financial news headlines with proper temporal alignment to market data
+* **Challenge**: Develop a composite sentiment score combining multiple sources (news, social media, earnings calls) and measure predictive power for price movements across different market conditions
 
 ---
 
-## Weekly Reflection Prompt
+## **Day 60: Reinforcement Learning Basics**
 
-How do deep learning approaches capture market patterns differently from traditional statistical methods? What are the practical challenges of deploying neural networks in live trading environments? How does reinforcement learning change the paradigm of strategy development compared to supervised learning?
+### **Objective**
+
+Establish foundational understanding of reinforcement learning principles and their application to sequential decision-making in financial markets.
+
+### **Core Concepts**
+
+* **Markov Decision Processes**: State space definition, action space specification, transition dynamics, and reward functions
+* **Value Functions**: State-value function V(s) and action-value function Q(s,a) definitions and relationships
+* **Bellman Equations**: Optimality principles and recursive value relationships
+* **Temporal Difference Learning**: Q-learning algorithm, SARSA, and eligibility traces
+* **Deep Q-Networks**: Experience replay, target networks, and neural network function approximation
+* **Exploration Strategies**: Epsilon-greedy, Boltzmann exploration, and uncertainty-driven exploration
+* **Policy Gradient Methods**: REINFORCE algorithm and policy parameterization
+* **Environment Design**: Market simulation, transaction cost modeling, and realistic constraints
+
+### **Hands-On Activity**
+
+* **Tutorial**: Implement tabular Q-learning for simplified trading environment with discrete state and action spaces
+* **Challenge**: Develop Deep Q-Network for continuous state representation, incorporating price features and technical indicators with proper reward shaping
 
 ---
 
-## Suggested Tools & Libraries
+## **Day 61: Reward System Design**
 
-| Category                   | Python                                            | Node.js (Optional)                              |
-| -------------------------- | ------------------------------------------------- | ----------------------------------------------- |
-| **Deep Learning**          | `tensorflow`, `keras`, `pytorch`                  | `tensorflow.js`, `brain.js`                     |
-| **NLP Processing**         | `nltk`, `spacy`, `transformers`, `vaderSentiment` | `natural`, `compromise`, `node-nlp`             |
-| **Reinforcement Learning** | `gym`, `stable-baselines3`, `ray[rllib]`          | `reinforce-js`, `ml5.js`                        |
-| **Time Series**            | `statsmodels`, `arch`, `prophet`                  | `timeseries-analysis`, `moment`                 |
-| **Data Sources**           | `yfinance`, `ccxt`, `tweepy`, `newspaper3k`       | `ccxt`, `twitter-api-v2`, `rss-parser`          |
-| **Visualization**          | `matplotlib`, `plotly`, `seaborn`                 | `chart.js`, `plotly.js`, `d3.js`                |
-| **Backtesting**            | `backtrader`, `vectorbt`, `bt`                    | `@dyno-trading/backtest`, custom implementation |
+### **Objective**
+
+Design sophisticated reward functions that effectively guide reinforcement learning agents toward desirable trading behaviors while managing risk and transaction costs.
+
+### **Core Concepts**
+
+* **Profit-Based Rewards**: Simple returns, logarithmic returns, and percentage-based profit incentives
+* **Risk-Adjusted Rewards**: Sharpe ratio components, Sortino ratio focus on downside risk, Calmar ratio drawdown considerations
+* **Drawdown Penalties**: Maximum drawdown constraints, ulcer index components, and recovery-based rewards
+* **Transaction Cost Modeling**: Fixed commissions, percentage-based fees, spread costs, and market impact approximations
+* **Sparse vs Dense Rewards**: End-of-episode vs step-wise rewards and credit assignment challenges
+* **Reward Shaping**: Potential-based shaping functions and domain knowledge incorporation
+* **Multi-Objective Optimization**: Pareto-optimal reward combinations and constraint handling
+* **Stability Considerations**: Reward scaling, normalization, and variance reduction techniques
+
+### **Hands-On Activity**
+
+* **Tutorial**: Implement and compare multiple reward functions (profit-only, Sharpe-based, drawdown-penalized) in a standardized trading environment
+* **Challenge**: Design adaptive reward functions that dynamically adjust risk preferences based on market volatility regimes and agent performance history
+
+---
+
+## **Day 62: Strategy Optimization with RL**
+
+### **Objective**
+
+Apply advanced reinforcement learning algorithms to optimize complete trading strategies in realistic market environments with complex state representations.
+
+### **Core Concepts**
+
+* **State Representation Engineering**: Technical indicators, market microstructure features, sentiment signals, and portfolio state
+* **Action Space Design**: Discrete actions (buy/hold/sell), continuous position sizing, and multi-asset allocation
+* **Advanced RL Algorithms**: Proximal Policy Optimization (PPO), Advantage Actor-Critic (A2C/A3C), and Soft Actor-Critic (SAC)
+* **Multi-Agent Systems**: Cooperative and competitive agent ensembles for diversified trading strategies
+* **Transfer Learning**: Pre-training on historical data and fine-tuning for current market conditions
+* **Meta-Learning**: Learning-to-learn approaches for rapid adaptation to new assets or regimes
+* **Risk-Sensitive Policies**: Conditional Value at Risk (CVaR) constraints and distributional reinforcement learning
+* **Exploration in High Dimensions**: Curiosity-driven exploration and state visitation bonuses
+
+### **Hands-On Activity**
+
+* **Tutorial**: Implement PPO agent with comprehensive state representation including price features, technical indicators, and sentiment signals
+* **Challenge**: Develop ensemble of specialized RL agents trading different timeframes and asset classes with coordinated risk management and performance attribution analysis
+
+---
+
+## **Day 63: Weekly Project – AI Trading Agent**
+
+### **Objective**
+
+Integrate deep learning, natural language processing, and reinforcement learning components into a unified AI trading system capable of adaptive market interaction and continuous improvement.
+
+### **Project Requirements**
+
+1. **Data Processing Pipeline**
+   * Multi-source data integration (OHLCV, fundamental data, news feeds, social media)
+   * Temporal alignment and missing data handling
+   * Feature engineering for deep learning and reinforcement learning components
+   * Real-time data streaming simulation
+
+2. **Deep Learning Forecasting System**
+   * Multi-scale LSTM/Transformer architecture for price prediction
+   * Uncertainty quantification and confidence estimation
+   * Ensemble methods for prediction robustness
+   * Online learning capabilities for model adaptation
+
+3. **Sentiment Analysis Module**
+   * Real-time news and social media processing
+   * Multi-modal sentiment aggregation
+   * Sentiment-return relationship modeling
+   * Anomaly detection in sentiment signals
+
+4. **Reinforcement Learning Decision Engine**
+   * Hierarchical RL architecture for position management
+   * Multi-objective reward optimization
+   * Risk-aware policy learning
+   * Transfer learning between market regimes
+
+5. **Comprehensive Backtesting Framework**
+   * Realistic market simulation with transaction costs
+   * Multiple historical period testing
+   * Stress testing under different market conditions
+   * Benchmark comparison against traditional strategies
+
+6. **Performance Monitoring System**
+   * Real-time strategy performance tracking
+   * Risk metric computation and alerting
+   * Model degradation detection
+   * Automated retraining triggers
+
+### **Deliverables**
+
+* **Modular Codebase**: Well-structured, documented Python implementation with clear interfaces between components
+* **AI_AGENT_REPORT.md** containing:
+  * System architecture diagram and component interactions
+  * Training methodology including data splits, validation procedures, and hyperparameter selection
+  * Comprehensive performance analysis across different market regimes and asset classes
+  * Ablation studies quantifying contributions of individual system components
+  * Risk analysis including maximum drawdown, Value at Risk, and stress test results
+  * Failure mode analysis and robustness evaluation
+  * Deployment considerations and live trading preparation steps
+
+---
+
+## **Weekly Reflection Prompt**
+
+How does the representational capacity of deep neural networks change your approach to financial modeling compared to traditional machine learning techniques? What specific market patterns or relationships might deep learning capture that conventional methods would miss?
+
+Evaluate the practical challenges of training and deploying neural networks in live trading environments, considering computational requirements, inference latency, and model stability. How would you design a production system that balances model complexity with operational reliability?
+
+Analyze the relative contributions of the prediction subsystem (LSTM/Transformer forecasts) versus the decision optimization component (RL policy) in your final trading agent. Under what market conditions does each component provide the most value, and how might this inform future architecture decisions?
+
+Consider the trade-offs between model interpretability and predictive power in deep learning systems. What techniques could you employ to maintain some level of explainability while leveraging complex neural architectures, and how would you communicate model decisions to stakeholders?
+
+Reflect on the reinforcement learning training process and its sensitivity to reward function design. What insights did you gain about how different reward formulations shape agent behavior, and how might you iteratively improve reward design based on observed trading patterns?
+
+---
+
+## **Suggested Tools & Libraries**
+
+| Category | Python Libraries | Specialized Financial Extensions |
+|----------|------------------|----------------------------------|
+| **Deep Learning Frameworks** | `tensorflow`, `keras`, `pytorch`, `pytorch-lightning` | `pytorch-forecasting`, `tensorflow-probability` |
+| **Natural Language Processing** | `nltk`, `spacy`, `transformers`, `gensim`, `textblob` | `finbert`, `financial-phrasebook`, `stock-emotions` |
+| **Reinforcement Learning** | `stable-baselines3`, `ray[rllib]`, `tianshou`, `gymnasium` | `gym-trading`, `finrl`, `qtrader` |
+| **Time Series Analysis** | `statsmodels`, `arch`, `prophet`, `sktime` | `tsfresh`, `python-ffn`, `empyrial` |
+| **Data Acquisition** | `yfinance`, `ccxt`, `alpha_vantage`, `eodhd` | `tweepy`, `newspaper3k`, `google-news` |
+| **Visualization & Analysis** | `matplotlib`, `seaborn`, `plotly`, `bokeh` | `mplfinance`, `plotly-finance`, `quantstats` |
+| **Backtesting & Portfolio Analysis** | `backtrader`, `vectorbt`, `bt`, `zipline` | `pyportfolioopt`, `riskfolio-lib`, `quantdom` |
+
+---
+
+## **Knowledge Prerequisites**
+
+* Solid understanding of Python programming and object-oriented design
+* Experience with pandas, numpy, and scikit-learn from previous weeks
+* Basic familiarity with probability, statistics, and linear algebra
+* Understanding of financial markets and trading concepts
+* Comfort with command-line operations and package management
+
+## **Learning Outcomes**
+
+Upon completion of Week 9, I will be able to:
+
+* Design and implement neural network architectures for financial prediction tasks
+* Build and train LSTM/Transformer models for multivariate time series forecasting
+* Develop NLP pipelines for financial sentiment analysis and feature extraction
+* Implement reinforcement learning agents for trading strategy optimization
+* Design sophisticated reward functions aligned with trading objectives
+* Integrate multiple AI components into cohesive trading systems
+* Conduct rigorous backtesting and performance evaluation of AI trading agents
+* Understand the practical challenges and considerations for deploying AI systems in live trading environments
+
+This week establishes the foundation for advanced AI-driven trading systems and prepares you for more specialized topics in algorithmic trading and quantitative finance.
