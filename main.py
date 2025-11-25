@@ -1,7 +1,7 @@
 import requests
 
 # ===== CONFIGURATION =====
-USERNAME = "cosmasonyekwelu"  # Replace with your GitHub username
+USERNAME = "#"  # Replace with your GitHub username
 TOKEN = "#"  # Must have 'delete_repo' and 'repo' permissions
 
 # ===== FETCH PUBLIC REPOSITORIES =====
