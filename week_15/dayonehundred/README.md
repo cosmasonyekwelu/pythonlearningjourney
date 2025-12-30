@@ -1,4 +1,4 @@
-# Day 100: 🏁 Capstone Project – Fully Deployed AI Trading System
+# Day 100:  Capstone Project – Fully Deployed AI Trading System
 
 ## Objective
 
@@ -2471,4 +2471,4 @@ This project demonstrates:
 
 **Remember**: This is just the beginning. The skills and system you've built are assets that will continue to grow and evolve throughout your career. You're now part of a small group of people who can truly build and operate sophisticated trading systems from first principles.
 
-**Well done, trader. Now go make markets.** 📈
+**Well done, trader. Now go make markets.** 
