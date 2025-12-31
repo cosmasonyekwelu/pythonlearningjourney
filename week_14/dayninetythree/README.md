@@ -95,14 +95,14 @@ input {
     port => 5044
     ssl => false
   }
-  
+
   # Direct TCP input for Python applications
   tcp {
     port => 5000
     codec => json_lines
     tags => ["trading", "python"]
   }
-  
+
   # HTTP input for REST APIs
   http {
     port => 8080
@@ -118,7 +118,7 @@ filter {
       target => "parsed"
     }
   }
-  
+
   # Add trading-specific fields
   if [parsed][service] == "trading" {
     mutate {
@@ -126,7 +126,7 @@ filter {
         "[@metadata][index]" => "trading-logs-%{+YYYY.MM.dd}"
       }
     }
-    
+
     # Enrich with trading context
     if [parsed][event_type] == "order" {
       ruby {
@@ -136,14 +136,14 @@ filter {
         "
       }
     }
-    
+
     # Mask sensitive data
     if [parsed][user_id] {
       mutate {
         replace => { "[parsed][user_id]" => "user_%{[parsed][user_id]}" }
       }
     }
-    
+
     # Add geoip for security monitoring
     if [parsed][client_ip] {
       geoip {
@@ -152,13 +152,13 @@ filter {
       }
     }
   }
-  
+
   # Common parsing for all logs
   grok {
     match => { "message" => "%{TIMESTAMP_ISO8601:timestamp} %{LOGLEVEL:level} %{GREEDYDATA:message}" }
     overwrite => [ "message" ]
   }
-  
+
   date {
     match => [ "timestamp", "ISO8601" ]
     target => "@timestamp"
@@ -174,7 +174,7 @@ output {
     password => "${ELASTIC_PASSWORD}"
     ssl => false
   }
-  
+
   # Backup to S3 for compliance
   if [parsed][audit_level] == "high" {
     s3 {
@@ -186,7 +186,7 @@ output {
       codec => "json_lines"
     }
   }
-  
+
   # Alerting output
   if [parsed][level] == "ERROR" or [parsed][level] == "CRITICAL" {
     http {
@@ -211,7 +211,7 @@ output {
 
 ## 📝 Structured Logging Implementation
 
-### Python Logging Configuration (structured-logging/loggers/__init__.py)
+### Python Logging Configuration (structured-logging/loggers/**init**.py)
 
 ```python
 """
@@ -288,26 +288,26 @@ class LogEvent:
     session_id: Optional[str] = None
     event_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     environment: str = os.getenv("ENVIRONMENT", "development")
-    
+
     # Trading-specific fields
     strategy: Optional[str] = None
     symbol: Optional[str] = None
     order_id: Optional[str] = None
     trade_id: Optional[str] = None
     position_id: Optional[str] = None
-    
+
     # Performance metrics
     duration_ms: Optional[float] = None
     memory_usage_mb: Optional[float] = None
-    
+
     # Error details
     error_code: Optional[str] = None
     error_message: Optional[str] = None
     stack_trace: Optional[str] = None
-    
+
     # Custom fields
     metadata: Dict[str, Any] = field(default_factory=dict)
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for JSON serialization."""
         data = asdict(self)
@@ -326,7 +326,7 @@ class AuditEvent(LogEvent):
     approved_by: Optional[str] = None
     client_ip: Optional[str] = None
     user_agent: Optional[str] = None
-    
+
     def __post_init__(self):
         """Set audit-specific defaults."""
         self.level = LogLevel.AUDIT.value
@@ -344,7 +344,7 @@ class TradeEvent(LogEvent):
     time_in_force: Optional[str] = None
     commission: Optional[float] = None
     pnl: Optional[float] = None
-    
+
     def __post_init__(self):
         """Set trade-specific defaults."""
         self.level = LogLevel.TRADE.value
@@ -352,60 +352,60 @@ class TradeEvent(LogEvent):
 
 class StructuredJsonFormatter(jsonlogger.JsonFormatter):
     """Custom JSON formatter for structured logging."""
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        
+
     def add_fields(self, log_record, record, message_dict):
         """Add custom fields to log record."""
         super().add_fields(log_record, record, message_dict)
-        
+
         # Add correlation ID from context
         log_record['correlation_id'] = correlation_id.get()
-        
+
         # Add request ID if available
         if request_id.get():
             log_record['request_id'] = request_id.get()
-            
+
         # Add user ID if available
         if user_id.get():
             log_record['user_id'] = user_id.get()
-            
+
         # Add process/thread info
         log_record['process_id'] = os.getpid()
         log_record['thread_id'] = threading.get_ident()
         log_record['thread_name'] = threading.current_thread().name
-        
+
         # Add host information
         log_record['hostname'] = os.getenv('HOSTNAME', 'unknown')
-        
+
         # Ensure timestamp is in ISO format
         if 'timestamp' not in log_record:
             log_record['timestamp'] = datetime.utcnow().isoformat() + "Z"
 
 class TradingLogger:
     """Main logger class for trading systems."""
-    
+
     _instance = None
     _lock = threading.Lock()
-    
+
     def __new__(cls):
         with cls._lock:
             if cls._instance is None:
                 cls._instance = super().__new__(cls)
                 cls._instance._initialized = False
             return cls._instance
-    
+
     def __init__(self):
         if self._initialized:
             return
-            
+
         self._setup_logging_config()
         self._initialized = True
-    
+
     def _setup_logging_config(self):
         """Configure logging with structured JSON output."""
-        
+
         log_config = {
             'version': 1,
             'disable_existing_loggers': False,
@@ -485,38 +485,38 @@ class TradingLogger:
                 }
             }
         }
-        
+
         # Add custom log levels
         logging.addLevelName(25, 'AUDIT')
         logging.addLevelName(26, 'TRADE')
         logging.addLevelName(27, 'RISK')
-        
+
         # Apply configuration
         logging.config.dictConfig(log_config)
-        
+
         # Get logger instances
         self.logger = logging.getLogger('trading')
         self.audit_logger = logging.getLogger('trading.audit')
         self.trade_logger = logging.getLogger('trading.trades')
         self.risk_logger = logging.getLogger('trading.risk')
-    
+
     def set_correlation_id(self, cid: str):
         """Set correlation ID for current context."""
         correlation_id.set(cid)
-    
+
     def set_request_id(self, rid: str):
         """Set request ID for current context."""
         request_id.set(rid)
-    
+
     def set_user_id(self, uid: str):
         """Set user ID for current context."""
         user_id.set(uid)
-    
+
     def log_event(self, event: LogEvent):
         """Log a structured event."""
         log_method = getattr(self.logger, event.level.lower(), self.logger.info)
         log_method(event.message, extra=event.to_dict())
-    
+
     def audit(self, action: AuditAction, **kwargs):
         """Log an audit event."""
         audit_event = AuditEvent(
@@ -525,13 +525,13 @@ class TradingLogger:
             audit_action=action,
             **kwargs
         )
-        
+
         # Add to audit-specific logger
         self.audit_logger.log(25, audit_event.message, extra=audit_event.to_dict())
-        
+
         # Also log to regular logger for correlation
         self.logger.info(audit_event.message, extra=audit_event.to_dict())
-    
+
     def log_trade(self, trade_data: Dict[str, Any]):
         """Log a trade event."""
         trade_event = TradeEvent(
@@ -539,9 +539,9 @@ class TradingLogger:
             message=f"Trade executed: {trade_data.get('symbol')}",
             **trade_data
         )
-        
+
         self.trade_logger.log(26, trade_event.message, extra=trade_event.to_dict())
-    
+
     def log_error(self, error: Exception, context: Dict[str, Any] = None):
         """Log an error with context."""
         error_event = LogEvent(
@@ -552,9 +552,9 @@ class TradingLogger:
             stack_trace=self._get_stack_trace(error),
             metadata=context or {}
         )
-        
+
         self.log_event(error_event)
-    
+
     def _get_stack_trace(self, error: Exception) -> str:
         """Extract stack trace from exception."""
         import traceback
@@ -566,7 +566,7 @@ logger = TradingLogger()
 # Context managers for correlation IDs
 class LoggingContext:
     """Context manager for logging context."""
-    
+
     def __init__(self, correlation_id: str = None, request_id: str = None, user_id: str = None):
         self.correlation_id = correlation_id or str(uuid.uuid4())
         self.request_id = request_id
@@ -574,22 +574,22 @@ class LoggingContext:
         self._old_correlation_id = None
         self._old_request_id = None
         self._old_user_id = None
-    
+
     def __enter__(self):
         # Save old values
         self._old_correlation_id = correlation_id.get()
         self._old_request_id = request_id.get()
         self._old_user_id = user_id.get()
-        
+
         # Set new values
         logger.set_correlation_id(self.correlation_id)
         if self.request_id:
             logger.set_request_id(self.request_id)
         if self.user_id:
             logger.set_user_id(self.user_id)
-        
+
         return self
-    
+
     def __exit__(self, exc_type, exc_val, exc_tb):
         # Restore old values
         correlation_id.set(self._old_correlation_id)
@@ -597,7 +597,7 @@ class LoggingContext:
             request_id.set(self._old_request_id)
         if self._old_user_id:
             user_id.set(self._old_user_id)
-        
+
         # Log any exception that occurred
         if exc_type is not None:
             logger.log_error(exc_val)
@@ -621,19 +621,19 @@ from structured_logging.loggers import logger, LoggingContext, AuditAction
 
 class RequestLoggingMiddleware(BaseHTTPMiddleware):
     """Middleware for logging HTTP requests and responses."""
-    
+
     def __init__(self, app: ASGIApp, service_name: str = "trading-api"):
         super().__init__(app)
         self.service_name = service_name
-    
+
     async def dispatch(self, request: Request, call_next: Callable):
         # Generate correlation and request IDs
         correlation_id = request.headers.get('X-Correlation-ID', str(uuid.uuid4()))
         request_id = str(uuid.uuid4())
-        
+
         # Extract user info from headers or JWT
         user_id = self._extract_user_id(request)
-        
+
         # Create logging context
         with LoggingContext(
             correlation_id=correlation_id,
@@ -642,7 +642,7 @@ class RequestLoggingMiddleware(BaseHTTPMiddleware):
         ):
             # Log request start
             start_time = time.time()
-            
+
             request_data = {
                 "method": request.method,
                 "url": str(request.url),
@@ -650,11 +650,11 @@ class RequestLoggingMiddleware(BaseHTTPMiddleware):
                 "client_ip": request.client.host if request.client else None,
                 "user_agent": request.headers.get("user-agent"),
             }
-            
+
             # Mask sensitive headers
             if 'authorization' in request_data['headers']:
                 request_data['headers']['authorization'] = '***masked***'
-            
+
             logger.logger.info(
                 "Request started",
                 extra={
@@ -663,7 +663,7 @@ class RequestLoggingMiddleware(BaseHTTPMiddleware):
                     "duration_ms": 0,
                 }
             )
-            
+
             # Process request
             try:
                 response = await call_next(request)
@@ -675,17 +675,17 @@ class RequestLoggingMiddleware(BaseHTTPMiddleware):
                     "correlation_id": correlation_id,
                 })
                 raise
-            
+
             # Calculate duration
             duration_ms = (time.time() - start_time) * 1000
-            
+
             # Log response
             response_data = {
                 "status_code": response.status_code,
                 "headers": dict(response.headers),
                 "duration_ms": duration_ms,
             }
-            
+
             logger.logger.info(
                 "Request completed",
                 extra={
@@ -694,13 +694,13 @@ class RequestLoggingMiddleware(BaseHTTPMiddleware):
                     "duration_ms": duration_ms,
                 }
             )
-            
+
             # Add correlation ID to response headers
             response.headers["X-Correlation-ID"] = correlation_id
             response.headers["X-Request-ID"] = request_id
-            
+
             return response
-    
+
     def _extract_user_id(self, request: Request) -> str:
         """Extract user ID from request."""
         # Try JWT token first
@@ -708,17 +708,17 @@ class RequestLoggingMiddleware(BaseHTTPMiddleware):
         if auth_header and auth_header.startswith("Bearer "):
             # In production, decode JWT to get user_id
             return "jwt_user"
-        
+
         # Try API key
         api_key = request.headers.get("X-API-Key")
         if api_key:
             return f"api_key_{api_key[:8]}"
-        
+
         return "anonymous"
 
 class AuditMiddleware(BaseHTTPMiddleware):
     """Middleware for auditing sensitive operations."""
-    
+
     SENSITIVE_ENDPOINTS = {
         "/api/orders": ["POST", "PUT", "DELETE"],
         "/api/trades": ["POST"],
@@ -727,40 +727,40 @@ class AuditMiddleware(BaseHTTPMiddleware):
         "/api/users": ["POST", "PUT", "DELETE"],
         "/api/strategies": ["POST", "PUT", "DELETE"],
     }
-    
+
     def __init__(self, app: ASGIApp):
         super().__init__(app)
-    
+
     async def dispatch(self, request: Request, call_next: Callable):
         # Check if endpoint requires audit
         requires_audit = self._requires_audit(request)
-        
+
         if requires_audit:
             # Capture request body for audit
             request_body = await self._capture_request_body(request)
-            
+
             # Store in request state for after processing
             request.state.audit_data = {
                 "request_body": request_body,
                 "action": self._get_audit_action(request),
             }
-        
+
         # Process request
         response = await call_next(request)
-        
+
         # Log audit event if required
         if requires_audit and hasattr(request.state, 'audit_data'):
             await self._log_audit_event(request, response, request.state.audit_data)
-        
+
         return response
-    
+
     def _requires_audit(self, request: Request) -> bool:
         """Check if the request requires audit logging."""
         for endpoint, methods in self.SENSITIVE_ENDPOINTS.items():
             if request.url.path.startswith(endpoint) and request.method in methods:
                 return True
         return False
-    
+
     async def _capture_request_body(self, request: Request) -> dict:
         """Capture and parse request body for audit."""
         try:
@@ -770,9 +770,9 @@ class AuditMiddleware(BaseHTTPMiddleware):
                 return json.loads(body)
         except:
             return {"raw_body": "Unable to parse"}
-        
+
         return {}
-    
+
     def _get_audit_action(self, request: Request) -> AuditAction:
         """Map request to audit action."""
         if request.url.path.startswith("/api/orders"):
@@ -782,18 +782,18 @@ class AuditMiddleware(BaseHTTPMiddleware):
                 return AuditAction.MODIFY_ORDER
             elif request.method == "DELETE":
                 return AuditAction.CANCEL_ORDER
-        
+
         if request.url.path.startswith("/api/trades") and request.method == "POST":
             return AuditAction.EXECUTE_TRADE
-        
+
         if request.url.path.startswith("/api/risk/limits") and request.method == "PUT":
             return AuditAction.UPDATE_RISK_LIMITS
-        
+
         if request.url.path.startswith("/api/users") and request.method in ["POST", "PUT", "DELETE"]:
             return AuditAction.USER_PERMISSION_CHANGE
-        
+
         return AuditAction.SYSTEM_CONFIG_CHANGE
-    
+
     async def _log_audit_event(self, request: Request, response: Response, audit_data: dict):
         """Log audit event."""
         logger.audit(
@@ -814,11 +814,11 @@ def setup_fastapi_logging(app: FastAPI, service_name: str = "trading-api"):
     """Set up logging middleware for FastAPI application."""
     app.add_middleware(RequestLoggingMiddleware, service_name=service_name)
     app.add_middleware(AuditMiddleware)
-    
+
     @app.on_event("startup")
     async def startup_event():
         logger.logger.info(f"{service_name} starting up")
-    
+
     @app.on_event("shutdown")
     async def shutdown_event():
         logger.logger.info(f"{service_name} shutting down")
@@ -851,47 +851,47 @@ import base64
 
 class WORMStorage:
     """Immutable storage for audit logs with cryptographic verification."""
-    
-    def __init__(self, 
+
+    def __init__(self,
                  storage_path: str = "/var/audit/worm",
                  retention_days: int = 3650,  # 10 years for SEC compliance
                  encryption_key_path: Optional[str] = None):
-        
+
         self.storage_path = Path(storage_path)
         self.retention_days = retention_days
         self.encryption_key_path = Path(encryption_key_path) if encryption_key_path else None
-        
+
         # Create storage directories
         self._init_storage()
-        
+
         # Load encryption key if provided
         self.encryption_key = self._load_encryption_key() if encryption_key_path else None
-    
+
     def _init_storage(self):
         """Initialize WORM storage structure."""
         # Create main storage directory
         self.storage_path.mkdir(parents=True, exist_ok=True)
-        
+
         # Create subdirectories
         (self.storage_path / "daily").mkdir(exist_ok=True)
         (self.storage_path / "monthly").mkdir(exist_ok=True)
         (self.storage_path / "yearly").mkdir(exist_ok=True)
         (self.storage_path / "index").mkdir(exist_ok=True)
         (self.storage_path / "signatures").mkdir(exist_ok=True)
-        
+
         # Set directory permissions (read-only after writing)
         os.chmod(self.storage_path, 0o555)
-    
+
     def _load_encryption_key(self) -> bytes:
         """Load encryption key from file."""
         with open(self.encryption_key_path, 'rb') as f:
             return f.read()
-    
+
     def store_audit_event(self, event: Dict[str, Any]) -> str:
         """Store an audit event with WORM guarantees."""
         # Generate unique event ID
         event_id = self._generate_event_id(event)
-        
+
         # Add metadata
         event_with_metadata = {
             **event,
@@ -901,59 +901,59 @@ class WORMStorage:
                 "version": "1.0",
             }
         }
-        
+
         # Create daily archive path
         today = datetime.utcnow().date()
         daily_path = self.storage_path / "daily" / today.isoformat()
         daily_path.mkdir(exist_ok=True)
-        
+
         # Write event to daily file
         event_file = daily_path / f"{event_id}.json"
-        
+
         # Serialize and optionally encrypt
         event_json = json.dumps(event_with_metadata, indent=2)
-        
+
         if self.encryption_key:
             event_data = self._encrypt_data(event_json.encode())
         else:
             event_data = event_json.encode()
-        
+
         # Write with append mode (WORM: can append but not modify)
         with open(event_file, 'ab') as f:
             # Add checksum
             checksum = hashlib.sha256(event_data).hexdigest()
             f.write(event_data + b'\n')
             f.write(f"# CHECKSUM: {checksum}\n".encode())
-        
+
         # Set file to read-only
         os.chmod(event_file, 0o444)
-        
+
         # Update index
         self._update_index(event_with_metadata, event_file)
-        
+
         # Create digital signature
         self._create_signature(event_file)
-        
+
         return event_id
-    
+
     def _generate_event_id(self, event: Dict[str, Any]) -> str:
         """Generate unique, deterministic event ID."""
         # Create deterministic string from event
         event_str = json.dumps(event, sort_keys=True)
-        
+
         # Generate hash-based ID
         event_hash = hashlib.sha256(event_str.encode()).hexdigest()
         timestamp = datetime.utcnow().strftime("%Y%m%d%H%M%S%f")
-        
+
         return f"AUDIT-{timestamp}-{event_hash[:16]}"
-    
+
     def _encrypt_data(self, data: bytes) -> bytes:
         """Encrypt data using loaded key."""
         # This is a simplified example - use proper encryption in production
         from cryptography.fernet import Fernet
         fernet = Fernet(self.encryption_key)
         return fernet.encrypt(data)
-    
+
     def _update_index(self, event: Dict[str, Any], event_file: Path):
         """Update search index for audit events."""
         index_entry = {
@@ -966,20 +966,20 @@ class WORMStorage:
             "file_path": str(event_file.relative_to(self.storage_path)),
             "checksum": hashlib.sha256(json.dumps(event).encode()).hexdigest(),
         }
-        
+
         # Append to daily index
         today = datetime.utcnow().date()
         index_file = self.storage_path / "index" / f"{today.isoformat()}.ndjson"
-        
+
         with open(index_file, 'a') as f:
             f.write(json.dumps(index_entry) + '\n')
-    
+
     def _create_signature(self, event_file: Path):
         """Create digital signature for audit file."""
         # Generate file hash
         with open(event_file, 'rb') as f:
             file_hash = hashlib.sha256(f.read()).hexdigest()
-        
+
         # Create signature entry
         signature = {
             "file": str(event_file.name),
@@ -987,15 +987,15 @@ class WORMStorage:
             "signed_at": datetime.utcnow().isoformat() + "Z",
             "signed_by": "audit_system",
         }
-        
+
         # Store signature
         sig_file = self.storage_path / "signatures" / f"{event_file.name}.sig"
         with open(sig_file, 'w') as f:
             json.dump(signature, f, indent=2)
-        
+
         # Set to read-only
         os.chmod(sig_file, 0o444)
-    
+
     def verify_integrity(self, event_id: str) -> bool:
         """Verify the integrity of an audit event."""
         try:
@@ -1003,30 +1003,30 @@ class WORMStorage:
             event_file = self._find_event_file(event_id)
             if not event_file:
                 return False
-            
+
             # Read file and verify checksum
             with open(event_file, 'rb') as f:
                 lines = f.readlines()
-                
+
             # Last line should be checksum
             if len(lines) < 2:
                 return False
-            
+
             data = lines[-2]  # Event data
             checksum_line = lines[-1].decode().strip()
-            
+
             if not checksum_line.startswith("# CHECKSUM: "):
                 return False
-            
+
             expected_checksum = checksum_line.split(": ")[1]
             actual_checksum = hashlib.sha256(data).hexdigest()
-            
+
             return expected_checksum == actual_checksum
-            
+
         except Exception as e:
             print(f"Integrity verification failed: {e}")
             return False
-    
+
     def _find_event_file(self, event_id: str) -> Optional[Path]:
         """Find event file by ID."""
         # Search in daily directories
@@ -1036,44 +1036,44 @@ class WORMStorage:
                     if event_id in event_file.name:
                         return event_file
         return None
-    
+
     def archive_old_logs(self):
         """Archive old logs to monthly/yearly compressed archives."""
         today = datetime.utcnow()
-        
+
         # Archive previous month
         if today.day == 1:  # First day of month
             self._archive_monthly(today)
-        
+
         # Archive previous year
         if today.month == 1 and today.day == 1:  # First day of year
             self._archive_yearly(today.year - 1)
-    
+
     def _archive_monthly(self, date: datetime):
         """Create monthly archive."""
         year_month = date.strftime("%Y-%m")
         monthly_archive = self.storage_path / "monthly" / f"{year_month}.tar.gz"
-        
+
         # Find all daily directories for the month
         daily_dirs = []
         for daily_dir in (self.storage_path / "daily").iterdir():
             if daily_dir.is_dir() and daily_dir.name.startswith(year_month):
                 daily_dirs.append(daily_dir)
-        
+
         if daily_dirs:
             # Create tar archive
             with tarfile.open(monthly_archive, "w:gz") as tar:
                 for daily_dir in daily_dirs:
                     tar.add(daily_dir, arcname=daily_dir.name)
-            
+
             # Set archive to read-only
             os.chmod(monthly_archive, 0o444)
-            
+
             # Remove daily directories (they're archived)
             for daily_dir in daily_dirs:
                 shutil.rmtree(daily_dir)
-    
-    def search_events(self, 
+
+    def search_events(self,
                      start_date: Optional[datetime] = None,
                      end_date: Optional[datetime] = None,
                      user_id: Optional[str] = None,
@@ -1081,23 +1081,23 @@ class WORMStorage:
                      action: Optional[str] = None) -> List[Dict[str, Any]]:
         """Search audit events with filters."""
         results = []
-        
+
         # Search through index files
         for index_file in (self.storage_path / "index").glob("*.ndjson"):
             # Parse date from filename
             file_date = datetime.strptime(index_file.stem, "%Y-%m-%d").date()
-            
+
             # Apply date filter
             if start_date and file_date < start_date.date():
                 continue
             if end_date and file_date > end_date.date():
                 continue
-            
+
             # Read index file
             with open(index_file, 'r') as f:
                 for line in f:
                     entry = json.loads(line.strip())
-                    
+
                     # Apply filters
                     if user_id and entry.get("user_id") != user_id:
                         continue
@@ -1105,22 +1105,22 @@ class WORMStorage:
                         continue
                     if action and entry.get("action") != action:
                         continue
-                    
+
                     # Load full event if needed
                     event = self._load_event(entry["file_path"])
                     if event:
                         results.append(event)
-        
+
         return results
-    
+
     def _load_event(self, file_path: str) -> Optional[Dict[str, Any]]:
         """Load event from file."""
         event_file = self.storage_path / file_path
-        
+
         try:
             with open(event_file, 'rb') as f:
                 lines = f.readlines()
-                
+
             if len(lines) >= 2:
                 # Decrypt if necessary
                 if self.encryption_key:
@@ -1129,18 +1129,18 @@ class WORMStorage:
                     data = fernet.decrypt(lines[-2])
                 else:
                     data = lines[-2]
-                
+
                 return json.loads(data.decode())
         except Exception as e:
             print(f"Failed to load event: {e}")
             return None
-    
-    def generate_compliance_report(self, 
+
+    def generate_compliance_report(self,
                                   report_type: str,
                                   start_date: datetime,
                                   end_date: datetime) -> Dict[str, Any]:
         """Generate compliance report for regulatory requirements."""
-        
+
         report = {
             "report_id": f"COMP-{datetime.utcnow().strftime('%Y%m%d%H%M%S')}",
             "report_type": report_type,
@@ -1152,32 +1152,32 @@ class WORMStorage:
             "statistics": {},
             "events": [],
         }
-        
+
         # Gather statistics
         events = self.search_events(start_date, end_date)
-        
+
         # Count by action
         action_counts = {}
         for event in events:
             action = event.get("audit_action")
             if action:
                 action_counts[action] = action_counts.get(action, 0) + 1
-        
+
         report["statistics"] = {
             "total_events": len(events),
             "unique_users": len(set(e.get("user_id") for e in events if e.get("user_id"))),
             "action_counts": action_counts,
         }
-        
+
         # Add sample events (limit to 100 for report)
         report["events"] = events[:100]
-        
+
         # Add integrity verification
         report["integrity_check"] = {
             "verified_events": len([e for e in events if self.verify_integrity(e.get("_metadata", {}).get("event_id", ""))]),
             "total_events": len(events),
         }
-        
+
         return report
 ```
 
@@ -1210,7 +1210,7 @@ class WORMStorage:
 ### Complete ELK Stack (docker-compose.yml)
 
 ```yaml
-version: '3.8'
+version: "3.8"
 
 services:
   # Elasticsearch - Log storage and indexing
@@ -1233,7 +1233,11 @@ services:
     networks:
       - logging
     healthcheck:
-      test: ["CMD-SHELL", "curl -s -u elastic:${ELASTIC_PASSWORD:-changeme} http://localhost:9200/_cluster/health | grep -q '\"status\":\"green\"' || exit 1"]
+      test:
+        [
+          "CMD-SHELL",
+          'curl -s -u elastic:${ELASTIC_PASSWORD:-changeme} http://localhost:9200/_cluster/health | grep -q ''"status":"green"'' || exit 1',
+        ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -1376,10 +1380,10 @@ class AnomalyAlert:
 
 class LogAnomalyDetector:
     """Detect anomalies in trading logs in real-time."""
-    
+
     def __init__(self, redis_host: str = 'localhost', redis_port: int = 6379):
         self.redis = redis.Redis(host=redis_host, port=redis_port, decode_responses=True)
-        
+
         # Rate limiting thresholds
         self.thresholds = {
             'logins_per_minute': 5,
@@ -1387,14 +1391,14 @@ class LogAnomalyDetector:
             'cancellations_per_minute': 20,
             'failed_logins_per_hour': 10,
         }
-        
+
         # Pattern tracking
         self.user_patterns = defaultdict(lambda: deque(maxlen=1000))
         self.ip_patterns = defaultdict(lambda: deque(maxlen=1000))
-        
+
         # Known patterns for anomaly detection
         self.suspicious_patterns = self._load_suspicious_patterns()
-    
+
     def _load_suspicious_patterns(self) -> Dict[str, Set[str]]:
         """Load patterns of known suspicious activity."""
         return {
@@ -1402,44 +1406,44 @@ class LogAnomalyDetector:
             'high_frequency_cancellations': {'order_type': 'limit', 'status': 'cancelled'},
             'price_manipulation': {'order_type': 'limit', 'price_deviation': 0.05},  # 5%+ price deviation
         }
-    
+
     async def analyze_log_entry(self, log_entry: Dict[str, any]) -> Optional[AnomalyAlert]:
         """Analyze a single log entry for anomalies."""
         anomalies = []
-        
+
         # Check for suspicious login patterns
         if log_entry.get('event_type') == 'login':
             anomalies.extend(await self._check_login_anomalies(log_entry))
-        
+
         # Check for trading anomalies
         elif log_entry.get('event_type') == 'order':
             anomalies.extend(await self._check_order_anomalies(log_entry))
-        
+
         # Check for audit anomalies
         elif log_entry.get('audit_action'):
             anomalies.extend(await self._check_audit_anomalies(log_entry))
-        
+
         # Return the highest severity anomaly
         if anomalies:
             return max(anomalies, key=lambda a: self._severity_to_score(a.severity))
-        
+
         return None
-    
+
     async def _check_login_anomalies(self, log_entry: Dict[str, any]) -> List[AnomalyAlert]:
         """Check for suspicious login patterns."""
         anomalies = []
         user_id = log_entry.get('user_id')
         ip_address = log_entry.get('client_ip')
         timestamp = log_entry.get('timestamp')
-        
+
         if not user_id or not ip_address:
             return anomalies
-        
+
         # Rate limiting check
         login_key = f"login:{user_id}:{ip_address}"
         login_count = self.redis.incr(login_key)
         self.redis.expire(login_key, 60)  # 1 minute TTL
-        
+
         if login_count > self.thresholds['logins_per_minute']:
             anomalies.append(AnomalyAlert(
                 anomaly_type=AnomalyType.SUSPICIOUS_LOGIN,
@@ -1455,13 +1459,13 @@ class LogAnomalyDetector:
                 ip_address=ip_address,
                 confidence=0.8
             ))
-        
+
         # Failed login pattern
         if log_entry.get('status') == 'failed':
             failed_key = f"failed_login:{user_id}:{ip_address}"
             failed_count = self.redis.incr(failed_key)
             self.redis.expire(failed_key, 3600)  # 1 hour TTL
-            
+
             if failed_count > self.thresholds['failed_logins_per_hour']:
                 anomalies.append(AnomalyAlert(
                     anomaly_type=AnomalyType.UNAUTHORIZED_ACCESS,
@@ -1477,7 +1481,7 @@ class LogAnomalyDetector:
                     ip_address=ip_address,
                     confidence=0.9
                 ))
-        
+
         # Geographic anomaly (simplified)
         known_locations = self.redis.smembers(f"user_locations:{user_id}")
         if known_locations:
@@ -1486,7 +1490,7 @@ class LogAnomalyDetector:
                 # New location detected
                 self.redis.sadd(f"user_locations:{user_id}", location_hash)
                 self.redis.expire(f"user_locations:{user_id}", 86400)  # 24 hours
-                
+
                 anomalies.append(AnomalyAlert(
                     anomaly_type=AnomalyType.SUSPICIOUS_LOGIN,
                     severity='medium',
@@ -1501,9 +1505,9 @@ class LogAnomalyDetector:
                     ip_address=ip_address,
                     confidence=0.6
                 ))
-        
+
         return anomalies
-    
+
     async def _check_order_anomalies(self, log_entry: Dict[str, any]) -> List[AnomalyAlert]:
         """Check for suspicious order patterns."""
         anomalies = []
@@ -1512,16 +1516,16 @@ class LogAnomalyDetector:
         order_type = log_entry.get('order_type')
         status = log_entry.get('status')
         timestamp = log_entry.get('timestamp')
-        
+
         if not user_id or not symbol:
             return anomalies
-        
+
         # Rapid order cancellation
         if status == 'cancelled':
             cancel_key = f"cancellations:{user_id}:{symbol}"
             cancel_count = self.redis.incr(cancel_key)
             self.redis.expire(cancel_key, 60)  # 1 minute TTL
-            
+
             if cancel_count > self.thresholds['cancellations_per_minute']:
                 anomalies.append(AnomalyAlert(
                     anomaly_type=AnomalyType.RAPID_ORDER_CANCELLATION,
@@ -1536,11 +1540,11 @@ class LogAnomalyDetector:
                     user_id=user_id,
                     confidence=0.7
                 ))
-        
+
         # After-hours trading detection
         log_time = datetime.fromisoformat(timestamp.replace('Z', '+00:00'))
         hour_str = log_time.strftime('%H:%M')
-        
+
         if hour_str in self.suspicious_patterns['after_hours_trading']:
             anomalies.append(AnomalyAlert(
                 anomaly_type=AnomalyType.AFTER_HOURS_TRADING,
@@ -1554,11 +1558,11 @@ class LogAnomalyDetector:
                 user_id=user_id,
                 confidence=0.5
             ))
-        
+
         # Unusual volume detection
         volume_key = f"volume:{user_id}:{symbol}"
         current_volume = float(log_entry.get('quantity', 0))
-        
+
         # Get historical average volume
         historical_avg = self.redis.get(f"{volume_key}:avg")
         if historical_avg:
@@ -1577,38 +1581,38 @@ class LogAnomalyDetector:
                     user_id=user_id,
                     confidence=0.6
                 ))
-        
+
         # Update volume statistics
         self._update_volume_stats(volume_key, current_volume)
-        
+
         return anomalies
-    
+
     def _update_volume_stats(self, key: str, volume: float):
         """Update volume statistics for anomaly detection."""
         # Store current volume
         self.redis.rpush(f"{key}:history", volume)
         self.redis.ltrim(f"{key}:history", 0, 99)  # Keep last 100
-        
+
         # Calculate and store average
         history = self.redis.lrange(f"{key}:history", 0, -1)
         if history:
             avg = sum(float(v) for v in history) / len(history)
             self.redis.set(f"{key}:avg", avg)
             self.redis.expire(f"{key}:avg", 86400)  # 24 hours
-    
+
     async def _check_audit_anomalies(self, log_entry: Dict[str, any]) -> List[AnomalyAlert]:
         """Check for audit-related anomalies."""
         anomalies = []
         user_id = log_entry.get('user_id')
         action = log_entry.get('audit_action')
         timestamp = log_entry.get('timestamp')
-        
+
         # Check for unauthorized access to sensitive data
         if action in ['access_sensitive_data', 'system_config_change', 'user_permission_change']:
             # Verify if user has permission for this action
             permission_key = f"permissions:{user_id}:{action}"
             has_permission = self.redis.get(permission_key)
-            
+
             if not has_permission or has_permission != 'true':
                 anomalies.append(AnomalyAlert(
                     anomaly_type=AnomalyType.UNAUTHORIZED_ACCESS,
@@ -1623,9 +1627,9 @@ class LogAnomalyDetector:
                     user_id=user_id,
                     confidence=0.9
                 ))
-        
+
         return anomalies
-    
+
     def _severity_to_score(self, severity: str) -> int:
         """Convert severity string to numeric score for comparison."""
         scores = {
@@ -1635,32 +1639,32 @@ class LogAnomalyDetector:
             'critical': 4
         }
         return scores.get(severity, 0)
-    
+
     async def process_log_stream(self, log_stream):
         """Process a stream of log entries for real-time anomaly detection."""
         alerts = []
-        
+
         async for log_line in log_stream:
             try:
                 log_entry = json.loads(log_line)
                 anomaly = await self.analyze_log_entry(log_entry)
-                
+
                 if anomaly:
                     alerts.append(anomaly)
-                    
+
                     # Send alert to monitoring system
                     await self._send_alert(anomaly)
-                    
+
                     # Store alert for reporting
                     self._store_alert(anomaly)
-            
+
             except json.JSONDecodeError:
                 print(f"Failed to parse log line: {log_line}")
             except Exception as e:
                 print(f"Error processing log: {e}")
-        
+
         return alerts
-    
+
     async def _send_alert(self, alert: AnomalyAlert):
         """Send anomaly alert to monitoring system."""
         alert_data = {
@@ -1672,20 +1676,20 @@ class LogAnomalyDetector:
             'confidence': alert.confidence,
             'evidence': alert.evidence
         }
-        
+
         # Send to Elasticsearch for indexing
         index_name = f"anomaly-alerts-{alert.timestamp.strftime('%Y.%m.%d')}"
         # In production, use Elasticsearch client to index document
-        
+
         # Send to alerting system (e.g., PagerDuty, Slack)
         if alert.severity in ['high', 'critical']:
             await self._send_critical_alert(alert_data)
-    
+
     async def _send_critical_alert(self, alert_data: Dict[str, any]):
         """Send critical alert to incident response system."""
         # Implementation for sending to PagerDuty, Slack, etc.
         print(f"CRITICAL ALERT: {alert_data}")
-    
+
     def _store_alert(self, alert: AnomalyAlert):
         """Store alert in Redis for short-term retention."""
         alert_key = f"alert:{alert.timestamp.timestamp()}:{alert.anomaly_type.value}"
@@ -1696,10 +1700,10 @@ class LogAnomalyDetector:
             'user_id': alert.user_id,
             'confidence': alert.confidence
         }
-        
+
         self.redis.hset(alert_key, mapping=alert_data)
         self.redis.expire(alert_key, 604800)  # 1 week
-    
+
     def generate_daily_report(self) -> Dict[str, any]:
         """Generate daily anomaly detection report."""
         today = datetime.utcnow().date()
@@ -1711,18 +1715,18 @@ class LogAnomalyDetector:
             'top_users': [],
             'trends': {}
         }
-        
+
         # Scan for today's alerts
         pattern = f"alert:*:*"
         for key in self.redis.scan_iter(match=pattern):
             alert_data = self.redis.hgetall(key)
-            
+
             alert_date = datetime.fromisoformat(alert_data['timestamp']).date()
             if alert_date == today:
                 report['total_alerts'] += 1
                 report['by_severity'][alert_data['severity']] += 1
                 report['by_type'][alert_data['type']] += 1
-        
+
         return report
 ```
 
@@ -1746,25 +1750,25 @@ from audit_trail.analytics.anomaly_detector import LogAnomalyDetector
 def test_structured_logging():
     """Test structured logging functionality."""
     print("Testing structured logging...")
-    
+
     # Test basic logging
     with logger.LoggingContext(correlation_id="test-123", user_id="test_user"):
         logger.logger.info("Test info message", extra={
             "component": "testing",
             "test_field": "test_value"
         })
-        
+
         logger.logger.error("Test error message", extra={
             "component": "testing",
             "error_code": "TEST_ERROR"
         })
-    
+
     print("✓ Structured logging test completed")
 
 def test_audit_logging():
     """Test audit logging functionality."""
     print("Testing audit logging...")
-    
+
     # Test audit events
     logger.audit(
         action=AuditAction.CREATE_ORDER,
@@ -1779,13 +1783,13 @@ def test_audit_logging():
         client_ip="192.168.1.100",
         user_agent="TestClient/1.0"
     )
-    
+
     print("✓ Audit logging test completed")
 
 def test_trade_logging():
     """Test trade logging functionality."""
     print("Testing trade logging...")
-    
+
     logger.log_trade({
         "symbol": "AAPL",
         "side": "buy",
@@ -1800,20 +1804,20 @@ def test_trade_logging():
         "strategy": "momentum",
         "user_id": "trader_001"
     })
-    
+
     print("✓ Trade logging test completed")
 
 def test_worm_storage():
     """Test WORM storage functionality."""
     print("Testing WORM storage...")
-    
+
     # Create WORM storage instance
     storage = WORMStorage(
         storage_path="/tmp/test_worm_storage",
         retention_days=7,
         encryption_key_path=None  # Disable encryption for testing
     )
-    
+
     # Store test audit event
     test_event = {
         "timestamp": datetime.utcnow().isoformat() + "Z",
@@ -1827,23 +1831,23 @@ def test_worm_storage():
             "version": "1.0"
         }
     }
-    
+
     event_id = storage.store_audit_event(test_event)
     print(f"✓ Stored audit event with ID: {event_id}")
-    
+
     # Verify integrity
     if storage.verify_integrity(event_id):
         print("✓ Event integrity verified")
     else:
         print("✗ Event integrity check failed")
-    
+
     # Search for events
     events = storage.search_events(
         user_id="test_user",
         event_type="audit"
     )
     print(f"✓ Found {len(events)} events in search")
-    
+
     # Generate compliance report
     report = storage.generate_compliance_report(
         report_type="test_report",
@@ -1851,15 +1855,15 @@ def test_worm_storage():
         end_date=datetime.utcnow()
     )
     print(f"✓ Generated compliance report: {report['report_id']}")
-    
+
     print("✓ WORM storage test completed")
 
 async def test_anomaly_detection():
     """Test anomaly detection functionality."""
     print("Testing anomaly detection...")
-    
+
     detector = LogAnomalyDetector(redis_host='localhost', redis_port=6379)
-    
+
     # Create test log stream
     test_logs = [
         json.dumps({
@@ -1888,24 +1892,24 @@ async def test_anomaly_detection():
             "quantity": 1000
         })
     ]
-    
+
     # Simulate log stream
     async def log_stream():
         for log in test_logs:
             yield log
             await asyncio.sleep(0.1)
-    
+
     # Process logs
     alerts = await detector.process_log_stream(log_stream())
     print(f"✓ Detected {len(alerts)} anomalies")
-    
+
     for alert in alerts:
         print(f"  - {alert.anomaly_type.value}: {alert.description}")
-    
+
     # Generate report
     report = detector.generate_daily_report()
     print(f"✓ Generated daily report with {report['total_alerts']} alerts")
-    
+
     print("✓ Anomaly detection test completed")
 
 def run_all_tests():
@@ -1913,28 +1917,28 @@ def run_all_tests():
     print("=" * 60)
     print("Running Logging System Tests")
     print("=" * 60)
-    
+
     try:
         test_structured_logging()
         time.sleep(1)
-        
+
         test_audit_logging()
         time.sleep(1)
-        
+
         test_trade_logging()
         time.sleep(1)
-        
+
         test_worm_storage()
         time.sleep(1)
-        
+
         # Run async test
         import asyncio
         asyncio.run(test_anomaly_detection())
-        
+
         print("\n" + "=" * 60)
         print("All tests completed successfully! ✅")
         print("=" * 60)
-        
+
     except Exception as e:
         print(f"\nTest failed with error: {e}")
         import traceback
@@ -1949,12 +1953,14 @@ if __name__ == "__main__":
 ### Step-by-Step Deployment
 
 1. **Clone and setup the logging system:**
+
 ```bash
 git clone <repository-url>
 cd logging-system
 ```
 
 2. **Configure environment variables:**
+
 ```bash
 cp .env.example .env
 # Edit .env with your configuration
@@ -1962,17 +1968,20 @@ cp .env.example .env
 ```
 
 3. **Start the ELK stack:**
+
 ```bash
 docker-compose up -d
 ```
 
 4. **Initialize Elasticsearch:**
+
 ```bash
 # Wait for Elasticsearch to start, then set password
 docker exec -it elasticsearch /usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic -i
 ```
 
 5. **Import Kibana dashboards:**
+
 ```bash
 # Wait for Kibana to start, then import dashboards
 curl -X POST "http://localhost:5601/api/saved_objects/_import" \
@@ -1982,6 +1991,7 @@ curl -X POST "http://localhost:5601/api/saved_objects/_import" \
 ```
 
 6. **Configure Python logging in your application:**
+
 ```python
 # In your trading application
 from structured_logging.loggers import logger, setup_fastapi_logging
@@ -1992,6 +2002,7 @@ setup_fastapi_logging(app, service_name="trading-api")
 ```
 
 7. **Test the logging system:**
+
 ```bash
 python scripts/test_logging.py
 ```
@@ -1999,6 +2010,7 @@ python scripts/test_logging.py
 ### Production Considerations
 
 1. **Security:**
+
 ```bash
 # Enable SSL/TLS for Elasticsearch
 # Configure firewall rules for log ports
@@ -2006,6 +2018,7 @@ python scripts/test_logging.py
 ```
 
 2. **Scalability:**
+
 ```yaml
 # In docker-compose.prod.yml
 elasticsearch:
@@ -2019,6 +2032,7 @@ elasticsearch:
 ```
 
 3. **Backup and Retention:**
+
 ```bash
 # Configure index lifecycle policies
 PUT _ilm/policy/trading-logs-policy
@@ -2065,18 +2079,21 @@ By completing Day 93, you will be able to:
 ## 🔧 Best Practices
 
 1. **Log Structure:**
+
    - Use consistent field names across all services
    - Include correlation IDs for request tracing
    - Mask sensitive data before logging
    - Add business context to technical logs
 
 2. **Performance:**
+
    - Use asynchronous logging for high-throughput systems
    - Implement log batching and buffering
    - Configure appropriate log rotation policies
    - Monitor log ingestion rates
 
 3. **Security:**
+
    - Encrypt sensitive log data
    - Implement access controls for log data
    - Use tamper-evident logging for audit trails
@@ -2093,12 +2110,14 @@ By completing Day 93, you will be able to:
 ### Key Log-Based Alerts to Configure:
 
 1. **Security Alerts:**
+
    - Multiple failed login attempts
    - Access from unusual locations
    - Unauthorized access attempts
    - Configuration changes without approval
 
 2. **Trading Alerts:**
+
    - Excessive order cancellations
    - Trading outside normal hours
    - Unusual trading volumes
@@ -2130,7 +2149,7 @@ async def send_to_alertmanager(alert: AnomalyAlert):
         },
         "startsAt": alert.timestamp.isoformat()
     }
-    
+
     # Send to AlertManager webhook
     import aiohttp
     async with aiohttp.ClientSession() as session:
@@ -2145,18 +2164,21 @@ async def send_to_alertmanager(alert: AnomalyAlert):
 After setting up the logging system, consider:
 
 1. **Advanced Analytics:**
+
    - Machine learning for predictive anomaly detection
    - Pattern recognition for insider trading
    - Sentiment analysis of trading communications
    - Correlation analysis across multiple data sources
 
 2. **Integration:**
+
    - Connect with SIEM systems
    - Integrate with trading surveillance platforms
    - Feed alerts into incident management systems
    - Create automated compliance workflows
 
 3. **Optimization:**
+
    - Implement log sampling for high-volume systems
    - Use compression for long-term storage
    - Create log data lakes for historical analysis
