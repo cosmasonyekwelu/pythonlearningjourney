@@ -1,14 +1,14 @@
 # Day 92: Monitoring & Alerting with Grafana and Prometheus
 
-## 📊 Project Overview
+## Project Overview
 
 Implement comprehensive monitoring and alerting for trading systems using industry-standard tools to detect issues before they impact trading performance. This day focuses on building a robust monitoring infrastructure that provides real-time visibility into system health, trading performance, and risk metrics.
 
-## 🎯 Objective
+## Objective
 
 Set up a complete Prometheus/Grafana stack with custom exporters for trading metrics, create comprehensive dashboards, and configure alerting for critical conditions.
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 monitoring-system/
@@ -37,7 +37,7 @@ monitoring-system/
 └── scripts/               # Deployment and maintenance scripts
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -64,7 +64,7 @@ docker-compose up -d
 pip install -r requirements.txt
 ```
 
-## 🔧 Configuration
+## Configuration
 
 ### Prometheus Configuration (prometheus/prometheus.yml)
 
@@ -113,7 +113,7 @@ scrape_configs:
       - targets: ['cadvisor:8080']
 ```
 
-## 📊 Custom Trading Exporter
+## Custom Trading Exporter
 
 ### Python Trading Metrics Exporter (exporters/trading_exporter.py)
 
@@ -376,7 +376,7 @@ if __name__ == "__main__":
     exporter.run()
 ```
 
-## 📈 Alert Rules Configuration
+## Alert Rules Configuration
 
 ### Alerting Rules (prometheus/alert_rules.yml)
 
@@ -521,7 +521,7 @@ groups:
           description: "Signal-to-noise ratio of daily PnL has fallen below 0.5"
 ```
 
-## 📊 Grafana Dashboard Examples
+## Grafana Dashboard Examples
 
 ### Trading Overview Dashboard (grafana/dashboards/trading_overview.json)
 
@@ -674,7 +674,7 @@ groups:
 }
 ```
 
-## 🚨 AlertManager Configuration
+## AlertManager Configuration
 
 ### AlertManager Configuration (alertmanager/alertmanager.yml)
 
@@ -749,7 +749,7 @@ inhibit_rules:
     equal: ['alertname', 'service']
 ```
 
-## 🐳 Docker Compose Configuration
+## Docker Compose Configuration
 
 ### Full Monitoring Stack (docker-compose.yml)
 
@@ -876,7 +876,7 @@ volumes:
   grafana_data:
 ```
 
-## 📈 Prometheus Recording Rules
+## Prometheus Recording Rules
 
 ### Advanced Recording Rules (prometheus/recording_rules.yml)
 
@@ -930,7 +930,7 @@ groups:
           avg_over_time(trading_open_positions[1h])
 ```
 
-## 🧪 Testing the Monitoring System
+## Testing the Monitoring System
 
 ### Test Script (scripts/test_monitoring.py)
 
@@ -1070,7 +1070,7 @@ class MonitoringTester:
         logger.info(f"\nTest Summary: {passed_tests}/{total_tests} tests passed")
         
         for test_name, result in results["tests"].items():
-            status = "✓ PASS" if result else "✗ FAIL"
+            status = "PASS" if result else "FAIL"
             logger.info(f"  {status} - {test_name}")
             
         return results
@@ -1086,7 +1086,7 @@ if __name__ == "__main__":
     logger.info("Test results saved to monitoring_test_results.json")
 ```
 
-## 📋 Deployment Guide
+## Deployment Guide
 
 ### Step-by-Step Deployment
 
@@ -1150,7 +1150,7 @@ volumes:
 - Use clustered Grafana with external database
 - Configure AlertManager clustering
 
-## 🎯 Challenge: Predictive Alerting Implementation
+## Challenge: Predictive Alerting Implementation
 
 ### Task: Implement Anomaly Detection for Trading Patterns
 
@@ -1221,7 +1221,7 @@ class PredictiveAlertingSystem:
         return np.array(features).reshape(1, -1)
 ```
 
-## 📚 Learning Outcomes
+## Learning Outcomes
 
 By completing Day 92, you will be able to:
 
@@ -1234,7 +1234,7 @@ By completing Day 92, you will be able to:
 - **Test** and validate monitoring system functionality
 - **Deploy** monitoring stacks in both development and production environments
 
-## 🚨 Best Practices
+## Best Practices
 
 1. **Alert Design:**
    - Use meaningful alert names and descriptions
@@ -1260,7 +1260,7 @@ By completing Day 92, you will be able to:
    - Encrypt sensitive alert configurations
    - Implement access controls for dashboards
 
-## 🔧 Troubleshooting Guide
+## Troubleshooting Guide
 
 ### Common Issues and Solutions:
 
@@ -1296,7 +1296,7 @@ global:
 - Verify metric names match queries
 - Check Prometheus service discovery
 
-## 📈 Next Steps
+## Next Steps
 
 After setting up the basic monitoring system, consider:
 
