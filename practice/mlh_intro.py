@@ -3,11 +3,11 @@ import random
 
 # sample sentences 
 sentences = [ 
-    "The quick brown fox jumps over the lazy dog.", 
-    "Python is a great programming language.", 
-    "I love watching dominosaurs streams!", 
-    "Coding is fun and rewarding.", 
-    "Practice makes perfect." 
+    "The quick brown fox jumps over the lazy dog", 
+    "Python is a great programming language", 
+    "I love watching dominosaurs streams", 
+    "Coding is fun and rewarding", 
+    "Practice makes perfect" 
 ]
 
 # initial prompt 
