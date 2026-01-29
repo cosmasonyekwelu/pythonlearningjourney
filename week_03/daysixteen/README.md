@@ -1,130 +1,29 @@
-# Day 16 - Python Learning Journey
+# Day 16: Advanced OOP - Encapsulation and Properties
 
 **Date:** October 7, 2025
 
-## Activities
+## Learning Objective
+To master Encapsulation in Python, learning how to protect data using private/protected attributes and control access using property decorators.
 
-- Mastered encapsulation concepts: private and protected attributes
+## Concepts Covered
+- **Protected Attributes**: Using the `_` prefix convention for internal-use attributes.
+- **Private Attributes**: Using the `__` prefix for name mangling to avoid subclass conflicts.
+- **Property Decorators**: Using `@property`, `@setter`, and `@deleter` for controlled attribute access.
+- **Data Validation**: Implementing logic within setters to ensure data integrity.
+- **Computed Properties**: Creating read-only properties that derive their value from other attributes.
 
-- Implemented getter and setter methods using `@property` decorator
+## Code Explanation
+The `day_sixteen.py` script explores data protection:
+- **EncapsulationFundamentals**: Demonstrates the difference between public, protected, and private members.
+- **Temperature Class**: Uses properties to automatically convert between Celsius, Fahrenheit, and Kelvin while validating that temperatures aren't below absolute zero.
+- **SecureBankVault**: Shows how private attributes and name mangling prevent accidental external access.
+- **Enhanced Bank Account Project**: A comprehensive example using properties to manage balance, overdraft limits, and transaction history with full validation.
 
-- Practiced data validation through property-based encapsulation
-
-- Explored name mangling with double underscores for private attributes
-
-- Built an enhanced Bank Account class with comprehensive property-based validation
-
-- Applied encapsulation principles to create robust, secure class designs
-
-## Tutorial
-
-**Title:** Advanced OOP: Encapsulation and Properties
-
-**URL:** Self-practice with Python OOP documentation
-
-## Topics Covered:
-
-- Private and protected attribute conventions
-
-- Property decorators for controlled attribute access
-
-- Data validation through setter methods
-
-- Name mangling mechanism
-
-- Encapsulation benefits for maintainability
-
-- Read-only and computed properties
-
-## Key Learnings
-
-- Understanding the importance of encapsulation for data protection
-
-- Mastering `@property` decorator for creating Pythonic getters/setters
-
-- Implementing robust data validation in setter methods
-
-- Using protected attributes `(\_prefix)` for internal use
-
-- Applying name mangling `(\_\_prefix)` for attribute privacy
-
-- Designing classes with proper access control and validation
-
-- Creating computed properties that behave like attributes
-
-## Code Examples
-
-## Basic Property
-
-```python
-class BankAccount:
-    def __init__(self):
-        self._balance = 0  # Protected attribute
-
-    @property
-    def balance(self):
-        return self._balance
-
-    @balance.setter
-    def balance(self, value):
-        if value >= 0:
-            self._balance = value
-        else:
-            raise ValueError("Balance cannot be negative")
+## How to Run
+Run the script to see encapsulation and property validation in action:
+```bash
+python week_03/daysixteen/day_sixteen.py
 ```
-
-## Name Mangling
-
-```python
-
-class SecureData:
-    def __init__(self):
-        self.__secret = "confidential"  # Name mangled
-
-    def get_secret(self):
-        return self.__secret
-```
-
-## Read-only Properties
-
-```python
-
-class Circle:
-    def __init__(self, radius):
-        self._radius = radius
-
-    @property
-    def area(self):
-        import math
-        return math.pi * self._radius ** 2
-```
-
-## Practice Exercises
-
-- Bank Account Enhancement: Built a comprehensive banking class with property validation
-
-- Student Class: Created a Student class with validated GPA and email properties
-
-- Temperature Converter: Implemented temperature class with property-based conversion
-
-- Product Inventory: Designed product class with price validation and computed properties
-
-## Mini-Project: Enhanced BankAccount System
-
-### Features Implemented:
-
-- Comprehensive balance validation with properties
-
-- Transaction history tracking with protected attributes
-
-- Account number generation with read-only properties
-
-- Overdraft protection through property setters
-
-- Audit trail using private attributes
-
-- Interest calculation with computed properties
 
 ## Reflection
-
-Today's focus on encapsulation revealed how proper data protection leads to more robust and maintainable code. The `@property` decorator provided an elegant way to implement getters and setters while maintaining Pythonic syntax. Data validation in setters proved crucial for ensuring object integrity. Name mangling offered true attribute privacy, while protected attributes established clear conventions for internal use. The Bank Account project demonstrated how encapsulation transforms simple classes into production-ready components with proper access control and validation.
+Encapsulation isn't just about hiding data; it's about creating a robust interface. Using properties allows you to add validation logic later without changing how other parts of the code access your object's data.

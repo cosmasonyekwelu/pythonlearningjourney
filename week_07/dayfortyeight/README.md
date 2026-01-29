@@ -1,61 +1,29 @@
-# Day 48: Portfolio Rebalancing Scripts
+# Day 48: Portfolio Rebalancing System
 
-## Objective
+**Date:** November 8, 2025
 
-Automate the rebalancing of your portfolio to maintain optimal diversification and target asset weights, implementing disciplined buy-low/sell-high strategies.
+## Learning Objective
+To build a system that maintains a target asset allocation by automatically identifying and planning rebalance trades.
 
-## Features
+## Concepts Covered
+- **Asset Allocation**: Defining target weights for various stocks and cash.
+- **Drift Detection**: Identifying when market movements have pushed a portfolio away from its intended target.
+- **Rebalance Planning**: Calculating the precise number of shares to buy or sell to restore the balance.
+- **Threshold-based Execution**: Only triggering trades if the deviation exceeds a certain limit (e.g., 5%).
+- **Simulation**: Modeling the effects of a rebalance (including commissions) before executing the trades.
 
-- **Threshold-Based Rebalancing**: Automatic rebalancing when allocations drift beyond set thresholds
-- **Time-Based Rebalancing**: Periodic rebalancing (monthly/quarterly) regardless of drift
-- **Trade Calculation**: Precise calculation of buy/sell quantities needed for rebalancing
-- **Cost-Aware Optimization**: Commission cost estimation and trade optimization
-- **Simulation Mode**: Preview rebalance impact before execution
-- **Performance Metrics**: Improvement scoring and allocation deviation analysis
+## Code Explanation
+The `day_fortyeight.py` script implements the `PortfolioRebalancer`:
+- **`calculate_current_allocations()`**: Computes the percentage of the portfolio currently held in each asset.
+- **`calculate_rebalance_trades()`**: Generates a list of suggested trades to bring the portfolio back to target weights.
+- **`simulate_rebalance()`**: Estimates the "improvement score" (how much closer the portfolio gets to the target) and the cost of commissions.
+- **`check_rebalance_conditions()`**: Decides if a rebalance is actually necessary based on time or deviation thresholds.
 
-## Core Concepts Demonstrated
-
-- **Target vs Current Allocation**: Calculating portfolio drift and rebalance needs
-- **Rebalance Triggers**: Threshold and time-based rebalancing conditions
-- **Trade Optimization**: Minimizing transaction costs and market impact
-- **Portfolio Analytics**: Allocation analysis and improvement metrics
-- **Execution Planning**: Generating actionable, optimized trade lists
-
-## Installation Requirements
-
+## How to Run
+1. Run the rebalancer:
 ```bash
-pip install pandas numpy sqlite3
+python week_07/dayfortyeight/day_fortyeight.py
 ```
 
-## Rebalancing Strategies
-
-- **Threshold-Based**: Rebalance when any holding deviates >5% from target
-- **Time-Based**: Rebalance every 30 days regardless of drift
-- **Hybrid Approach**: Combine both strategies for optimal results
-
-## Usage
-
-```bash
-python day_fortyeight.py
-```
-
-## Configuration
-
-- Set target allocations in `target_allocations` dictionary
-- Adjust `rebalance_threshold` for sensitivity (default: 5%)
-- Modify rebalance frequency in `check_rebalance_conditions()`
-
-## Key Methods
-
-- `generate_rebalance_plan()`: Comprehensive rebalance analysis and planning
-- `calculate_rebalance_trades()`: Precise trade quantity calculations
-- `simulate_rebalance()`: Preview rebalance impact and costs
-- `execute_rebalance()`: Execute the rebalance plan (simulation/real)
-
-## Output Analysis
-
-- Current vs target allocation comparison
-- Required trades with quantities and values
-- Commission cost estimation
-- Expected improvement in allocation accuracy
-- Portfolio statistics and metrics
+## Reflection
+Portfolios naturally drift over time as some assets outperform others. Regular rebalancing forces you to "buy low and sell high," maintaining your desired risk profile without constant manual intervention.

@@ -1,75 +1,30 @@
-
 # Day 64: Blockchain Fundamentals
 
-## Objective
-Establish comprehensive understanding of blockchain architecture, consensus mechanisms, and cryptographic foundations essential for building secure, decentralized financial applications.
+**Date:** November 24, 2025
 
-## Core Concepts Covered
+## Learning Objective
+To understand the core components of a blockchain, including blocks, hashing, Proof of Work (PoW), and transaction management.
 
-### Distributed Ledger Technology
-- Block structure, cryptographic hashing, and Merkle trees
-- Immutable chain validation and cryptographic assurance
-- Blockchain state transitions and transaction ordering
+## Concepts Covered
+- **Block Structure**: Linking blocks using cryptographic hashes to ensure data integrity.
+- **Proof of Work (PoW)**: Implementing a "nonce" based mining algorithm with adjustable difficulty.
+- **Consensus Mechanisms**: Simulating PoW, Proof of Stake (PoS), and Delegated PoS (DPoS).
+- **Asymmetric Cryptography**: Using Elliptic Curve Digital Signature Algorithm (ECDSA) for secure transaction signing.
+- **Wallet Addresses**: Generating public/private key pairs and Ethereum-style addresses.
 
-### Consensus Mechanisms
-- Proof of Work (PoW) mining economics and security guarantees
-- Proof of Stake (PoS) staking dynamics and validator incentives
-- Delegated Proof-of-Stake (DPoS) and Byzantine Fault Tolerance
-- Consensus finality and fork resolution
+## Code Explanation
+The `day_sixtyfour.py` script implements a complete blockchain prototype:
+- **`Block` Class**: Handles the mining process by finding a hash that starts with a specific number of zeros.
+- **`Blockchain` Class**: Manages the chain, pending transactions, and verifies the validity of the entire history.
+- **`CryptographyManager`**: Uses the `cryptography` library to sign transactions, ensuring only the owner of a private key can spend their funds.
+- **`ConsensusSimulator`**: Provides mathematical models for how different blockchains reach agreement.
 
-### Cryptographic Primitives
-- Public/private key pairs and Elliptic Curve Cryptography (ECC)
-- Digital signatures and transaction authorization
-- Hash functions (SHA-256, Keccak) and their properties
-- Address generation and verification
-
-### Ethereum Virtual Machine
-- Account types (EOAs vs contract accounts)
-- Gas economics and transaction lifecycle
-- State transitions and execution environment
-- Smart contract execution model
-
-### Token Standards
-- ERC-20 fungible tokens for currencies and governance
-- ERC-721 non-fungible tokens (NFTs)
-- ERC-1155 multi-token standard
-- Token metadata and interface standards
-
-## Implementation Features
-
-### Mini-Blockchain Simulation
-- Block creation and validation
-- Proof of Work consensus implementation
-- Transaction merkelization
-- Chain reorganization handling
-
-### Cryptographic Operations
-- Key pair generation and management
-- Transaction signing and verification
-- Address derivation and validation
-- Hash function implementations
-
-### Blockchain Analytics
-- Block exploration and transaction tracing
-- Network health monitoring
-- Transaction fee analysis
-- Consensus participation simulation
-
-## File Structure
-- `day_sixtyfour.py` - Main blockchain implementation
-- Cryptographic utilities and key management
-- Consensus mechanism simulations
-- Blockchain exploration tools
-
-## Usage
-```python
-python day_sixtyfour.py --simulate_blockchain --blocks 100 --difficulty 4
+## How to Run
+1. Install requirements: `pip install cryptography`
+2. Run the simulation:
+```bash
+python week_10/daysixtyfour/day_sixtyfour.py --simulate_blockchain --difficulty 4
 ```
 
-## Dependencies
-- web3.py
-- eth-account
-- cryptography
-- hashlib
-- ecdsa
-```
+## Reflection
+A blockchain is essentially a distributed, append-only database secured by math. Understanding how hashes link blocks together is fundamental to seeing why it's so difficult to tamper with historical data.

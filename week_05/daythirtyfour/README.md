@@ -1,122 +1,30 @@
-# Day 34 - Data Cleaning & Preprocessing
+# Day 34: Data Cleaning & Preprocessing Pipeline
 
-Comprehensive financial data cleaning, preprocessing, and validation toolkit.
+**Date:** October 25, 2025
 
-## Files Overview
+## Learning Objective
+To build a production-ready data preprocessing pipeline that handles cleaning, outlier treatment, feature engineering, and validation for machine learning.
 
-- `data_cleaner.py` - Missing data handling, outlier detection and treatment
-- `feature_engineer.py` - Technical indicators and feature creation
-- `preprocessing_pipeline.py` - End-to-end preprocessing pipeline
-- `data_validation.py` - Data quality validation and integrity checks
+## Concepts Covered
+- **Missing Data Handling**: Using multiple imputation strategies (mean, median, ffill).
+- **Outlier Treatment**: Using the IQR method to cap or remove extreme values.
+- **Feature Engineering**: Creating technical indicators, price lags, and derived percentage changes.
+- **Data Scaling**: Normalizing features for better performance in ML models.
+- **Validation**: Implementing checks for data type consistency, range limits, and statistical sanity.
 
-## Key Features
+## Code Explanation
+The `day_thirtyfour.py` script integrates several components:
+- **`FinancialDataCleaner`**: Detects and fixes "holes" in the historical price data.
+- **`FinancialFeatureEngineer`**: Generates a rich set of 20+ features from basic OHLCV data.
+- **`FinancialPreprocessingPipeline`**: A high-level class that can process entire portfolios of stocks consistently.
+- **`FinancialDataValidator`**: Produces a quality report ensuring the output data is safe for model training.
 
-### Data Cleaning
-
-- Missing data imputation (forward fill, interpolation, strategic methods)
-- Outlier detection (Z-score, IQR, modified Z-score)
-- Outlier treatment (capping, removal, median replacement)
-- Data quality analysis and reporting
-
-### Feature Engineering
-
-- Price-based features (returns, momentum, gaps)
-- Technical indicators (RSI, MACD, Bollinger Bands, moving averages)
-- Time-based features (hour, day, month, seasonal patterns)
-- Derived statistical features (rolling statistics, lags, differences)
-- Feature scaling (standard, min-max, robust)
-
-### Preprocessing Pipeline
-
-- Automated end-to-end data processing
-- Portfolio-level data preparation
-- Training dataset creation for machine learning
-- Sequential processing with validation
-
-### Data Validation
-
-- Numeric range validation
-- Temporal consistency checks
-- Financial business rules validation
-- Statistical property validation
-- Comprehensive quality scoring
-
-## Installation
-
+## How to Run
+1. Ensure the `data/sample_stocks.csv` file exists (or run Day 30 to generate some).
+2. Run the pipeline:
 ```bash
-pip install -r requirements.txt
+python week_05/daythirtyfour/day_thirtyfour.py
 ```
 
-## Usage Examples
-
-### Basic Data Cleaning
-
-```python
-from data_cleaner import FinancialDataCleaner
-
-cleaner = FinancialDataCleaner()
-raw_data = yf.download('AAPL', period='1y')
-cleaned_data = cleaner.handle_missing_data(raw_data)
-cleaned_data = cleaner.treat_outliers(cleaned_data)
-```
-
-### Feature Engineering
-
-```python
-from feature_engineer import FinancialFeatureEngineer
-
-engineer = FinancialFeatureEngineer()
-features = engineer.create_technical_indicators(data)
-features = engineer.create_time_features(features)
-features = engineer.scale_features(features)
-```
-
-### Complete Pipeline
-
-```python
-from preprocessing_pipeline import FinancialPreprocessingPipeline
-
-pipeline = FinancialPreprocessingPipeline()
-portfolio_data = pipeline.process_portfolio(['AAPL', 'MSFT', 'GOOGL'])
-X, y, feature_names = pipeline.create_training_dataset(portfolio_data)
-```
-
-### Data Validation
-
-```python
-from data_validation import FinancialDataValidator
-
-validator = FinancialDataValidator()
-report = validator.comprehensive_validation(data, symbol='AAPL')
-validator.generate_validation_report(report)
-```
-
-## Learning Objectives
-
-- Handle missing data in financial time series
-- Detect and treat outliers using statistical methods
-- Create comprehensive technical indicators
-- Engineer time-based and derived features
-- Build automated preprocessing pipelines
-- Validate data quality and integrity
-- Prepare datasets for machine learning
-
-## Data Quality Standards
-
-- **Excellent**: Quality score ≥ 90
-- **Good**: Quality score ≥ 75
-- **Fair**: Quality score ≥ 60
-- **Poor**: Quality score < 60
-
-## Next Steps
-
-1. Run `data_cleaner.py` to understand data cleaning techniques
-2. Experiment with `feature_engineer.py` for feature creation
-3. Use `preprocessing_pipeline.py` for automated processing
-4. Validate results with `data_validation.py`
-5. Extend with custom features and validation rules
-
-```
-
-This comprehensive Day 34 implementation provides everything needed for professional financial data cleaning, preprocessing, and validation with practical examples and production-ready code.
-```
+## Reflection
+"Garbage in, garbage out" is the golden rule of machine learning. A robust preprocessing pipeline is the most critical component of any data-driven trading system.

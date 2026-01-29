@@ -1,46 +1,31 @@
-# Day 44: Automated Report Generation
+# Day 44: Portfolio Reporting Engine
 
-## Objective
-Automate the creation and delivery of daily portfolio summaries and market analysis, converting raw data into actionable, visualized insights.
+**Date:** November 4, 2025
 
-## Features
-- **Portfolio Analytics**: Calculate key metrics like P&L, allocation, and performance
-- **Professional Visualizations**: Generate pie charts, bar charts, and performance graphs
-- **HTML & PDF Reports**: Create formatted reports using Jinja2 templating
-- **Email Automation**: Send reports via SMTP with attachment support
-- **Modular Design**: Easy to extend with new metrics and visualizations
+## Learning Objective
+To build a comprehensive reporting system that calculates portfolio performance and generates both visual and HTML reports for end-users.
 
-## Core Concepts Demonstrated
-- **Data Analysis**: Portfolio metrics calculation and performance tracking
-- **Visualization**: Matplotlib for creating publication-quality charts
-- **Templating Engines**: Jinja2 for dynamic HTML report generation
-- **Email Integration**: SMTP for automated report distribution
-- **Scheduling Ready**: Designed for cron job integration
+## Concepts Covered
+- **Data Analysis**: Calculating unrealized P&L, percentage changes, and weighted allocations.
+- **Data Visualization**: Using `Matplotlib` to create pie charts and bar graphs.
+- **HTML Templating**: Using `Jinja2` to generate dynamic HTML reports.
+- **Email Automation**: Sending reports as attachments using `smtplib` and MIME messages.
+- **Logging**: Tracking the report generation lifecycle.
 
-## Installation Requirements
+## Code Explanation
+The `day_fortyfour.py` script implements the `PortfolioReporter`:
+- **`calculate_metrics()`**: Takes a list of holdings and produces a summary including total value and P&L percentage.
+- **`create_visualizations()`**: Generates a 2x2 dashboard image showing allocation and performance.
+- **`generate_html_report()`**: Uses an embedded Jinja2 template to produce a professional-looking summary.
+- **`send_email_report()`**: (Optional) Interfaces with an SMTP server to deliver the report to the user's inbox.
+
+## How to Run
+1. Install dependencies: `pip install pandas matplotlib jinja2`
+2. Run the reporter:
 ```bash
-pip install pandas matplotlib jinja2
+python week_07/dayfortyfour/day_fortyfour.py
 ```
+3. Open `portfolio_report.html` to view the generated dashboard.
 
-## Usage
-```bash
-python day_fortyfour.py
-```
-
-## Output Files
-- `portfolio_report.html`: Comprehensive HTML dashboard
-- `portfolio_report.png`: Portfolio visualization charts
-
-## Email Configuration
-To enable email reports:
-1. Update SMTP settings in `send_email_report()` method
-2. Use app-specific passwords for Gmail/Outlook
-3. Uncomment the email sending line in `main()`
-
-## Key Metrics Calculated
-- Total portfolio value and cost basis
-- Unrealized P&L (absolute and percentage)
-- Portfolio allocation by symbol
-- Individual holding performance
-
-
+## Reflection
+A system is only as good as the information it provides. Automating the generation and delivery of performance reports allows investors to make data-driven decisions without manual calculations.

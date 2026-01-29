@@ -1,130 +1,33 @@
-## **Day 49: Weekly Project – Automated Trading Bot**
+# Day 49: Weekly Project – Trading Bot Architecture
 
-### **Objective**
+**Date:** November 9, 2025
 
-Combine all your knowledge from the week into a single, autonomous **algorithmic trading system** capable of fetching data, making trading decisions, executing orders, managing risk, and generating daily reports — all with minimal manual intervention.
+## Learning Objective
+To integrate all concepts from the "FinTech Architecture" week into a fully-functional, automated trading bot that handles data, strategy, risk, and execution.
 
-This marks your transition from learning individual trading components to orchestrating them into a fully functional **trading automation ecosystem**.
+## Concepts Covered
+- **Modular Bot Architecture**: Decoupling the Data Feed, Strategy, Risk Manager, and OMS.
+- **Strategy Implementation**: Building "Moving Average Crossover" and "Mean Reversion" signals.
+- **Graceful Shutdown**: Using the `signal` module to handle `Ctrl+C` correctly and save data before exiting.
+- **Event-Loop Design**: Implementing a continuous polling loop that runs the bot's logic at regular intervals.
+- **Reporting & Persistence**: Automatically saving equity curves, trades, and orders to CSV files.
 
----
+## Code Explanation
+The `day_fortynine.py` script is the orchestrator for the entire trading system:
+- **`DataFeed`**: Fetches price data either via a live exchange (using CCXT) or from a local CSV file.
+- **`Strategy`**: Analyzes the historical data to generate "buy" or "sell" signals.
+- **`PaperBroker`**: A simulated environment that fills orders with realistic slippage.
+- **`TradingBot`**: The main class that runs the `run_once()` loop, checking rules and triggering actions.
+- **`RiskManager`**: Ensures every trade is appropriately sized and stops trading if drawdown gets too high.
 
-### **Project Requirements**
-
-#### 1. **Data Ingestion**
-
-Your bot should fetch **live or near-real-time market data** using one or more of the following:
-
-- Broker or exchange APIs (`Alpaca`, `Binance`, `ccxt`).
-- Web scraping from financial websites (e.g., CoinMarketCap, Yahoo Finance).
-- CSV or JSON fallback data (for testing in offline mode).
-
-#### 2. **Trading Strategy**
-
-Implement a **rule-based strategy** to generate buy/sell signals. You can start with simple, classic strategies such as:
-
-- **Moving Average Crossover Strategy**
-
-  - **Buy Signal:** When the short-term moving average (e.g., 20-day) crosses **above** the long-term MA (e.g., 50-day).
-  - **Sell Signal:** When the short-term MA crosses **below** the long-term MA.
-
-- **Mean Reversion Strategy**
-
-  - **Buy Signal:** When the asset’s price falls a certain % below its average.
-  - **Sell Signal:** When the price reverts to or above the average.
-
-> Tip: Keep it simple. Focus on correct signal logic, not profitability yet.
-
-#### 3. **Order Management**
-
-Integrate your **Order Management System (OMS)** from Day 46 to:
-
-- Place and modify orders programmatically.
-- Track order states (`PENDING`, `FILLED`, `CANCELLED`, etc.).
-- Store order details (symbol, side, quantity, price, status, timestamps) in your local database.
-
-#### 4. **Risk Controls**
-
-Protect your portfolio through **automated risk management scripts**:
-
-- Enforce **maximum position size** (e.g., no more than 10% of portfolio per trade).
-- Set **stop-loss** and **take-profit** thresholds for every position.
-- Define a **maximum daily drawdown** rule — if triggered, suspend trading for the day.
-- Optionally, monitor correlations or volatility to manage exposure.
-
-#### 5. **Automation**
-
-Schedule your bot to run continuously or at fixed intervals (every minute, hour, or day):
-
-- Use libraries like `schedule`, `APScheduler`, or OS-level cron jobs.
-- Log all activities (data fetch, trade signals, order execution, errors).
-- Implement graceful error handling and recovery from failed API calls.
-
-#### 6. **Reporting**
-
-Generate a daily or weekly **performance report** that summarizes:
-
-- Total trades executed (wins/losses).
-- Current portfolio value and P&L.
-- Open positions and pending orders.
-- Charts or plots of balance over time.
-
-Output this as:
-
-- HTML dashboard, **PDF report**, or terminal summary.
-- Optional: Auto-send via email or message (Slack, Telegram).
-
----
-
-### **Deliverables**
-
-Your final deliverable for Week 7 should include:
-
-1. **A fully functional automated trading bot**, running in a **paper trading environment** (no real money).
-2. **Source files:**
-
-   - `day_fortynine.py` — your bot’s main logic.
-   - `config.json` or `.env` — for storing API keys, secrets, or thresholds.
-
-3. **Documentation file (`STRATEGY.md` or `BOT_LOGIC.md`):**
-
-   - Describe your chosen trading strategy and logic flow.
-   - Outline your risk management framework.
-   - Explain your API setup and authentication.
-   - Include screenshots, sample logs, or trade reports.
-
----
-
-### **Example Bot Workflow**
-
-```text
-1. Fetch market data from API or scraper
-2. Compute indicators (e.g., moving averages, RSI)
-3. Evaluate buy/sell signals
-4. Apply risk rules (position sizing, stop-loss)
-5. Send order to paper trading API
-6. Log results (trade ID, price, quantity, timestamp)
-7. Generate report at end of day
+## How to Run
+1. Install requirements: `pip install pandas numpy ccxt` (ccxt is optional).
+2. Ensure `sample_data.csv` is present in the directory.
+3. Start the bot:
+```bash
+python week_07/dayfortynine/day_fortynine.py
 ```
+4. Watch the `logs/` directory for real-time activity and the root directory for generated CSV reports.
 
----
-
-### **Weekly Reflection Prompt**
-
-> _What part of building an automated trading system challenged you the most — designing the strategy, handling API logic, or managing order state? How does automation influence your discipline and emotional response to trading decisions?_
-
-Take time to document your reflections in your journal or `WEEK7_REFLECTION.md`. It’s crucial for improving your future bot design and emotional resilience as a trader.
-
----
-
-### **Suggested Tools & Libraries**
-
-| **Category**       | **Python**                                 | **Node.js**                                    |
-| ------------------ | ------------------------------------------ | ---------------------------------------------- |
-| **Web Scraping**   | `requests`, `BeautifulSoup`, `selenium`    | `axios`, `cheerio`, `puppeteer`                |
-| **APIs & Trading** | `ccxt`, `alpaca-trade-api`, `binance`      | `ccxt`, `alpaca-trade-api`, `node-binance-api` |
-| **Data & Reports** | `pandas`, `matplotlib`, `jinja2`, `pdfkit` | `chart.js`, `puppeteer`, `handlebars`          |
-| **Scheduling**     | `schedule`, `APScheduler`, `croniter`      | `node-cron`, `agenda`                          |
-| **Databases**      | `sqlite3`, `sqlalchemy`, `pymongo`         | `mongoose`, `better-sqlite3`                   |
-| **Logging**        | `logging`, `loguru`                        | `winston`, `pino`                              |
-
----
+## Reflection
+This project brings together everything from web scraping and database management to risk engineering and multi-threading. It demonstrates the complexity and rigor required to build a system that can operate autonomously in the financial markets.

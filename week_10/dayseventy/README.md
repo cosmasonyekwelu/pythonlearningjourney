@@ -1,75 +1,31 @@
+# Day 70: Weekly Project – Integrated Crypto Portfolio Manager
 
-# Day 70: Weekly Project – Crypto Portfolio Manager
+**Date:** November 30, 2025
 
-## Objective
-Integrate blockchain data acquisition, smart contract interaction, and DeFi protocol integration into a unified crypto portfolio management system with sophisticated risk management and performance attribution capabilities.
+## Learning Objective
+To integrate all concepts from the "Blockchain & Crypto" week into a professional portfolio management system that monitors, analyzes, and rebalances assets across multiple venues.
 
-## Project Requirements
+## Concepts Covered
+- **Integrated System Architecture**: Building a "Central Brain" that communicates with exchanges and blockchains.
+- **Automated Rebalancing**: Calculating deviations from target weights and suggesting trades to restore balance.
+- **Holistic Risk Scoring**: A multi-factor model that weights concentration, liquidity, and smart contract risks.
+- **Performance Analytics**: Real-time calculation of portfolio VaR, CVaR, and P&L.
+- **Radar Visualizations**: Using multi-axis charts to visualize the risk profile of the entire portfolio.
 
-### 1. Multi-Chain Data Infrastructure
-- Real-time price feeds from 5+ centralized exchanges
-- On-chain analytics for wallet tracking and network health
-- Cross-chain data normalization and temporal alignment
-- Alternative data integration (social sentiment, governance signals)
+## Code Explanation
+The `day_seventy.py` script implements the `CryptoPortfolioManager`:
+- **`initialize_components()`**: Sets up authenticated links to `ccxt` exchanges and `web3.py` blockchain nodes.
+- **`run_portfolio_analysis()`**: The main asynchronous loop that updates prices, calculates weights, and checks for risk limit violations.
+- **`ExecutionManager`**: A safety-first component that handles both "Paper" simulation and a framework for "Live" execution.
+- **`generate_portfolio_charts()`**: Produces a 4-panel dashboard showing current allocations vs. targets and the overall risk radar.
 
-### 2. Strategy Execution Engine
-- Cross-exchange order routing with smart order placement
-- DEX integration with gas-optimized transaction bundling
-- Smart contract execution for complex conditional orders
-- MEV protection and front-running mitigation
-
-### 3. DeFi Yield Optimization System
-- Automated liquidity provision across multiple AMMs
-- Cross-protocol lending rate optimization
-- Dynamic yield farming allocation
-- Gas cost analysis and batch transaction optimization
-
-### 4. Comprehensive Risk Management
-- Exchange counterparty risk scoring
-- Smart contract security assessment
-- Blockchain congestion monitoring
-- Regulatory compliance tracking
-
-### 5. Portfolio Analytics & Reporting
-- Cross-asset portfolio valuation
-- Crypto-specific risk metrics (VaR, CVaR, drawdown)
-- Performance attribution by strategy
-- Tax lot tracking and reporting
-
-### 6. Security & Operations Framework
-- Multi-signature wallet management
-- Automated security monitoring and alerting
-- Backup and recovery procedures
-- Comprehensive audit trail
-
-## Implementation Architecture
-
-### Modular Design
-- Data layer for multi-source integration
-- Strategy layer for signal generation
-- Execution layer for order management
-- Risk layer for portfolio protection
-
-### Real-time Processing
-- WebSocket data streams
-- Event-driven architecture
-- Low-latency execution
-- Real-time monitoring
-
-### Multi-Chain Support
-- Ethereum and EVM-compatible chains
-- Bitcoin and UTXO-based chains
-- Cross-chain bridge integration
-- Network-specific optimizations
-
-## File Structure
-- `day_seventy.py` - Main crypto portfolio manager
-- Configuration management system
-- Performance monitoring dashboard
-- Risk assessment utilities
-
-## Usage
-```python
-python day_seventy.py --config portfolio_config.json --mode live --risk_tolerance medium
+## How to Run
+1. Install dependencies: `pip install ccxt web3 matplotlib pandas numpy scipy seaborn`
+2. Create a `portfolio_config.json` with your target weights and exchange IDs.
+3. Run the manager:
+```bash
+python week_10/dayseventy/day_seventy.py --analyze --rebalance
 ```
 
+## Reflection
+A true crypto portfolio manager must look beyond simple price changes. It must account for the unique risks of the space—like protocol hacks or network congestion. This project demonstrates how Python can unify these disparate data sources into a single source of truth for an investor.

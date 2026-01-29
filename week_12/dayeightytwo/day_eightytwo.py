@@ -893,7 +893,8 @@ class PortfolioRiskEngine:
         score_components = []
         
         # Market risk component (40%)
-        var_score = min(100, abs(self.risk_metrics.get('var_95', 0)) / 0.05 * 100)  >5% VaR = 100
+        # >5% VaR = 100
+        var_score = min(100, abs(self.risk_metrics.get('var_95', 0)) / 0.05 * 100)
         es_score = min(100, abs(self.risk_metrics.get('expected_shortfall_95', 0)) / 0.08 * 100)
         market_risk_score = (var_score * 0.6 + es_score * 0.4)
         score_components.append(market_risk_score * 0.4)

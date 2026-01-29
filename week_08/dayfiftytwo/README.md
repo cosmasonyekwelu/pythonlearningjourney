@@ -1,76 +1,30 @@
-# Day 52: Feature Engineering
+# Day 52: Feature Engineering for Financial ML
 
-## Overview
+**Date:** November 12, 2025
 
-Transform raw time-series data into **informative, predictive features** for machine learning models.
+## Learning Objective
+To create a high-dimensional feature set from raw market data, transforming prices into predictive inputs for machine learning models.
 
-## Feature Categories Implemented
+## Concepts Covered
+- **Technical Indicators**: Using the `ta` library to generate RSI, MACD, Bollinger Bands, and Ichimoku features.
+- **Rolling Statistics**: Calculating z-scores and price ratios over multiple time horizons.
+- **Lag Features**: Creating shifted time-series data to capture historical momentum.
+- **Advanced Volatility**: Implementing Parkinson Volatility and realized volatility ratios.
+- **Predictive Power Evaluation**: Using correlation analysis to identify features that actually lead future returns.
 
-### 1. Technical Indicators
+## Code Explanation
+The `day_fiftytwo.py` script implements the `FeatureEngineer` class:
+- **`add_technical_indicators()`**: Injects 15+ classic signals into the dataset.
+- **`add_volatility_features()`**: Compares short-term vs. long-term volatility regimes.
+- **`create_custom_mean_reversion_indicator()`**: A proprietary signal that combines RSI, BB, and multi-timeframe MA deviations.
+- **`normalize_features()`**: Uses `StandardScaler` to prepare the data for ML algorithms.
 
-- **Momentum**: RSI, Stochastic, Williams %R, ROC
-- **Trend**: MACD, ADX, CCI
-- **Volatility**: Bollinger Bands, ATR
-- **Volume**: OBV, VWAP
-
-### 2. Rolling Statistics
-
-- Multiple time windows (5, 10, 20, 50 days)
-- Rolling means, standard deviations, min/max
-- Z-scores and price ratios
-- High/Low ratios relative to rolling windows
-
-### 3. Lag Features
-
-- Lagged returns, volume, and technical indicators
-- Price and volume momentum ratios
-- Multiple lag periods (1, 2, 3, 5, 10 days)
-
-### 4. Volatility Features
-
-- Realized volatility at different horizons
-- Parkinson volatility (using high-low range)
-- Volatility ratios and regimes
-- Conditional volatility features
-
-### 5. Temporal Features
-
-- Day of week, month, quarter
-- Seasonal patterns using trigonometric encoding
-- Calendar effects (month start/end, quarter start/end)
-
-### 6. Custom Mean Reversion Indicators
-
-- Multiple time frame mean reversion signals
-- RSI-based mean reversion
-- Bollinger Band position signals
-- Combined mean reversion score
-
-## Challenge: Custom Mean Reversion Indicator
-
-The script implements and evaluates a sophisticated mean reversion indicator that:
-
-1. **Combines Multiple Time Frames**: Uses short (5,10) and long (20,50) windows
-2. **Multiple Signal Types**: Price deviation, Z-scores, RSI, Bollinger Bands
-3. **Regime Awareness**: Different behavior in high/low volatility periods
-4. **Predictive Power Analysis**: Correlation with future returns
-
-## Key Insights
-
-1. **Feature Diversity**: No single feature type dominates; combination is key
-2. **Time Horizon Matters**: Different features work for different prediction horizons
-3. **Regime Dependency**: Feature effectiveness varies with market conditions
-4. **Normalization Importance**: Proper scaling crucial for model performance
-
-## Usage
-
-```python
-# Complete pipeline
-engineer = FeatureEngineer()
-final_data, feature_names = engineer.build_feature_pipeline('SPY')
-
-# Individual components
-engineer.add_technical_indicators()
-engineer.add_rolling_statistics()
-mr_signal = engineer.create_custom_mean_reversion_indicator()
+## How to Run
+1. Install dependencies: `pip install pandas numpy matplotlib seaborn yfinance ta scikit-learn`
+2. Run the pipeline:
+```bash
+python week_08/dayfiftytwo/day_fiftytwo.py
 ```
+
+## Reflection
+Raw price data is rarely enough for a model to learn from. Feature engineering is the process of extracting the "latent information" in the market—transforming absolute prices into relative signals that a model can generalize from.

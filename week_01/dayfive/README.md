@@ -1,49 +1,30 @@
-# Day 05 - Python Learning Journey.
+# Day 05: Data Structures & Problem Solving
 
 **Date:** September 26, 2025
 
-## Activities
+## Learning Objective
+To gain proficiency in Python's core data structures (Lists, Tuples, Sets, Dictionaries) and apply them to common programming problems.
 
-1. Practiced core data structures: lists, tuples, sets, and dictionaries
+## Concepts Covered
+- **Lists**: Ordered, mutable collections. Demonstration of indexing, slicing, and list comprehensions.
+- **Tuples**: Ordered, immutable collections. Demonstration of packing and unpacking.
+- **Sets**: Unordered collections of unique elements. Demonstration of union, intersection, and difference.
+- **Dictionaries**: Key-value pairs for efficient data retrieval.
+- **Problem Solving**: Implementing logic for reversing lists, finding word frequencies, and merging data.
 
-2. Explored list indexing, slicing, and comprehensions
+## Code Explanation
+The `day_five.py` script explores each data structure in detail:
+- **List Comprehensions**: A concise way to create lists (e.g., `squares = [x**2 for x in range(5)]`).
+- **Tuple Unpacking**: Assigning tuple elements to multiple variables.
+- **Set Operations**: Using mathematical operators (`|`, `&`, `-`) on sets.
+- **Word Frequency**: Using a dictionary to count occurrences of words in a string.
+- **Dictionary Merging**: Using the `**` unpacking operator to combine dictionaries.
 
-3. Worked with tuples for immutability and unpacking
-
-4. Used sets for unique values and operations (union, intersection, difference)
-
-5. Built and manipulated dictionaries, including nested ones
-
-6. Solved problem sets: reverse a list, most frequent word, merge dictionaries, remove duplicates
-
-7. Built a Student Gradebook mini-project for managing grades and calculating statistics
-
-## Tutorial
-
-**Title:** Data Structures in Action & Problem Solving
-
-**URL:** Self-practice + multiple online references
-
-**Topics Covered:**
-
--Lists, Tuples, Sets, Dictionaries
-
--Problem-solving with real-world exercises
-
--Student Gradebook system (mini-project)
-
-## Key Learnings
-
--How to effectively use Python’s core data structures
-
--Solving common problems using lists, sets, and dictionaries
-
--The power of sets in handling unique values and operations
-
--Combining dictionaries and iterating over key-value pairs
-
--Structuring small projects with functions and reusable code
+## How to Run
+Execute the script to see the data structure demonstrations:
+```bash
+python week_01/dayfive/day_five.py
+```
 
 ## Reflection
-
-Today was a big step in working with data structures. I learned how each structure has unique strengths: lists for sequences, tuples for immutability, sets for uniqueness, and dictionaries for mappings. The problem-solving exercises sharpened my logical thinking, and the Gradebook project showed me how to organize data in a real-world scenario. I’m starting to feel like I can build more practical Python programs.
+Understanding when to use a List versus a Set or a Dictionary is a key skill. Sets are amazing for uniqueness, while Dictionaries are perfect for structured data.

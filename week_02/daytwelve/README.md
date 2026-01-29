@@ -1,39 +1,33 @@
-# Day 12 - Python Learning Journey
+# Day 12: Functions, Scope & Error Handling
 
 **Date:** October 3, 2025
 
-## Activities
+## Learning Objective
+To master function definitions, parameter passing (including `*args` and `**kwargs`), variable scope (global/nonlocal), and robust error handling using try/except blocks.
 
-1. Functions & parameters
-2. Scope (local vs global variables)
-3. Errors & exception handling
-   - try, except, else, finally
-   - handling `ZeroDivisionError`, `ValueError`, `FileNotFoundError`
-   - raising exceptions
-   - custom exception classes
-4. Practice: **Calculator with error handling**
+## Concepts Covered
+- **Function Parameters**: Positional, keyword, default, and arbitrary arguments (`*args`, `**kwargs`).
+- **Variable Scope**: Understanding Local, Global, and Nonlocal scopes.
+- **Exception Handling**: Basic and advanced `try/except/else/finally` patterns.
+- **Custom Exceptions**: Creating user-defined exception classes for specific error scenarios.
+- **Closures**: Using nested functions and the `nonlocal` keyword for state persistence.
+- **Data Validation**: Implementing robust input checking and custom validation errors.
 
-## Tutorial
+## Code Explanation
+The `day_twelve.py` script is a comprehensive guide to functions and errors:
+- **FunctionFundamentals**: Demonstrates everything from basic type hints to complex `**kwargs` usage and global variable management.
+- **ExceptionHandling**: Shows how to catch multiple exceptions and use `finally` for cleanup (like closing files).
+- **Custom Exceptions**: Defines `CalculatorError` and its subclasses to show how to build an informative error hierarchy.
+- **PracticeExercises**:
+    - `robust_calculator`: A command-line calculator that handles invalid inputs and math errors gracefully.
+    - `create_counter`: Demonstrates closures and `nonlocal` scope to create independent counter objects.
+    - `validate_user_profile`: A practical example of multi-step data validation.
 
-- **Title:** Functions, Scope & Errors in Python
-- **URL:** Self-practice + roadmap.sh/python
-- **Topics Covered:**
-  - Defining & calling functions
-  - Local vs global variables
-  - Handling runtime errors gracefully
-  - Custom error messages & exceptions
-  - Building a Safe Calculator
-
-## Key Learnings
-
-- Functions help organize reusable code.
-- Scope determines variable visibility inside/outside functions.
-- Python’s exception handling (`try/except`) prevents program crashes.
-- Custom exceptions give meaningful error messages.
-- Built a **Safe Calculator** with robust error handling.
+## How to Run
+Run the script to see the function and exception demonstrations:
+```bash
+python week_02/daytwelve/day_twelve.py
+```
 
 ## Reflection
-
-Today, I learned how to make programs safer with **error handling**.  
-Understanding functions and scope improved how I structure code.  
-The calculator project showed me how to combine user input, operators, and exception handling into a safe and interactive application.
+Error handling is what separates a script from a professional application. Custom exceptions allow you to communicate exactly what went wrong, and understanding scope is vital for avoiding bugs in complex programs.

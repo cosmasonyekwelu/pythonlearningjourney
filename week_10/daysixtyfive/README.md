@@ -1,78 +1,34 @@
-
 # Day 65: Crypto APIs & Data Feeds
 
-## Objective
-Master cryptocurrency data acquisition from centralized exchanges, decentralized protocols, and blockchain networks for quantitative analysis and real-time strategy execution.
+**Date:** November 25, 2025
 
-## Core Concepts Covered
+## Learning Objective
+To master real-time cryptocurrency data acquisition using REST APIs, WebSockets, and on-chain analysis techniques.
 
-### Centralized Exchange APIs
-- REST endpoints for historical data and order management
-- WebSocket streams for real-time market data
-- Rate limiting strategies and connection optimization
-- Authentication and API key management
+## Concepts Covered
+- **Multi-Exchange Aggregation**: Using the `ccxt` library to fetch unified data from Binance, Coinbase, and Kraken.
+- **WebSocket Streaming**: Implementing asynchronous listeners for live ticker updates.
+- **Arbitrage Detection**: Identifying price discrepancies between different exchanges in real-time.
+- **On-Chain Analysis**: Calculating network metrics like "Whale Movements" and exchange flows.
+- **Order Book Analysis**: Evaluating market depth and bid-ask spreads.
 
-### Market Data Types
-- OHLCV candlestick data across multiple timeframes
-- Order book depth and market microstructure
-- Trade history and volume analysis
-- Funding rates and derivatives data
+## Code Explanation
+The `day_sixtyfive.py` script provides a toolkit for market data:
+- **`ExchangeDataManager`**: Fetches OHLCV and order book data across multiple venues.
+- **`WebSocketManager`**: Uses `websockets` and `asyncio` to maintain persistent connections to live price streams.
+- **`OnChainAnalyzer`**: A conceptual class showing how to detect large transactions on the Ethereum network.
+- **`DataVisualizer`**: Uses Matplotlib to compare prices and volatility across different exchanges.
 
-### On-Chain Analytics
-- Wallet behavior and transaction patterns
-- Network health metrics and gas price dynamics
-- Smart contract events and token transfers
-- DeFi protocol activity and TVL analysis
-
-### Data Processing Pipeline
-- Cross-exchange data normalization
-- Real-time data streaming architecture
-- Data quality validation and cleaning
-- Temporal alignment and gap filling
-
-## Implementation Features
-
-### Multi-Exchange Data Aggregation
-- Unified interface for multiple exchanges
-- Symbol mapping and standardization
-- Failover mechanisms and redundancy
-- Performance monitoring and logging
-
-### Real-time Market Data
-- WebSocket connection management
-- Order book reconstruction
-- Trade aggregation and analysis
-- Market depth visualization
-
-### On-Chain Data Integration
-- Blockchain RPC connections
-- Event log processing
-- Address monitoring
-- Gas price optimization
-
-### Advanced Analytics
-- Liquidity analysis across venues
-- Arbitrage opportunity detection
-- Market regime classification
-- Volatility forecasting
-
-## File Structure
-- `day_sixtyfive.py` - Main crypto data aggregation system
-- Exchange-specific adapters
-- WebSocket managers
-- Data processing utilities
-
-## Usage
-```python
-python day_sixtyfive.py --exchanges binance coinbase --symbols BTC/USDT ETH/USDT --real_time
+## How to Run
+1. Install requirements: `pip install ccxt websockets pandas matplotlib`
+2. Run the historical analysis:
+```bash
+python week_10/daysixtyfive/day_sixtyfive.py --fetch_historical
+```
+3. Run the live ticker stream (requires internet):
+```bash
+python week_10/daysixtyfive/day_sixtyfive.py --real_time
 ```
 
-## Dependencies
-- ccxt
-- websocket-client
-- websockets
-- pandas
-- numpy
-- matplotlib
-- python-socketio
-
+## Reflection
+Crypto markets never sleep. Relying only on REST APIs is insufficient for high-frequency trading; WebSockets are essential for capturing the micro-movements that occur between poll intervals.

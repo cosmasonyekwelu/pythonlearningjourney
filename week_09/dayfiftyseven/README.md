@@ -1,90 +1,30 @@
-# Day 57: Neural Networks Fundamentals
+# Day 57: Neural Networks Fundamentals for Finance
 
-## Objective
+**Date:** November 17, 2025
 
-Build and train neural networks for financial prediction using PyTorch, establishing foundational deep learning skills for quantitative trading.
+## Learning Objective
+To understand the fundamentals of Deep Learning and implement a Multi-Layer Perceptron (MLP) for predicting market direction using PyTorch.
 
-## Core Concepts Covered
+## Concepts Covered
+- **PyTorch Basics**: Tensors, Autograd, and Module classes.
+- **MLP Architecture**: Designing input, hidden, and output layers with Batch Normalization and Dropout.
+- **Activation Functions**: Comparing ReLU, Leaky ReLU, Tanh, and Sigmoid.
+- **Loss Functions & Optimizers**: Using Binary Cross Entropy with Logits and the Adam optimizer.
+- **Data Engineering**: Creating sliding windows (sequences) from historical price data.
 
-### Neural Architecture
+## Code Explanation
+The `day_fiftyseven.py` script implements a `FinancialNeuralNetwork`:
+- **`FinancialMLP`**: A custom PyTorch model that can be configured with a variable number of layers and units.
+- **`FinancialDataset`**: A custom PyTorch Dataset class for handling time-series sequences.
+- **`train_model()`**: Implements the training loop with validation checks and learning rate scheduling.
+- **Evaluation**: Calculates test accuracy to judge the model's ability to predict "Up" vs "Down" days.
 
-- Multi-layer perceptron (MLP) design
-- Input/output layer sizing for financial data
-- Hidden layer configurations and connectivity
-
-### Activation Functions
-
-- ReLU and Leaky ReLU for hidden layers
-- Sigmoid for binary classification
-- Tanh for bounded outputs
-- Softmax for multi-class scenarios
-
-### Training Mechanics
-
-- Forward propagation with matrix operations
-- Backpropagation and gradient computation
-- Loss functions (MSE, Cross-Entropy)
-- Optimization algorithms (Adam, SGD)
-
-### Regularization Techniques
-
-- L1/L2 regularization
-- Dropout for preventing overfitting
-- Batch normalization
-- Early stopping
-
-## Implementation Features
-
-### Data Preparation
-
-- Financial time series preprocessing
-- Feature normalization and scaling
-- Train/validation/test splits
-- Rolling window creation
-
-### Model Architecture
-
-- Configurable network depth and width
-- Modular layer construction
-- Flexible activation functions
-- Comprehensive initialization
-
-### Training Pipeline
-
-- Custom training loops
-- Progress monitoring
-- Validation metrics
-- Model checkpointing
-
-### Evaluation
-
-- Performance metrics (MSE, Accuracy)
-- Comparison against baseline models
-- Visualization of training progress
-- Prediction analysis
-
-## File Structure
-
-- `day_fiftyseven.py` - Main implementation file
-- Sample data loading and preprocessing
-- Model definition and training
-- Evaluation and visualization
-
-## Usage
-
-```python
-python day_fiftyseven.py --epochs 100 --hidden_layers 3 --units 128
+## How to Run
+1. Install requirements: `pip install torch pandas numpy yfinance scikit-learn`
+2. Run the neural network training:
+```bash
+python week_09/dayfiftyseven/day_fiftyseven.py --symbol AAPL --epochs 50
 ```
 
-## Dependencies
-
-- PyTorch
-- pandas
-- numpy
-- matplotlib
-- scikit-learn
-- yfinance
-
-```
-
-```
+## Reflection
+While traditional ML models work well on tabular data, Neural Networks provide the flexibility to learn complex, non-linear patterns. However, they are sensitive to hyperparameters and require careful regularization (like Dropout) to avoid overfitting on noisy financial data.

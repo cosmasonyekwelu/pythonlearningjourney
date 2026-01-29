@@ -1,106 +1,31 @@
-# Day 21 — Personal Library Manager
+# Day 21: Weekly Project – Personal Library Manager
 
 **Date:** October 12, 2025
-**Week 3:** Review & Project Polish
 
-## Project Overview
+## Learning Objective
+To integrate all of the OOP, File I/O, Error Handling, and API concepts learned in Week 3 into a comprehensive real-world application.
 
-A comprehensive library management system demonstrating object-oriented programming principles, data persistence, and API integration. This project serves as a capstone for Week 3, incorporating all concepts learned into a polished, production-ready application.
+## Concepts Covered
+- **Complex Class Hierarchies**: Using base classes (`Book`) and specialized subclasses (`EBook`, `PrintBook`).
+- **Data persistence**: Storing the entire library state in JSON files.
+- **Third-Party API Integration**: Importing book data directly from the Google Books API.
+- **Reporting**: Generating text and JSON reports of library statistics.
+- **Modular Project Structure**: Separating logic into `book.py`, `library_manager.py`, and `api_utils.py`.
 
-## Features
+## Code Explanation
+The `PersonalLibraryApp` is a complete management system:
+- **`LibraryManager`**: Handles the core logic of adding, removing, searching, and filtering books. It also manages borrowing and returning functionality.
+- **`GoogleBooksAPI`**: Uses the `requests` library to fetch book details by title or ISBN.
+- **`Book` Classes**: Use encapsulation to protect book details and provide a polymorphic `get_details()` method.
+- **Statistics**: Automatically calculates utilization rates, overdue status, and genre distribution.
 
-### Core Functionality
-
-- **Book Management**: Add, edit, and delete books with inheritance (Book -> EBook, PrintBook)
-- **Search and Filter**: Advanced search using polymorphism across different book types
-- **Borrowing System**: Track borrowing history with due dates and overdue detection
-- **Data Persistence**: Automatic save/load using JSON files
-- **Reporting**: Generate comprehensive statistics and analytics reports
-
-### Advanced Features
-
-- **Google Books API Integration**: Import book information automatically
-- **ISBN Validation**: Basic ISBN format validation
-- **Multiple Book Types**: Support for both ebooks and print books with specialized attributes
-- **Comprehensive Error Handling**: Graceful error recovery and user-friendly messages
-
-## Installation and Setup
-
-1. **Install dependencies**:
-
-   ```bash
-   pip install -r requirements.txt
-
-   ```
-
-2. **Run the application**:
-
+## How to Run
+1. Install dependencies: `pip install requests`
+2. Run the main application:
+```bash
+python week_03/daytwentyone/day_twenty_one.py
 ```
-   python day_twenty_one.py
-```
+3. Use the menu to add books manually or via the Google Books API.
 
-## Adding Books
-
-- Manual Entry: Add books by providing details through the menu interface
-
-- API Import: Search and import books using Google Books API
-
-- Book Types: Choose between EBook (digital) and PrintBook (physical) with type-specific attributes
-
-## Managing Library
-
-- Search: Find books by title, author, genre, or ISBN
-
-- Filter: Narrow down books by type, availability, genre, or author
-
-- Borrow/Return: Track book lending with automatic due date calculation
-
-- Statistics: View comprehensive library analytics and usage patterns
-
-## Data Management
-
-- Automatic Saving: All changes are automatically persisted to JSON files
-
-- Backup: Data is stored in the data/ directory
-
-- Reports: Generate text and JSON reports in the reports/ directory
-
-### Technical Implementation
-
-## Object-Oriented Design
-
-- Inheritance: Base Book class with EBook and PrintBook subclasses
-
-- Polymorphism: Unified interface for different book types
-
-- Encapsulation: Proper data hiding with getter methods
-
-- Factory Pattern: Book creation through factory function
-
-## Data Persistence
-
-- JSON-based storage for books and borrowing history
-
-- Automatic serialization/deserialization of complex objects
-
-- Error handling for data corruption scenarios
-
-## API Integration
-
-- Google Books API for book information retrieval
-
-- ISBN-based searching and data enrichment
-
-- Graceful fallback for API failures
-
-## Key Features Implemented
-
-1. **Complete OOP Structure**: Inheritance hierarchy with proper polymorphism
-2. **Data Persistence**: Automatic JSON serialization/deserialization
-3. **API Integration**: Google Books API for book data enrichment
-4. **Comprehensive Error Handling**: Graceful recovery from various error scenarios
-5. **User-Friendly Interface**: Clear menu system with input validation
-6. **Reporting System**: Text and JSON reports with analytics
-7. **Modular Architecture**: Clean separation of concerns
-
-This completes Day 21 with a polished, production-ready library management system that demonstrates all the concepts learned throughout Week 3!
+## Reflection
+This project was the culmination of three weeks of learning. It demonstrates how inheritance allows for different book formats, how encapsulation protects data integrity, and how external APIs can add massive value to a simple utility script.

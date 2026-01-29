@@ -1,73 +1,31 @@
 # Day 37: Building Secure APIs
 
-This module demonstrates essential security practices for building robust and secure RESTful APIs.
+**Date:** October 28, 2025
 
-## Key Security Features
+## Learning Objective
+To implement essential security patterns in Flask-based REST APIs, protecting against common web vulnerabilities like XSS and SQL injection.
 
-### 1. Input Validation & Sanitization
+## Concepts Covered
+- **Input Sanitization**: Using `html.escape` to prevent Cross-Site Scripting (XSS).
+- **Parameterized Queries**: Using SQLite's placeholder syntax to prevent SQL Injection.
+- **Rate Limiting**: Using `flask-limiter` to protect against Brute Force and DoS attacks.
+- **CORS (Cross-Origin Resource Sharing)**: Configuring trusted origins to prevent unauthorized cross-site requests.
+- **Security Headers**: Setting HSTS, CSP, and X-Frame-Options to harden the application.
 
-- **Email Validation**: Regex pattern for valid email formats
-- **Username Validation**: Alphanumeric with length constraints
-- **Input Sanitization**: HTML escaping to prevent XSS attacks
-- **Type Checking**: Proper data type validation
+## Code Explanation
+The `day_thirtyseven.py` script implements a "Security-First" User API:
+- **`validate_email` & `validate_username`**: Strict regex checks ensure inputs meet expected formats before processing.
+- **`limiter`**: Configured with both default and route-specific limits (e.g., only 10 registrations per minute).
+- **`set_security_headers`**: A decorator that automatically adds 5+ defensive HTTP headers to every response.
+- **`sqlite3` context manager**: Demonstrates safe database handling using parameterized values `(?, ?, ?)`.
 
-### 2. SQL Injection Prevention
-
-- **Parameterized Queries**: Using placeholders instead of string concatenation
-- **ORM Best Practices**: Safe database operations
-
-### 3. Rate Limiting
-
-- **Flask-Limiter**: Protection against brute force and DoS attacks
-- **Configurable Limits**: 200 requests per day, 50 per hour by default
-- **Endpoint-specific limits**: Stricter limits on sensitive endpoints
-
-### 4. CORS Configuration
-
-- **Origin Restrictions**: Only allow trusted domains
-- **Cross-Origin Protection**: Prevent unauthorized domain access
-
-### 5. Security Headers
-
-- **X-Content-Type-Options**: Prevent MIME type sniffing
-- **X-Frame-Options**: Clickjacking protection
-- **X-XSS-Protection**: Browser XSS protection
-- **HSTS**: HTTP Strict Transport Security
-- **CSP**: Content Security Policy
-
-### 6. Error Handling
-
-- **Generic Error Messages**: Avoid information leakage
-- **Proper HTTP Status Codes**: Accurate response statuses
-- **Structured Error Responses**: Consistent error format
-
-## API Endpoints
-
-### POST /api/register
-
-- Rate limit: 10 requests per minute
-- Input validation for username, email, password
-- SQL injection protection
-- Secure user creation
-
-### GET /api/users/{id}
-
-- Rate limit: 100 requests per hour
-- Parameterized SQL queries
-- Proper error handling
-
-## Security Best Practices Implemented
-
-1. **Never Trust User Input**: Always validate and sanitize
-2. **Use HTTPS**: Essential for production (configure in deployment)
-3. **Principle of Least Privilege**: Database users with minimal permissions
-4. **Secure Authentication**: Proper password hashing (use bcrypt in production)
-5. **Regular Updates**: Keep dependencies updated
-6. **Security Testing**: Regular penetration testing and code reviews
-
-## Running the Application
-
+## How to Run
+1. Install dependencies: `pip install flask-limiter flask-cors`
+2. Run the secure API:
 ```bash
-pip install flask flask-limiter flask-cors
-python day_37.py
+python week_06/daythirtyseven/day_thirtyseven.py
 ```
+3. Test the rate limiting by making multiple requests to `/api/register`.
+
+## Reflection
+Security is not a feature; it's a foundation. Building an API with security from day one—like implementing rate limits and CSP headers—is much more effective than trying to patch vulnerabilities after deployment.

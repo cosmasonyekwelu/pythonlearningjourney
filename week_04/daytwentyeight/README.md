@@ -1,170 +1,31 @@
-# Week 4 Summary - Web Frameworks & Backend Development
+# Day 28: Weekly Project – Web Frameworks & Backend Summary
 
-## Overview
+**Date:** October 19, 2025
 
-This week focused on building robust web applications using Python frameworks (Flask & Django), database integration, user authentication, API development, and frontend-backend integration.
+## Learning Objective
+To consolidate all backend development skills acquired during the week—Flask, SQLAlchemy, authentication, and external APIs—into a single, production-ready Portfolio Tracker.
 
-## Key Learning Objectives Achieved
+## Concepts Covered
+- **Comprehensive Integration**: Combining database models, user auth, and API calls.
+- **Relational Mapping**: Linking Users, Trades, and Portfolios in a cohesive SQL schema.
+- **Custom Template Filters**: Creating reusable Jinja2 filters for currency and date formatting.
+- **Third-Party APIs**: Fetching live cryptocurrency prices from the CoinGecko API.
+- **Error Handling**: Implementing custom 404 and 500 error pages.
 
-### Day 22 - Flask Fundamentals & Routing
+## Code Explanation
+The `day_twentyeight.py` script serves as the "grand finale" of the web framework week:
+- **`User`, `Trade`, `Portfolio` Models**: A complete normalized database schema.
+- **`@app.template_filter`**: Custom filters like `format_currency` make the frontend code cleaner.
+- **`get_crypto_prices()`**: An API endpoint that acts as a proxy to CoinGecko, bringing real-time data into the dashboard.
+- **`init_db()`**: Automatically seeds the database with a test user and sample trades upon first run.
 
-- Set up Flask development environment
-- Created routes and handled HTTP requests
-- Implemented Jinja2 templating
-- Managed static files and debug mode
-
-### Day 23 - Django Setup & ORM
-
-- Understood Django project structure
-- Created models and migrations
-- Implemented Django ORM for database operations
-- Set up Django Admin interface
-
-### Day 24 - Database Design
-
-- Designed relational schemas for trading applications
-- Connected multiple databases (SQLite, PostgreSQL, MySQL, MongoDB)
-- Implemented CRUD operations with SQLAlchemy
-- Applied database migrations and queries
-
-### Day 25 - User Authentication & Sessions
-
-- Implemented secure login systems
-- Managed user sessions and cookies
-- Applied password hashing and security measures
-- Created access control decorators
-
-### Day 26 - API Development
-
-- Built RESTful APIs with Flask and Django REST Framework
-- Implemented JWT authentication
-- Created API endpoints with pagination and filtering
-- Tested APIs with Postman
-
-### Day 27 - Frontend Integration
-
-- Connected backend logic with frontend templates
-- Implemented template inheritance
-- Integrated Bootstrap for responsive design
-- Handled form submissions and validations
-
-## Technical Skills Acquired
-
-### Frameworks & Libraries
-
-- **Flask**: Micro web framework for lightweight applications
-- **Django**: Full-stack framework for robust applications
-- **SQLAlchemy**: Database ORM and toolkit
-- **Django REST Framework**: Building REST APIs
-- **Flask-Login**: User session management
-
-### Database Technologies
-
-- **SQL Databases**: SQLite, PostgreSQL, MySQL
-- **NoSQL**: MongoDB
-- **ORM**: Django ORM, SQLAlchemy
-- **Migrations**: Database schema versioning
-
-### Security & Authentication
-
-- **Password Hashing**: bcrypt, werkzeug.security
-- **Session Management**: Cookies, server-side sessions
-- **JWT**: Token-based authentication
-- **CSRF Protection**: Cross-site request forgery prevention
-
-### Frontend Integration
-
-- **Templating**: Jinja2, Django Templates
-- **CSS Frameworks**: Bootstrap integration
-- **Static Files**: CSS, JavaScript, images management
-- **Form Handling**: Validation and processing
-
-## Project Highlights
-
-### Crypto Price Tracker (Flask)
-
-- Real-time cryptocurrency price monitoring
-- External API integration
-- Dynamic template rendering
-
-### Trade Records System (Django)
-
-- Complete CRUD operations
-- Database modeling and migrations
-- Admin interface customization
-
-### Portfolio Tracker
-
-- Multi-user authentication
-- Transaction management
-- Portfolio analytics
-
-### RESTful Trading API
-
-- Market data endpoints
-- User transaction management
-- JWT authentication
-
-## Code Examples Summary
-
-### Flask Application Structure
-
-```python
-from flask import Flask, render_template, request, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, UserMixin, login_required
-
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///trading.db'
-db = SQLAlchemy(app)
-login_manager = LoginManager(app)
+## How to Run
+1. Install dependencies: `pip install flask flask-sqlalchemy flask-login requests`
+2. Run the application:
+```bash
+python week_04/daytwentyeight/day_twentyeight.py
 ```
+3. Register a new account at `http://localhost:5000/register` to start tracking your simulated trades.
 
-### Django Model Example
-
-```python
-from django.db import models
-from django.contrib.auth.models import User
-
-class Trade(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    symbol = models.CharField(max_length=10)
-    quantity = models.IntegerField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    timestamp = models.DateTimeField(auto_now_add=True)
-```
-
-### REST API Endpoint
-
-```python
-from rest_framework import viewsets, permissions
-from .models import Trade
-from .serializers import TradeSerializer
-
-class TradeViewSet(viewsets.ModelViewSet):
-    queryset = Trade.objects.all()
-    serializer_class = TradeSerializer
-    permission_classes = [permissions.IsAuthenticated]
-```
-
-## Best Practices Implemented
-
-1. **Security**: Password hashing, CSRF protection, input validation
-2. **Database**: Proper schema design, indexing, migrations
-3. **API Design**: RESTful principles, proper status codes, documentation
-4. **Code Organization**: MVC pattern, modular design, configuration management
-5. **Error Handling**: Proper exception handling and user feedback
-
-## Next Steps
-
-- **Advanced Topics**: Web sockets for real-time updates
-- **Deployment**: Docker, cloud platforms (AWS, Heroku)
-- **Testing**: Unit tests, integration tests
-- **Performance**: Caching, database optimization
-- **Monitoring**: Logging, analytics, error tracking
-
-## Week 4 Completion
-
-Successfully built full-stack web applications with database integration, user authentication, and RESTful APIs, ready for real-world trading application development.
-
----
+## Reflection
+Building a full-stack application from scratch reveals how all the individual pieces—databases, routing, security, and external data—fit together. This project serves as a solid foundation for any commercial web application.

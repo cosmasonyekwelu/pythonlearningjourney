@@ -1,86 +1,30 @@
-# Day 60: Reinforcement Learning Basics
+# Day 60: Reinforcement Learning (RL) Basics
 
-## Objective
+**Date:** November 20, 2025
 
-Establish foundational understanding of reinforcement learning principles and their application to sequential decision-making in financial markets.
+## Learning Objective
+To understand the fundamentals of Reinforcement Learning and build a custom OpenAI Gym environment for an agent to learn how to trade.
 
-## Core Concepts Covered
+## Concepts Covered
+- **The RL Framework**: Agent, Environment, States, Actions, and Rewards.
+- **Gym Environments**: Implementing the `reset()` and `step()` API for time-series data.
+- **Q-Learning**: Understanding the Bellman equation and Tabular Q-tables.
+- **Deep Q-Networks (DQN)**: Using neural networks to approximate the Q-function for high-dimensional state spaces.
+- **Experience Replay**: Storing past transitions to break correlation in training data.
 
-### Markov Decision Processes
+## Code Explanation
+The `day_sixty.py` script features a complete RL implementation:
+- **`TradingEnvironment`**: A custom class where the agent can choose to BUY (2), SELL (0), or HOLD (1). It handles transaction costs and tracks portfolio value.
+- **`DQNAgent`**: A PyTorch-based agent that uses epsilon-greedy exploration to discover profitable strategies.
+- **`TabularQLearningAgent`**: A baseline agent that discretizes the market into bins to learn a simple lookup table.
+- **Evaluation**: Compares the trained agent against a simple "Buy and Hold" benchmark.
 
-- State space definition for trading environments
-- Action space specification (discrete and continuous)
-- Transition dynamics and market simulation
-- Reward function design principles
-
-### Value Functions
-
-- State-value function V(s) definitions
-- Action-value function Q(s,a) relationships
-- Bellman equations and optimality principles
-- Value iteration and policy iteration
-
-### Temporal Difference Learning
-
-- Q-learning algorithm implementation
-- SARSA on-policy learning
-- Eligibility traces and TD(λ)
-- Convergence properties and guarantees
-
-### Deep Q-Networks
-
-- Neural network function approximation
-- Experience replay for stability
-- Target networks for training stability
-- Double DQN and dueling architectures
-
-## Implementation Features
-
-### Trading Environment
-
-- Realistic market simulation
-- Transaction cost modeling
-- Portfolio state tracking
-- Risk-aware position management
-
-### Agent Architectures
-
-- Tabular Q-learning for discrete spaces
-- Deep Q-networks for continuous states
-- Epsilon-greedy exploration strategies
-- Policy-based methods introduction
-
-### Training Infrastructure
-
-- Episode-based training loops
-- Performance metrics tracking
-- Model checkpointing and evaluation
-- Hyperparameter optimization
-
-### Evaluation Framework
-
-- Out-of-sample testing
-- Risk-adjusted performance metrics
-- Benchmark comparisons
-- Strategy robustness analysis
-
-## File Structure
-
-- `day_sixty.py` - Main RL trading implementation
-- Trading environment simulator
-- Multiple agent implementations
-- Training and evaluation pipelines
-
-## Usage
-
-```python
-python day_sixty.py --agent dqn --environment trading --episodes 1000
+## How to Run
+1. Install requirements: `pip install torch gym numpy pandas yfinance matplotlib stable-baselines3`
+2. Run the RL training:
+```bash
+python week_09/daysixty/day_sixty.py --symbol AAPL --episodes 500
 ```
 
-## Dependencies
-- gym
-- stable-baselines3
-- numpy
-- pandas
-- matplotlib
-- yfinance
+## Reflection
+Reinforcement Learning is unique because the agent doesn't just predict the future; it learns how its own actions (buying/selling) impact its long-term reward. This mimics the actual challenge of a live trader.

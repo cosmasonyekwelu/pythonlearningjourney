@@ -1,126 +1,34 @@
-## Day 24: Database Design with SQLite, PostgreSQL, MySQL, and MongoDB
+# Day 24: Database Design (SQL & NoSQL)
 
-### Focus
+**Date:** October 15, 2025
 
-Designing and connecting multi-database systems using SQL (PostgreSQL, MySQL, SQLite) and NoSQL (MongoDB) to create scalable and data-rich applications.
+## Learning Objective
+To understand the differences between relational (SQL) and non-relational (NoSQL) databases and implement a hybrid data architecture using Flask.
 
----
+## Concepts Covered
+- **Relational Databases (SQL)**: Using PostgreSQL with SQLAlchemy to manage structured data (Users, Portfolios, Transactions).
+- **NoSQL Databases**: Using MongoDB (via `pymongo`) for unstructured logging and activity tracking.
+- **ORM (Object-Relational Mapping)**: Defining relationships like `ForeignKey` and `backref` in SQLAlchemy.
+- **Hybrid Architectures**: Knowing when to use SQL for consistency and NoSQL for scalability/flexibility.
+- **RESTful API CRUD**: Implementing Create and Read operations for multiple database resources.
 
-## Key Concepts
+## Code Explanation
+The `day_twentyfour.py` script implements a Portfolio Tracker API:
+- **`SQLAlchemy Models`**: Defines the relational schema with `User`, `Portfolio`, `Asset`, and `Transaction` tables.
+- **`MongoDB Logging`**: The `log_action()` helper function sends record of every API call to a MongoDB collection.
+- **`Flask Routes`**:
+    - `POST /users`: Creates a new user in the SQL database.
+    - `POST /transactions`: Records a trade and links it to a portfolio and asset.
+    - `GET /assets`: Retrieves all available assets.
 
-### 1. Database Fundamentals
-
-- **Tables:** Store structured data in rows and columns.
-- **Relations:** Define links between tables such as one-to-one, one-to-many, and many-to-many.
-- **Indexes:** Improve data lookup speed.
-- **Primary Key:** Unique record identifier.
-- **Foreign Key:** References another table’s key.
-
----
-
-### 2. Portfolio Tracker Schema
-
-| Table        | Purpose                    | Key Fields                                      |
-| ------------ | -------------------------- | ----------------------------------------------- |
-| Users        | Store user data            | id, username, email                             |
-| Portfolios   | Track user balance         | id, user_id, balance                            |
-| Assets       | Define tradable items      | id, name, symbol, type                          |
-| Transactions | Record buy/sell operations | id, portfolio_id, asset_id, type, amount, price |
-
----
-
-### 3. SQLAlchemy and Flask Integration
-
-- ORM maps Python classes to database tables.
-- `db.create_all()` automatically generates schema.
-- CRUD routes allow database interaction.
-
-Example:
-
-```python
-portfolio = Portfolio(user_id=1, balance=1500.0)
-db.session.add(portfolio)
-db.session.commit()
-```
-
----
-
-### 4. MongoDB Integration
-
-MongoDB is used for logging or unstructured data (via `pymongo`):
-
-```python
-from pymongo import MongoClient
-client = MongoClient("mongodb://localhost:27017/")
-db = client['portfolio_tracker']
-db['activity_logs'].insert_one({"action": "BUY", "asset": "BTC"})
-```
-
----
-
-### 5. Backup and Restore
-
-**PostgreSQL**
-
+## How to Run
+*Note: This script requires active PostgreSQL and MongoDB instances.*
+1. Install dependencies: `pip install flask-sqlalchemy psycopg2-binary pymongo`
+2. Update the connection strings in the script with your credentials.
+3. Run the application:
 ```bash
-pg_dump portfolio_db > backup.sql
-psql portfolio_db < backup.sql
+python week_04/daytwentyfour/day_twentyfour.py
 ```
 
-**MongoDB**
-
-```bash
-mongodump --db portfolio_tracker --out ./backup
-mongorestore --db portfolio_tracker ./backup/portfolio_tracker
-```
-
----
-
-### 6. Connecting Multiple Databases (Django Example)
-
-```python
-DATABASES = {
-  'default': {'ENGINE': 'django.db.backends.postgresql', 'NAME': 'main_db'},
-  'mysql_db': {'ENGINE': 'django.db.backends.mysql', 'NAME': 'analytics_db'},
-}
-```
-
-Query from a specific database:
-
-```python
-MyModel.objects.using('mysql_db').all()
-```
-
----
-
-## Important ORM Concepts
-
-| Term                | Description                                             |
-| ------------------- | ------------------------------------------------------- |
-| **Model**           | Python class representing a table                       |
-| **Migration**       | Converts model changes into database schema             |
-| **QuerySet**        | Lazy-evaluated collection of records                    |
-| **Field lookups**   | Filter expressions such as `.filter(balance__gte=1000)` |
-| **Related records** | Access linked data through foreign keys                 |
-
----
-
-## Tools Used
-
-- Flask – micro web framework
-- SQLAlchemy – ORM for SQL databases
-- PostgreSQL, MySQL, SQLite – relational databases
-- MongoDB – NoSQL database for logs
-- PyMongo – MongoDB driver for Python
-
----
-
-## Learning Resources
-
-- [SQLAlchemy Documentation](https://docs.sqlalchemy.org/)
-- [PostgreSQL Official Docs](https://www.postgresql.org/docs/)
-- [MongoDB University](https://university.mongodb.com/)
-- [W3Schools SQL Tutorial](https://www.w3schools.com/sql/)
-- [DB-Engines Knowledge Base](https://db-engines.com/en/learning_resources)
-
----
+## Reflection
+Modern applications often use multiple types of databases. Using SQL for financial transactions ensures data integrity, while using NoSQL for logs allows the system to handle high volumes of activity data without slowing down core business logic.
