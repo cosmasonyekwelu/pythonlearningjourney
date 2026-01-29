@@ -1,40 +1,33 @@
-# Day 06 - Python Learning Journey.
+# Day 06: Algorithms & File Handling
 
 **Date:** September 27, 2025
 
-## Activities
+## Learning Objective
+To understand fundamental sorting and searching algorithms and master file I/O operations for text and CSV data.
 
-1. Learned and practiced basic algorithms (sorting & searching).
-2. Explored Python’s file handling features.
-3. Worked with text and CSV files.
-4. Solved exercises combining algorithms and file operations.
-5. Built a Contact Book mini-project to manage and search stored contacts.
+## Concepts Covered
+- **Sorting Algorithms**: Bubble Sort and Selection Sort (O(n²) complexity).
+- **Searching Algorithms**: Linear Search (O(n)) and Binary Search (O(log n)).
+- **Performance Benchmarking**: Comparing algorithm speed.
+- **File Handling**: Reading and writing text files (`.txt`).
+- **CSV Processing**: Reading and writing structured data using the `csv` module.
+- **Big-O Notation**: Introduction to algorithmic complexity analysis.
 
-## Tutorial
+## Code Explanation
+The `day_six.py` script is organized into three classes:
+- **AlgorithmMastery**: Implements classic algorithms. Note that while Bubble Sort is educational, Python's built-in `sorted()` is much more efficient.
+- **FileHandling**: Contains methods for:
+    - `read_text_file`: Reads an entire file.
+    - `count_word_frequency`: Analyzes text files.
+    - `read_csv_file` / `write_csv_file`: Manages structured data using `DictReader` and `DictWriter`.
+- **ProblemSolvingExercises**: Orchestrates the demonstrations and provides a "Big-O" summary.
 
-- **Title:** Algorithms & File Handling
-- **URL:** Self-practice + multiple online references
-- **Topics Covered:**
-  - Sorting algorithms (Bubble Sort, Selection Sort, `sorted()`)
-  - Searching algorithms (Linear Search, Binary Search)
-  - File I/O (`open()`, `.read()`, `.write()`, `.readlines()`)
-  - CSV file handling with `csv` module
-  - Mini-project: Contact Book
-
-## Key Learnings
-
-- Difference between **linear and binary search**
-- Implementation of **bubble sort** and **selection sort**
-- Using Python’s built-in `sorted()` for efficient sorting
-- Reading from and writing to **text and CSV files**
-- Combining algorithms with file handling in real-world projects
+## How to Run
+Run the script to see algorithms in action and file operations:
+```bash
+python week_01/daysix/day_six.py
+```
+This will also generate `sample.txt` and `contacts.csv` in the same directory.
 
 ## Reflection
-
-Today I took a major step into **algorithms** and **file operations**.  
-Understanding how sorting and searching work under the hood helped me appreciate efficiency and performance. File handling made Python feel even more practical, and the Contact Book mini-project showed me how to combine multiple skills to build something useful.
-
-## Files
-
-- [`daysix.py`](daysix.py): Algorithms + file handling practice
-- [`contactbook.py`](contactbook.py): Contact Book mini-project
+Binary search is incredibly fast compared to linear search as the dataset grows. Learning to handle CSV files is essential for data science and automation tasks.

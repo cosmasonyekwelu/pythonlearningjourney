@@ -1,44 +1,29 @@
-# Day 43: Web Scraping for Market Data
+# Day 43: Market Data Scraper
 
-## Objective
-Learn to extract live market and financial data from websites that don't provide public APIs, building custom data pipelines for your trading insights.
+**Date:** November 3, 2025
 
-## Features
-- **Multi-Source Scraping**: Extract data from Yahoo Finance and financial news sites
-- **Structured Data Output**: Save data in JSON and pandas DataFrame formats
-- **Rate Limiting**: Built-in delays between requests to be respectful to servers
-- **Error Handling**: Robust error handling for network issues and parsing failures
-- **Top Gainers Extraction**: Specialized function for trending stocks
+## Learning Objective
+To understand how to extract financial data from web pages using Web Scraping techniques with `BeautifulSoup` and `requests`.
 
-## Core Concepts Demonstrated
-- **HTML Parsing**: Using BeautifulSoup to navigate and extract specific data elements
-- **HTTP Session Management**: Maintaining sessions with proper headers and cookies
-- **Ethical Scraping**: Respecting `robots.txt` and implementing rate limiting
-- **Data Transformation**: Converting unstructured HTML to structured data formats
-- **Logging & Monitoring**: Comprehensive logging for debugging and monitoring
+## Concepts Covered
+- **Web Scraping Fundamentals**: Navigating the HTML DOM and extracting specific elements.
+- **BeautifulSoup**: Using CSS selectors and HTML tags to find data.
+- **Session Management**: Using `requests.Session()` to handle headers and cookies efficiently.
+- **Data Persistence**: Saving scraped data into JSON and Pandas DataFrames.
+- **Rate Limiting**: Implementing `time.sleep()` to avoid being blocked by servers.
 
-## Installation Requirements
+## Code Explanation
+The `day_fortythree.py` script implements a `MarketDataScraper`:
+- **`scrape_yahoo_finance(symbol)`**: Extracts the current price, previous close, and market cap for a specific stock by parsing the Yahoo Finance page.
+- **`scrape_top_gainers()`**: Fetches the "Top Gainers" table from Yahoo Finance and extracts the first 5 records.
+- **Logging**: Uses the `logging` module to track successes and errors during the scraping process.
+
+## How to Run
+1. Install dependencies: `pip install requests beautifulsoup4 pandas`
+2. Run the scraper:
 ```bash
-pip install requests beautifulsoup4 pandas
+python week_07/dayfortythree/day_fortythree.py
 ```
 
-## Usage
-```bash
-python day_fortythree.py
-```
-
-## Output Files
-- `stock_data.json`: Individual stock data for major tech companies
-- `top_gainers.json`: Top 5 gaining stocks with price change information
-
-## Ethical Scraping Practices
-- 1-second delays between requests to avoid overwhelming servers
-- Proper User-Agent headers to identify the scraper
-- Respect for website terms of service
-- Graceful error handling without retry storms
-
-## Customization
-- Modify `symbols` list in `main()` function to scrape different stocks
-- Adjust `scrape_top_gainers()` to extract different metrics
-- Add new data sources by creating additional scraping methods
-```
+## Reflection
+Web scraping is a powerful way to gather data when an official API is unavailable. However, it is brittle—if the website changes its layout, the scraper may break. Always check a site's `robots.txt` before scraping.

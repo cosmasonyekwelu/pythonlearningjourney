@@ -1,45 +1,30 @@
-# Day 08 - Python Learning Journey.
+# Day 08: Advanced Strings & Variables Mastery
 
 **Date:** September 29, 2025
 
-## Activities
+## Learning Objective
+To master advanced string operations, including indexing, slicing, methods, and various formatting techniques, and to understand Pythonic variable naming conventions.
 
-1. Explored **advanced string operations**:
-   - Indexing & slicing
-   - String methods (`upper()`, `lower()`, `strip()`, `replace()`, etc.)
-   - String formatting (`f-strings`, `.format()`)
-2. Learned about **variables**:
-   - Assignment & naming conventions
-   - Dynamic typing
-   - Multiple assignment & swapping values
-3. Solved exercises:
-   - Check if a string is a palindrome
-   - Count the number of vowels in a string
-4. Built a **Mini-Project: String Analyzer Tool**
-   - Counts vowels
-   - Checks palindrome
-   - Reverses text
-   - Reports string length
+## Concepts Covered
+- **Indexing & Slicing**: Positive and negative indexing, step slicing, and string reversal.
+- **String Methods**: Case transformations, cleaning (strip), searching, and validation (`isalnum`, `isalpha`, etc.).
+- **String Formatting**: f-strings, `.format()`, and precision formatting for numbers.
+- **Variable Mastery**: Multiple assignment, variable swapping, and naming conventions.
+- **String Algorithms**: Palindrome checking and vowel counting.
 
-## Tutorial
+## Code Explanation
+The `day_eight.py` script is organized into two main classes:
+- **StringMastery**: Demonstrates core Python string features through interactive examples.
+- **StringAlgorithms**: Implements practical functions:
+    - `is_palindrome(text)`: Uses slicing (`[::-1]`) for an efficient, case-insensitive check.
+    - `count_vowels(text)`: Iterates through characters to count vowels.
+    - `analyze_text(text)`: A comprehensive function that returns a dictionary of analysis results.
 
-- **Title:** Advanced Strings & Variables in Python
-- **URL:** Self-practice + roadmap.sh/python
-- **Topics Covered:**
-  - Strings, indexing, slicing, methods
-  - Variables, assignment, naming conventions
-  - String algorithms: palindrome, vowel counter
-  - Mini-project with functions for text analysis
-
-## Key Learnings
-
-- Strings are sequences and support **indexing & slicing** like lists.
-- Python variables are dynamically typed and don’t need explicit type declaration.
-- Useful string methods help with cleaning and transforming text.
-- Functions make string operations reusable and modular.
+## How to Run
+Execute the script to see the string mastery demonstrations:
+```bash
+python week_02/dayeight/day_eight.py
+```
 
 ## Reflection
-
-Today I leveled up my Python knowledge by mastering **strings and variables**.  
-The **String Analyzer mini-project** gave me hands-on experience with real-world string manipulation.  
-I now feel confident working with text data, an essential skill for any Python project.
+Python's string handling is incredibly expressive. Slicing with `[::-1]` for reversal and f-strings for formatting make the code much more readable compared to other languages.

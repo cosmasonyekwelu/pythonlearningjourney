@@ -64,5 +64,8 @@ print(f"Merged Dictionary: {merged}")
 
 # 4. Remove duplicates from a list
 dup_list = [1, 2, 2, 3, 4, 4, 5]
+# NOTE: Converting a list to a set is the easiest way to remove duplicates,
+# but it doesn't preserve the original order of elements.
+# If order matters, you can use: dict.fromkeys(dup_list).keys()
 no_duplicates = list(set(dup_list))
 print(f"List without Duplicates: {no_duplicates}")

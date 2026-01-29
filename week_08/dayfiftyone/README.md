@@ -1,76 +1,30 @@
 # Day 51: Statistical Analysis for Trading
 
-## Overview
+**Date:** November 11, 2025
 
-Use statistical methods to validate trading hypotheses and detect underlying market structures.
+## Learning Objective
+To apply rigorous statistical tests to financial data to validate stationarity, normality, and the random walk hypothesis.
 
-## Key Statistical Tests and Methods
+## Concepts Covered
+- **Stationarity Testing**: Using the Augmented Dickey-Fuller (ADF) test to ensure data is suitable for time-series modeling.
+- **Normality Tests**: Implementing Shapiro-Wilk and Jarque-Bera tests to analyze the distribution of returns.
+- **Autocorrelation (ACF/PACF)**: Identifying serial correlation in price movements and returns.
+- **Volatility Modeling**: Introduction to GARCH (Generalized Autoregressive Conditional Heteroskedasticity) models.
+- **Hypothesis Testing**: Using t-tests and Variance Ratio tests to evaluate the Efficient Market Hypothesis (EMH).
 
-### 1. Stationarity Analysis
+## Code Explanation
+The `day_fiftyone.py` script implements the `StatisticalAnalysis` class:
+- **`stationarity_test()`**: Runs the ADF test and interprets the p-value.
+- **`autocorrelation_analysis()`**: Plots ACF and PACF graphs to identify significant lags.
+- **`volatility_modeling()`**: Uses the `arch` library to fit a GARCH(1,1) model to stock returns.
+- **`risk_return_metrics()`**: Calculates professional stats like Sharpe Ratio, VaR (Value at Risk), and CVaR.
 
-- **Augmented Dickey-Fuller (ADF) Test**: Determines if price series are stationary
-- **Returns vs Prices**: Returns are typically stationary while prices are not
-- **Implications**: Stationary series are required for many statistical models
-
-### 2. Normality Testing
-
-- **Shapiro-Wilk Test**: Formal test for normality
-- **Jarque-Bera Test**: Tests both skewness and kurtosis
-- **Q-Q Plots**: Visual normality assessment
-- **Key Insight**: Financial returns are rarely normal (exhibit fat tails)
-
-### 3. Autocorrelation Analysis
-
-- **ACF/PACF Plots**: Identify serial correlation patterns
-- **Significant Lags**: Detect predictable patterns in returns
-- **Market Efficiency**: Random walk hypothesis testing
-
-### 4. Volatility Modeling
-
-- **GARCH Models**: Capture volatility clustering
-- **Model Comparison**: AIC/BIC for model selection
-- **Conditional Volatility**: Time-varying risk assessment
-
-### 5. Hypothesis Testing
-
-- **One-sample t-test**: Test if mean returns are zero
-- **Two-sample t-test**: Compare different return series
-- **Variance Ratio Test**: Test random walk hypothesis
-- **Confidence Intervals**: Range estimation for parameters
-
-### 6. Risk-Return Metrics
-
-- **Sharpe Ratio**: Risk-adjusted returns
-- **Maximum Drawdown**: Worst-case loss
-- **Value at Risk (VaR)**: Tail risk measurement
-- **Expected Shortfall**: Conditional VaR
-
-## Key Findings from Financial Data
-
-1. **Non-Stationarity**: Price series are non-stationary, returns are stationary
-2. **Non-Normality**: Returns exhibit fat tails and skewness
-3. **Volatility Clustering**: High volatility periods cluster together
-4. **Weak Autocorrelation**: Some short-term predictability may exist
-5. **Risk-Return Tradeoff**: Higher returns typically come with higher volatility
-
-## Challenge: Volatility Analysis
-
-The script includes advanced volatility analysis comparing:
-
-- Different GARCH model specifications
-- Rolling volatility vs conditional volatility
-- Volatility regime identification
-- Clustering pattern visualization
-
-## Usage
-
-```python
-# Complete analysis
-analyzer = StatisticalAnalysis()
-analyzer.run_complete_analysis('SPY')
-
-# Individual tests
-analyzer.stationarity_test()
-analyzer.normality_tests()
-analyzer.volatility_modeling(p=1, q=1)
+## How to Run
+1. Install requirements: `pip install pandas numpy matplotlib seaborn yfinance arch statsmodels`
+2. Run the statistical suite:
+```bash
+python week_08/dayfiftyone/day_fiftyone.py
 ```
+
+## Reflection
+Trading is a game of probabilities. Rigorous statistical analysis helps separate signal from noise, ensuring that a perceived "trend" isn't just a random fluctuation in a non-stationary series.

@@ -1,47 +1,33 @@
-# Day 32 - Market Data APIs & Portfolio Performance Metrics
+# Day 32: Market Data APIs & Performance Metrics
 
-Comprehensive integration with financial APIs and advanced portfolio performance analysis.
+**Date:** October 23, 2025
 
-## Files Overview
+## Learning Objective
+To integrate external market data APIs into a portfolio management workflow and calculate professional-grade performance metrics.
 
-- `market_data_apis.py` - Multiple financial API integrations (Yahoo Finance, Alpha Vantage, IEX Cloud, Polygon.io)
-- `portfolio_metrics.py` - Comprehensive portfolio performance metrics and risk analysis
-- `fundamental_analyzer.py` - Fundamental data analysis and company valuation
-- `benchmark_comparison.py` - Portfolio benchmarking and relative performance analysis
+## Concepts Covered
+- **API Integration**: Using `yfinance` to download historical data for a custom portfolio.
+- **Portfolio Weighting**: Calculating returns based on asset allocation percentages.
+- **Benchmark Comparison**: Measuring portfolio performance against a market index (e.g., SPY).
+- **Risk-Adjusted Returns**: Implementing Alpha and Beta calculations to evaluate manager skill vs. market risk.
+- **Drawdown Analysis**: Visualizing the peak-to-trough decline of an investment.
 
-## Key Features
+## Code Explanation
+The `day_thirtytwo.py` script focuses on the `PortfolioAnalyzer` class:
+- **`get_portfolio_returns()`**: Takes a dictionary of weights and aggregates their historical performance into a single series.
+- **`calculate_metrics()`**: Computes:
+    - **Volatility**: Annualized standard deviation of returns.
+    - **Sharpe Ratio**: Reward per unit of risk.
+    - **Alpha**: Excess return over the benchmark.
+    - **Beta**: Sensitivity to market movements.
+- **Visualization**: Plots the cumulative growth of $1 in the portfolio versus the benchmark.
 
-### Market Data APIs
-
-- Unified interface for multiple financial data providers
-- Redundant data sourcing for reliability
-- Rate limiting and error handling
-- Data quality assessment
-
-### Portfolio Performance Metrics
-
-- Basic metrics (returns, volatility, Sharpe ratio)
-- Advanced metrics (Sortino ratio, Calmar ratio, Information ratio)
-- Drawdown analysis and risk assessment
-- Asset contribution analysis
-- Comprehensive reporting
-
-### Fundamental Analysis
-
-- Company valuation metrics (P/E, P/B, P/S ratios)
-- Financial health indicators
-- Profitability and growth analysis
-- Multi-company comparison
-
-### Benchmark Comparison
-
-- Multiple benchmark support (S&P 500, NASDAQ, etc.)
-- Relative performance analysis
-- Risk-return profile comparison
-- Visual performance charts
-
-## Installation
-
+## How to Run
+1. Ensure `yfinance` and `pandas` are installed.
+2. Run the demonstration:
 ```bash
-pip install -r requirements.txt
+python week_05/daythirtytwo/day_thirtytwo.py
 ```
+
+## Reflection
+Calculating raw returns is easy, but understanding "Alpha" (skill) versus "Beta" (market exposure) is what separates professional portfolio management from simple indexing.

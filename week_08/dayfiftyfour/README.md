@@ -1,111 +1,30 @@
-# Day 54: Model Evaluation & Validation
+# Day 54: Model Evaluation & Interpretation
 
-## Overview
+**Date:** November 14, 2025
 
-Ensure your models generalize beyond historical data and don't overfit through rigorous validation techniques and interpretability analysis.
+## Learning Objective
+To implement rigorous validation techniques for time-series models and use explainable AI (XAI) to interpret complex model predictions.
 
-## Key Validation Techniques
+## Concepts Covered
+- **Walk-Forward Validation**: Simulating how a model would perform in a live environment by continuously retraining as new data arrives.
+- **Time-Series Cross-Validation**: Ensuring the training data always precedes the validation data to prevent "look-ahead" bias.
+- **SHAP (SHapley Additive exPlanations)**: Calculating the contribution of each feature to an individual prediction.
+- **Permutation Importance**: Measuring feature importance by randomly shuffling values and observing the drop in accuracy.
+- **Overfitting Analysis**: Using learning curves to identify when a model is memorizing the noise in the data.
 
-### 1. Time-Series Cross-Validation
+## Code Explanation
+The `day_fiftyfour.py` script implements the `ModelEvaluator` class:
+- **`walk_forward_validation()`**: A robust alternative to standard k-fold CV that preserves temporal order.
+- **`shap_analysis()`**: Uses the `shap` library to create "force plots" and "dependence plots" for model transparency.
+- **`detailed_confusion_analysis()`**: Breaks down True Positives, False Positives (over-trading), and False Negatives (missed opportunities).
+- **`plot_roc_curves()`**: Visualizes the trade-off between sensitivity and specificity across different models.
 
-- **TimeSeriesSplit**: Prevents data leakage by maintaining temporal order
-- **Walk-Forward Validation**: Simulates real-world model updating
-- **Expanding Window**: Increasing training set over time
-- **Rolling Window**: Fixed-size moving training window
-
-### 2. Comprehensive Metrics
-
-**Classification Metrics**:
-
-- Accuracy, Precision, Recall, F1-Score
-- ROC-AUC, Confusion Matrix analysis
-- Specificity, Sensitivity
-- Class distribution analysis
-
-**Overfitting Detection**:
-
-- Train-test score comparison
-- Learning curves
-- Cross-validation stability
-
-### 3. Feature Importance Analysis
-
-**Multiple Methods**:
-
-- **Permutation Importance**: Model-agnostic, reliable
-- **SHAP Values**: Game-theoretic approach, local and global
-- **Built-in Importance**: Model-specific (tree-based)
-
-**Comparison Framework**:
-
-- Rank features across methods
-- Identify consistently important features
-- Detect method-specific biases
-
-## Advanced SHAP Analysis
-
-### 1. Global Interpretability
-
-- **Summary Plots**: Feature importance with impact direction
-- **Feature Dependencies**: Interaction effects visualization
-
-### 2. Local Interpretability
-
-- **Force Plots**: Individual prediction explanations
-- **Decision Plots**: Model decision path visualization
-- **Waterfall Plots**: Feature contribution breakdown
-
-### 3. Practical Insights
-
-- Identify which features drive specific predictions
-- Understand model decision boundaries
-- Detect potential biases and edge cases
-
-## Tutorial Components
-
-### 1. Time-Series Validation
-
-- Proper train-test splitting without lookahead bias
-- Cross-validation that respects temporal order
-- Performance stability across time periods
-
-### 2. Confusion Matrix Deep Dive
-
-- Beyond accuracy: precision, recall, specificity
-- Class imbalance analysis
-- Error pattern identification
-
-### 3. Feature Importance Comparison
-
-- Method-agnostic importance ranking
-- Consistency validation across techniques
-- Actionable feature selection insights
-
-## Challenge: SHAP Interpretation
-
-The SHAP analysis challenge provides:
-
-1. **Individual Prediction Explanations**: Why specific predictions were made
-2. **Model Decision Paths**: How features combine for final decisions
-3. **Feature Interaction Insights**: How features influence each other
-4. **Global Model Behavior**: Overall feature importance patterns
-
-## Key Insights
-
-1. **Validation Rigor**: Time-series cross-validation is non-negotiable
-2. **Interpretability Matters**: Understanding "why" builds trust
-3. **Feature Consistency**: Important features should rank highly across methods
-4. **Overfitting Detection**: Gap between train/test performance indicates issues
-
-## Usage
-
-```python
-# Comprehensive evaluation
-evaluator = ModelEvaluator()
-report = evaluator.comprehensive_model_report(model, X_train, X_test, y_train, y_test, "My Model")
-
-# Individual components
-cv_results = evaluator.time_series_cross_validation(model, X, y)
-confusion_analysis = evaluator.detailed_confusion_analysis(y_true, y_pred)
-shap_importance = evaluator.shap_analysis(model, X_test, "Model Name")
+## How to Run
+1. Install requirements: `pip install pandas numpy matplotlib seaborn scikit-learn shap`
+2. Run the evaluation suite:
+```bash
+python week_08/dayfiftyfour/day_fiftyfour.py
 ```
+
+## Reflection
+"Black box" models are dangerous in trading. Understanding *why* a model expects the market to go up—for example, due to a specific RSI level combined with volume spikes—allows a trader to have confidence during periods of high volatility.

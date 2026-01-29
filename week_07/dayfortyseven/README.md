@@ -1,55 +1,30 @@
-# Day 47: Risk Management Automation
+# Day 47: Risk Management Engine
 
-## Objective
-Protect your capital by embedding automated risk controls directly into your trading system, preventing catastrophic losses and ensuring disciplined trading.
+**Date:** November 7, 2025
 
-## Features
-- **Pre-Trade Validation**: Comprehensive risk checks before order execution
-- **Position Sizing**: Risk-based position sizing using multiple methodologies
-- **Stop-Loss Management**: Automated stop-loss and trailing stop generation
-- **Portfolio Monitoring**: Real-time risk metric calculation and monitoring
-- **Limit Enforcement**: Automated enforcement of risk limits and constraints
-- **Sector Concentration**: Sector-based exposure monitoring and alerts
+## Learning Objective
+To implement a proactive risk management system that enforces trading limits and provides real-time protection for a portfolio.
 
-## Core Concepts Demonstrated
-- **Risk Per Trade**: Fixed fractional and volatility-based position sizing
-- **Stop-Loss Strategies**: Fixed percentage and dynamic trailing stops
-- **Portfolio Constraints**: Sector concentration and diversification limits
-- **Daily Loss Limits**: Maximum acceptable daily loss calculations
-- **Drawdown Management**: Portfolio-level drawdown monitoring and protection
+## Concepts Covered
+- **Pre-trade Risk Checks**: Validating orders against limits before they are even sent to the broker.
+- **Position Sizing**: Calculating the "correct" number of shares based on a target risk per trade.
+- **Exposure Limits**: Enforcing maximum concentration levels for individual symbols and entire sectors.
+- **Automatic Stop-Losses**: Generating protective orders based on current price action (Fixed stops vs. Trailing stops).
+- **Drawdown Protection**: Implementing a "circuit breaker" that halts trading if losses exceed a certain percentage.
 
-## Installation Requirements
+## Code Explanation
+The `day_fortyseven.py` script implements the `RiskManager`:
+- **`pre_trade_risk_check()`**: Checks if a proposed trade violates any limits like max position size or daily loss.
+- **`calculate_position_size()`**: Uses a volatility-based approach to determine how many shares to buy given a specific stop-loss.
+- **`generate_stop_loss_orders()`**: Scans the portfolio and creates a list of sell orders to protect against downside.
+- **`check_sector_exposure()`**: Ensures the portfolio is diversified and not overly concentrated in one area (e.g., Technology).
+
+## How to Run
+1. Ensure `trading_system.db` exists (created by Day 46).
+2. Run the risk manager demo:
 ```bash
-pip install pandas numpy sqlite3
+python week_07/dayfortyseven/day_fortyseven.py
 ```
 
-## Risk Limits Configurable
-- Maximum position size (percentage of portfolio)
-- Maximum daily loss percentage
-- Maximum drawdown limit
-- Sector exposure limits
-- Minimum risk/reward ratios
-- Leverage constraints
-
-## Usage
-```bash
-python day_fortyseven.py
-```
-
-## Key Methods
-- `pre_trade_risk_check()`: Comprehensive trade validation
-- `calculate_position_size()`: Risk-based position sizing
-- `generate_stop_loss_orders()`: Automated protective order generation
-- `run_risk_checks()`: Portfolio-wide risk assessment
-- `check_risk_limits()`: Limit violation detection
-
-## Risk Metrics Calculated
-- Portfolio value and composition
-- Position concentration analysis
-- Sector exposure breakdown
-- Daily P&L tracking
-- Drawdown calculations
-
-## Integration
-Designed to integrate seamlessly with Order Management System (Day 46) for automated risk enforcement before trade execution.
-```
+## Reflection
+Profit is important, but survival is more important. A robust risk management engine ensures that no single bad decision can destroy the entire portfolio.

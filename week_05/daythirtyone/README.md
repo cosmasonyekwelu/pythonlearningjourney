@@ -1,44 +1,31 @@
-# Day 31 - Pandas for Financial Data & Basic Financial Calculations
+# Day 31: Pandas for Financial Analysis
 
-Master pandas for financial analysis and calculations with comprehensive tools for portfolio management, risk analysis, and time series operations.
+**Date:** October 22, 2025
 
-## Files Overview
+## Learning Objective
+To master the usage of the Pandas library for complex financial data manipulation, statistical analysis, and time-series processing.
 
-- `pandas_finance_basics.py` - Core pandas operations for financial data
-- `portfolio_analyzer.py` - Portfolio performance and risk analysis
-- `risk_metrics_calculator.py` - Advanced risk metrics and stress testing
-- `financial_time_series.py` - Time series analysis and feature engineering
+## Concepts Covered
+- **Data Wrangling**: Fetching, merging, and cleaning stock data from Yahoo Finance.
+- **Financial Returns**: Calculating daily, logarithmic, and cumulative returns.
+- **Rolling Statistics**: Implementing Bollinger Bands and moving averages.
+- **Resampling**: Converting daily data to weekly or monthly frequencies (OHLC resampling).
+- **Risk Metrics**: Calculating Volatility, Sharpe Ratio, and Maximum Drawdown.
+- **Time Series Features**: Generating lags, momentum indicators, and autocorrelation plots.
 
-## Key Features
+## Code Explanation
+The `day_thirtyone.py` script is divided into functional analyzers:
+- **`FinancialDataProcessor`**: Handles bulk data fetching and primary return calculations.
+- **`PortfolioAnalyzer`**: Calculates weighted portfolio returns and sector allocations.
+- **`RiskMetricsCalculator`**: Computes advanced financial stats like Beta, Jensen's Alpha, and Treynor Ratio.
+- **`FinancialTimeSeries`**: Focuses on feature engineering for machine learning and seasonality analysis (e.g., checking if certain days of the week perform better).
 
-### Data Processing
+## How to Run
+1. Install dependencies: `pip install pandas numpy yfinance matplotlib seaborn scipy`
+2. Run the analysis:
+```bash
+python week_05/daythirtyone/day_thirtyone.py
+```
 
-- Multi-asset data fetching from Yahoo Finance
-- Returns calculation (simple and logarithmic)
-- Rolling statistics and volatility
-- Data resampling (daily, weekly, monthly)
-- Correlation analysis
-
-### Portfolio Analysis
-
-- Portfolio loading and weight calculation
-- Performance metrics (Sharpe, Calmar ratios)
-- Sector allocation analysis
-- Drawdown analysis
-- Comprehensive reporting
-
-### Risk Management
-
-- Value at Risk (VaR) and Conditional VaR
-- Beta calculation and systematic risk
-- Treynor ratio and Jensen's alpha
-- Stress testing and scenario analysis
-- Rolling risk metrics
-
-### Time Series Analysis
-
-- Technical feature engineering
-- Seasonal pattern detection
-- Autocorrelation analysis
-- Structural break detection
-- Rolling regression
+## Reflection
+Pandas is the industry standard for data science for a reason. Its ability to handle missing data, perform vectorized calculations, and resample time series makes it indispensable for financial engineering.

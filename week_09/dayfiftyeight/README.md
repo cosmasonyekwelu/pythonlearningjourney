@@ -1,88 +1,30 @@
 # Day 58: LSTM for Time Series Prediction
 
-## Objective
+**Date:** November 18, 2025
 
-Implement Long Short-Term Memory networks for financial time series forecasting, capturing complex temporal dependencies and market regime changes.
+## Learning Objective
+To implement Long Short-Term Memory (LSTM) networks, a type of Recurrent Neural Network (RNN) designed to capture long-term dependencies in sequential market data.
 
-## Core Concepts Covered
+## Concepts Covered
+- **LSTM Architecture**: Understanding Gates (Input, Forget, Output) and Cell State.
+- **Bidirectional LSTMs**: Processing the sequence in both forward and backward directions to capture more context.
+- **Attention Mechanisms**: Implementing a layer that allows the model to focus on the most important historical time steps.
+- **Sequence Engineering**: Preparing 3D tensors (Batch, Time, Features) for RNN training.
+- **Regression Modeling**: Predicting the exact percentage change in price rather than just direction.
 
-### LSTM Architecture
+## Code Explanation
+The `day_fiftyeight.py` script implements the `LSTMForecaster`:
+- **`FinancialLSTM`**: A sophisticated model supporting multiple layers, bidirectionality, and an optional Attention layer.
+- **`AttentionLayer`**: Manually implements the alignment mechanism to weight different parts of the lookback window.
+- **`fetch_data()`**: Integrates the `ta` library to create a rich 20+ feature input vector including MACD, ADX, and Bollinger Bands.
+- **Visualization**: Generates a comparison plot of Actual vs. Predicted returns.
 
-- Input, forget, and output gates
-- Cell state mechanisms
-- Gradient flow and vanishing gradient solution
-- Stacked and bidirectional architectures
-
-### Sequence Modeling
-
-- Many-to-one prediction for price forecasting
-- Sequence preprocessing and windowing
-- Walk-forward validation
-- Multivariate time series handling
-
-### Advanced Architectures
-
-- Stacked LSTM for hierarchical feature learning
-- Bidirectional LSTM for past and future context
-- Attention mechanisms for focus learning
-- Encoder-decoder structures
-
-### Training Techniques
-
-- Stateful vs stateless training
-- Teacher forcing
-- Gradient clipping
-- Sequence bucketing
-
-## Implementation Features
-
-### Data Engineering
-
-- Multivariate time series preprocessing
-- Sequence creation with configurable lengths
-- Feature normalization and scaling
-- Missing data handling
-
-### Model Architecture
-
-- Configurable LSTM layers and units
-- Dropout and batch normalization
-- Attention mechanism integration
-- Flexible output layers
-
-### Training Pipeline
-
-- Custom training loops with gradient clipping
-- Validation with walk-forward testing
-- Early stopping and model checkpointing
-- Learning rate scheduling
-
-### Evaluation
-
-- Multiple forecasting horizons
-- Volatility prediction
-- Regime change detection
-- Comparison against baseline models
-
-## File Structure
-
-- `day_fiftyeight.py` - Main LSTM implementation
-- Sequence data generator
-- Model training and evaluation
-- Visualization tools
-
-## Usage
-
-```python
-python day_fiftyeight.py --sequence_length 30 --lstm_layers 2 --units 64 --forecast_days 5
-
+## How to Run
+1. Install requirements: `pip install torch pandas numpy yfinance ta matplotlib`
+2. Run the LSTM trainer:
+```bash
+python week_09/dayfiftyeight/day_fiftyeight.py --symbol MSFT --attention --epochs 30
 ```
 
-## Dependencies
-
-- PyTorch
-- pandas
-- numpy
-- matplotlib
-- yfinance
-- ta (technical analysis library)
+## Reflection
+LSTMs are specifically designed for data where the order matters. By adding an Attention mechanism, we help the model identify which past events (like a price spike 10 days ago) are most relevant to tomorrow's prediction.

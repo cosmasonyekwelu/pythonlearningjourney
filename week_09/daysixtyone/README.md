@@ -1,67 +1,29 @@
-# Day 61: Reward System Design
+# Day 61: Reward System Design for RL
 
-## Objective
-Design sophisticated reward functions that effectively guide reinforcement learning agents toward desirable trading behaviors while managing risk and transaction costs.
+**Date:** November 21, 2025
 
-## Core Concepts Covered
+## Learning Objective
+To design sophisticated reward functions that go beyond simple returns, incorporating risk management and market volatility into the agent's learning process.
 
-### Profit-Based Rewards
-- Simple and logarithmic return calculations
-- Percentage-based profit incentives
-- Absolute vs relative performance measures
-- Time-weighted returns
+## Concepts Covered
+- **Reward Shaping**: Designing the "objective function" to guide the agent toward desired behaviors.
+- **Risk-Adjusted Rewards**: Incorporating the Sharpe and Sortino Ratios into the reward signal.
+- **Drawdown Penalties**: Explicitly punishing large percentage drops in the portfolio value.
+- **Adaptive Rewards**: Adjusting the agent's risk aversion based on real-time market volatility.
+- **Transaction Cost Awareness**: Ensuring the reward accounts for the negative impact of over-trading.
 
-### Risk-Adjusted Rewards
-- Sharpe ratio components and calculation
-- Sortino ratio focusing on downside risk
-- Calmar ratio considering maximum drawdown
-- Information ratio for benchmark comparison
+## Code Explanation
+The `day_sixtyone.py` script implements a `RewardSystem` factory:
+- **`sharpe_ratio_reward()`**: Rewards the agent for high returns relative to the standard deviation of those returns.
+- **`calmar_ratio_reward()`**: Focuses on maximizing returns while minimizing the maximum drawdown.
+- **`risk_adjusted_reward()`**: A multi-factor signal that combines volatility penalties with raw performance.
+- **`RewardComparator`**: A backtesting tool that runs the same strategy across 6 different reward functions to visualize how they influence agent behavior.
 
-### Drawdown Management
-- Maximum drawdown constraints and penalties
-- Ulcer index implementation
-- Recovery-based reward shaping
-- Time-under-water considerations
-
-### Transaction Cost Modeling
-- Fixed commission structures
-- Percentage-based fee calculations
-- Bid-ask spread costs
-- Market impact approximations
-
-## Implementation Features
-
-### Multi-Objective Reward Functions
-- Pareto-optimal reward combinations
-- Constraint handling techniques
-- Dynamic weight adjustment
-- Hierarchical reward structures
-
-### Adaptive Reward Systems
-- Market regime detection
-- Volatility-adjusted rewards
-- Performance-based reward shaping
-- Risk preference adaptation
-
-### Stability Enhancements
-- Reward scaling and normalization
-- Variance reduction techniques
-- Credit assignment improvements
-- Sparse reward handling
-
-## File Structure
-- `day_sixtyone.py` - Advanced reward system implementation
-- Multiple reward function variants
-- Performance comparison framework
-- Adaptive reward mechanisms
-
-## Usage
-```python
-python day_sixtyone.py --reward sharpe --risk_adjusted True --adaptive True
+## How to Run
+1. Run the comparator:
+```bash
+python week_09/daysixtyone/day_sixtyone.py --symbol AAPL
 ```
-## Dependencies
-numpy
-pandas
-matplotlib
-scipy
-yfinance
+
+## Reflection
+The reward function is the "personality" of the AI. A simple return reward produces an aggressive, high-risk agent, while a Sharpe-based reward produces a more conservative, consistent agent.

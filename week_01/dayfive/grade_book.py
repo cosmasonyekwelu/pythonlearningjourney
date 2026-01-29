@@ -17,6 +17,9 @@ def add_student(name, grades):
 
 def calculate_average(grades):
     """Return average of a list of grades"""
+    # FIXED: Added check for empty list to avoid ZeroDivisionError
+    if not grades:
+        return 0
     return sum(grades) / len(grades)
 
 

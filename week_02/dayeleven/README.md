@@ -1,48 +1,33 @@
-# Day 11 - Python Learning Journey
+# Day 11: Advanced Dictionaries & Sets
 
 **Date:** October 2, 2025
 
-## Activities
+## Learning Objective
+To master the usage of Dictionaries for mapped data and Sets for unique collections, focusing on efficiency and advanced comprehension techniques.
 
-1. Explored **advanced dictionaries**:
-   - Keys, values, and items
-   - Methods: `get`, `setdefault`, `update`, `pop`, `popitem`, `copy`, `clear`
-   - Iterating through dictionaries
-   - Dictionary comprehensions
-2. Practiced **sets**:
-   - Set operations: union, intersection, difference, symmetric difference
-   - Methods: `add`, `remove`, `discard`, `pop`
-   - Comparisons: `issubset`, `issuperset`, `isdisjoint`
-   - Operator-based set math (`|`, `&`, `-`, `^`)
-   - Set comprehensions and membership performance
-3. Solved practice problems:
-   - Word frequency counter
-   - Find unique values
-   - Student data analysis (grades, courses, popular course)
-   - Data deduplication with sets
+## Concepts Covered
+- **Dictionary Methods**: Deep dive into `get`, `setdefault`, `update`, `popitem`, and dictionary views (`keys`, `values`, `items`).
+- **Iteration Patterns**: Efficiently looping through dictionary components.
+- **Dictionary Comprehensions**: Creating and transforming dictionaries using concise syntax.
+- **Set Operations**: Union, intersection, difference, and symmetric difference using both methods and operators.
+- **Set Membership**: Understanding the performance advantages of O(1) lookup in sets.
+- **Data Deduplication**: Using sets to clean data and remove duplicates.
 
-## Tutorial
+## Code Explanation
+The `day_eleven.py` script explores:
+- **DictionaryOperations**: Demonstrates how `setdefault` and `update` can simplify code.
+- **SetOperations**: Uses mathematical operators (`|`, `&`, `-`, `^`) to perform set logic.
+- **Set Membership Performance**: A benchmark showing that sets are orders of magnitude faster than lists for checking if an item exists.
+- **PracticeExercises**: Includes:
+    - `word_frequency_counter`: A robust counter that cleans punctuation.
+    - `analyze_student_data`: Using set union to find all unique courses across multiple students.
+    - `data_deduplication`: Practical examples of cleaning email lists and numeric data.
 
-- **Title:** Advanced Dictionaries & Sets in Python
-- **URL:** Self-practice + roadmap.sh/python
-- **Topics Covered:**
-  - Dictionary operations and comprehension
-  - Set operations and performance benefits
-  - Practical applications of sets for data cleaning and membership tests
-
-## Key Learnings
-
-- Dictionaries allow powerful mapping of keys to values, with flexible methods to update, access, and manage data.
-- Iteration can be done over keys, values, or items, and comprehensions let us create complex mappings concisely.
-- Sets are optimized for membership checks, making them much faster than lists for lookups.
-- Set operations mirror mathematical logic (union, intersection, difference).
-- Sets are useful in **deduplication** and **data validation** tasks.
+## How to Run
+Execute the script to see the dictionary and set demonstrations:
+```bash
+python week_02/dayeleven/day_eleven.py
+```
 
 ## Reflection
-
-Today I learned how to fully utilize dictionaries and sets in real-world scenarios.  
-The **word frequency counter** highlighted how dictionaries can map items to counts.  
-The **student data analysis** showed how sets simplify combining and analyzing course enrollments.  
-The **deduplication exercise** reinforced why sets are critical for cleaning large datasets efficiently.
-
-This practice strengthened my problem-solving toolkit by combining **mapping (dict)** and **unique collections (set)**.
+Dictionaries and sets are the backbone of efficient Python programs. The constant-time lookup for sets makes them the go-to choice for large-scale membership testing.

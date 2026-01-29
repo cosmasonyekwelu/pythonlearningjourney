@@ -1,110 +1,30 @@
-# Day 55: Trading Strategy Backtesting
+# Day 55: Strategy Backtesting with VectorBT
 
-## Overview
+**Date:** November 15, 2025
 
-Convert model predictions into executable trading strategies and simulate their performance historically with realistic constraints.
+## Learning Objective
+To build a high-performance backtesting engine that converts model predictions into trading signals and evaluates their real-world profitability.
 
-## Core Components
+## Concepts Covered
+- **Vectorized Backtesting**: Using `vectorbt` for lightning-fast performance evaluation on large datasets.
+- **Signal Generation**: Transforming probabilities into "Buy," "Sell," and "Hold" decisions using thresholding.
+- **Transaction Costs**: Factoring in slippage and commissions to understand the net profitability of a strategy.
+- **Performance Metrics**: Calculating Sortino Ratio (downside risk), Calmar Ratio, and Profit Factor.
+- **Equity Curves**: Visualizing the growth of capital over time compared to a Buy & Hold benchmark.
 
-### 1. Signal Generation
+## Code Explanation
+The `day_fiftyfive.py` script implements the `TradingStrategyBacktester`:
+- **`vectorbt_backtest()`**: Wraps the `from_signals` method to compute an entire trading history in one pass.
+- **`manual_backtest()`**: A loop-based implementation used to verify the logic and handle custom order rules.
+- **`add_transaction_costs()`**: Adjusts the equity curve based on a fixed percentage commission per trade.
+- **`benchmark_comparison()`**: Directly compares the strategy against the underlying asset's performance.
 
-- **Binary Classification**: Buy/Sell signals from directional predictions
-- **Probability-based**: Confidence-weighted signals with thresholds
-- **Regression-based**: Magnitude-based position sizing
-- **Multi-class**: Complex strategies with hold/scale positions
-
-### 2. Portfolio Simulation
-
-- **Vectorized Backtesting**: High-performance with vectorbt
-- **Manual Implementation**: Transparent trade-by-trade simulation
-- **Position Tracking**: Cash, holdings, portfolio value
-- **Trade Execution**: Realistic order filling
-
-### 3. Performance Metrics
-
-**Return Metrics**:
-
-- Total Return, Annual Return
-- CAGR (Compound Annual Growth Rate)
-
-**Risk Metrics**:
-
-- Volatility, Maximum Drawdown
-- VaR (Value at Risk), CVaR (Conditional VaR)
-
-**Risk-Adjusted Metrics**:
-
-- Sharpe Ratio, Sortino Ratio, Calmar Ratio
-- Information Ratio, Alpha, Beta
-
-**Strategy Quality**:
-
-- Win Rate, Profit Factor
-- Expectancy, Recovery Factor
-
-### 4. Transaction Costs
-
-- **Commission Modeling**: Fixed and percentage-based fees
-- **Slippage Estimation**: Market impact costs
-- **Net Performance**: Realistic after-cost returns
-- **Break-even Analysis**: Minimum required edge
-
-## Advanced Features
-
-### 1. Walk-Forward Analysis
-
-- **Rolling Windows**: Adapt to changing market regimes
-- **Out-of-Sample Testing**: True forward performance
-- **Strategy Stability**: Consistency across periods
-- **Parameter Robustness**: Sensitivity analysis
-
-### 2. Benchmark Comparison
-
-- **Buy & Hold**: Passive investment comparison
-- **Risk-adjusted Outperformance**: Alpha generation
-- **Strategy Efficiency**: Return per unit of risk
-
-### 3. Visualization Suite
-
-- **Equity Curves**: Strategy vs benchmark
-- **Drawdown Analysis**: Risk exposure over time
-- **Rolling Performance**: Time-varying metrics
-- **Signal Frequency**: Trading activity patterns
-
-## Tutorial: VectorBT Backtesting
-
-The tutorial demonstrates:
-
-1. **Efficient Vectorized Operations**: Fast backtesting with large datasets
-2. **Realistic Assumptions**: Commission, slippage, market hours
-3. **Comprehensive Metrics**: Beyond simple returns
-4. **Visual Analytics**: Interactive performance charts
-
-## Challenge: Transaction Cost Analysis
-
-The challenge provides deep insights into:
-
-1. **Cost Impact Quantification**: How commissions affect net returns
-2. **Strategy Frequency Optimization**: Balancing signals vs costs
-3. **Break-even Analysis**: Minimum required edge
-4. **Commission Sensitivity**: Strategy robustness to cost changes
-
-## Key Insights
-
-1. **Realism Matters**: Transaction costs significantly impact high-frequency strategies
-2. **Robustness Testing**: Walk-forward analysis reveals true performance
-3. **Risk Management**: Drawdown control is as important as returns
-4. **Benchmarking**: Outperformance must be risk-adjusted
-
-## Usage
-
-```python
-# Complete backtest
-backtester = TradingStrategyBacktester()
-results = backtester.run_complete_backtest(prices, predictions, "My Strategy")
-
-# Individual components
-portfolio = backtester.vectorbt_backtest(prices, signals)
-metrics = backtester.calculate_performance_metrics(portfolio_values, prices)
-wf_results = backtester.walk_forward_analysis(prices, predictions)
+## How to Run
+1. Install dependencies: `pip install pandas numpy matplotlib yfinance vectorbt`
+2. Run the backtester:
+```bash
+python week_08/dayfiftyfive/day_fiftyfive.py
 ```
+
+## Reflection
+A model that is 60% accurate can still lose money if the average loss is larger than the average win, or if commissions eat the profits. Backtesting is the ultimate "reality check" for any machine learning strategy.

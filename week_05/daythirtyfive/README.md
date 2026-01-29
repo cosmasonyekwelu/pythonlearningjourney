@@ -1,90 +1,36 @@
-# **Day 35 — Stock Data Analyzer**
+# Day 35: Weekly Project – Financial Programming Summary
 
-A **comprehensive stock analysis and visualization tool** that combines **technical indicators, fundamental metrics, portfolio risk analytics**, and an **interactive dashboard**.
+**Date:** October 26, 2025
 
----
+## Learning Objective
+To consolidate all financial programming concepts learned throughout the week into a unified Command Line Interface (CLI) and interactive dashboard.
 
-## **Overview**
+## Concepts Covered
+- **Command-Line Interface (CLI)**: Using `argparse` to build a professional multi-command tool.
+- **Project Structure**: Organizing complex code into a logical `src/` directory with modular responsibilities.
+- **Reporting**: Exporting analysis results to HTML, CSV, and Excel formats.
+- **Interactive Dashboards**: Launching a Dash-based web application for data exploration.
+- **Caching**: Implementing a simple file-based cache to improve API performance and reduce rate-limiting issues.
 
-The **Stock Data Analyzer** fetches live and historical market data, performs in-depth technical and fundamental analysis, evaluates portfolio risks, and generates exportable reports or visual dashboards — all in one system.
+## Code Explanation
+The `day_thirtyfive.py` script serves as the main entry point for the "Stock Data Analyzer" project:
+- **Commands**:
+    - `analyze`: Provides a technical and risk summary of a single ticker.
+    - `compare`: Analyzes correlations and portfolio risk for multiple symbols.
+    - `screen`: Filters the stock universe based on volatility and Sharpe ratio.
+    - `recommend`: Uses technical analysis to generate Buy/Hold/Sell signals.
+    - `dashboard`: Starts a local web server to visualize the data interactively.
 
----
-
-## **Key Features**
-
-- **Multi-Stock Comparison** — price, returns, and correlations
-- **Technical Analysis** — RSI, MACD, Bollinger Bands, Moving Averages
-- **Fundamental Analysis** — P/E, ROE, dividends, profit margins
-- **Risk Metrics** — volatility, Sharpe ratio, drawdown, VaR
-- **Interactive Dashboard** — built with Plotly Dash
-- **Reports & Exports** — HTML, CSV, Excel summaries
-- **Caching System** — fast local data reuse
-
----
-
-## **Quick Start**
-
-### **1️ Setup**
-
+## How to Run
+1. Install dependencies: `pip install -r requirements.txt`
+2. View available commands:
 ```bash
-pip install -r requirements.txt
-cp .env.example .env
+python week_05/daythirtyfive/day_thirtyfive.py --help
 ```
-
-(Optional) Add your Alpha Vantage API key in `.env`.
-
-### **2️ CLI Usage**
-
+3. Run a stock analysis:
 ```bash
-# Analyze a stock
-python day_thirtyfive.py analyze AAPL --period 1y
-
-# Compare multiple stocks
-python day_thirtyfive.py compare AAPL MSFT GOOGL
-
-# Generate HTML report
-python day_thirtyfive.py report AAPL --format html
-
-# Launch dashboard
-python day_thirtyfive.py dashboard
+python week_05/daythirtyfive/day_thirtyfive.py analyze AAPL --format json
 ```
 
----
-
-## **Dashboard**
-
-Run:
-
-```bash
-python day_thirtyfive.py dashboard
-```
-
-Then open [http://localhost:8050](http://localhost:8050)
-
-Tabs include:
-
-- **Price Comparison**
-- **Technical Analysis**
-- **Fundamentals**
-- **Risk Metrics**
-- **Portfolio View**
-
----
-
-## **Project Structure**
-
-```
-day_thirtyfive/
-├── day_thirtyfive.py        # Main entry point
-├── requirements.txt
-├── .env.example
-└── src/
-    ├── data_collection.py   # Data fetching & caching
-    ├── analysis_engine.py   # Technical/Fundamental/Risk analysis
-    ├── reporting.py         # Report generation
-    ├── stock_data_analyzer.py
-    ├── dashboard.py         # Interactive dashboard
-    └── app.py               # CLI interface
-```
-
----
+## Reflection
+Consolidating individual scripts into a unified tool transforms a collection of experiments into a professional product. This project demonstrates how a robust backend can support multiple frontends (CLI, Reports, Dashboards) simultaneously.

@@ -1,157 +1,34 @@
 # Day 36: Networking & Socket Programming
 
-## Overview
+**Date:** October 27, 2025
 
-This project demonstrates the fundamentals of network programming using Python sockets.  
-It covers how to create both simple TCP echo programs and a multi-client chat system.  
-The examples in this folder show how clients and servers communicate, handle multiple connections, and exchange data over a network.
+## Learning Objective
+To understand the fundamentals of network communication in Python using the `socket` module and to build basic server-client architectures.
 
----
+## Concepts Covered
+- **Socket Programming**: Understanding TCP/IP sockets, binding, listening, and accepting connections.
+- **Echo Servers**: Building a basic server that returns any data sent by a client.
+- **Multi-threading**: Using threads to handle multiple simultaneous client connections.
+- **Protocol Design**: Creating a simple chat protocol for message exchange.
+- **Client Implementation**: Building robust clients that can connect, send data, and handle server responses.
 
-## Folder Structure
+## Code Explanation
+The `day_thirtysix.py` script acts as a launcher for several networking examples:
+- **`echo_server.py` & `echo_client.py`**: A foundational "Hello World" of networking.
+- **`chat_server.py`**: A more advanced implementation that maintains a list of connected clients and broadcasts messages to all of them.
+- **`chat_client.py`**: Uses a separate thread for receiving messages so the user can type and receive simultaneously.
+- **`run_single_chat_test()`**: Orchestrates a server and client in a single process using threads for easy demonstration.
 
-```
-
-daythirtysix/
-│
-├── day_thirtysix.py      # Main menu and example runner
-├── README.md             # Documentation file
-├── echo_server.py        # Basic TCP echo server
-├── echo_client.py        # Basic TCP echo client
-├── chat_server.py        # Multi-client chat server
-├── chat_client.py        # Chat client for multi-user messaging
-└── chat_log.txt          # Chat history log file (auto-generated)
-
-```
-
----
-
-## Quick Start
-
-### Option 1: Use the Main Menu
-
-Run the interactive menu to access all examples:
-
+## How to Run
+1. Open two terminal windows.
+2. In the first, run the server:
 ```bash
-python day_thirtysix.py
+python week_06/daythirtysix/echo_server.py
 ```
-
-### Option 2: Run Individual Components
-
-**Start the Echo Server**
-
+3. In the second, run the client:
 ```bash
-python echo_server.py
+python week_06/daythirtysix/echo_client.py
 ```
 
-**Run the Echo Client (in a new terminal)**
-
-```bash
-python echo_client.py
-```
-
-**Start the Chat Server**
-
-```bash
-python chat_server.py
-```
-
-**Run a Chat Client (in one or more terminals)**
-
-```bash
-python chat_client.py
-```
-
----
-
-## Features
-
-### Echo Server and Client
-
-- Demonstrates the basics of socket connections.
-- Uses TCP for reliable communication.
-- Handles one client connection at a time.
-- Echoes received messages back to the sender.
-
-### Multi-Client Chat Server
-
-- Handles multiple clients using threading.
-- Broadcasts messages to all connected users.
-- Supports simple text commands such as:
-
-  - `/users` — show online users
-  - `/quit` — exit chat
-
-- Logs messages to `chat_log.txt`.
-- Demonstrates JSON message formatting.
-
----
-
-## Learning Objectives
-
-- Understand the concept of **TCP/IP communication**.
-- Learn the **client-server model** in networking.
-- Use the Python `socket` module for network programming.
-- Manage **multiple connections** using threads.
-- Handle user input and data serialization.
-- Implement basic **error handling** in networked applications.
-
----
-
-## Networking Concepts Covered
-
-- IP addresses and port numbers.
-- TCP vs UDP transport protocols.
-- Socket functions:
-
-  - `socket()`, `bind()`, `listen()`, `accept()`, `connect()`, `send()`, `recv()`
-
-- Threading for concurrent connections.
-- JSON-based message exchange.
-
----
-
-## Chat Message Protocol
-
-Messages exchanged between server and clients follow this structure:
-
-```json
-{
-  "type": "message | notification | error",
-  "content": "Message text",
-  "sender": "User nickname",
-  "timestamp": "2025-10-27T12:00:00"
-}
-```
-
----
-
-## Example Workflow
-
-1. Start the chat server:
-
-   ```bash
-   python chat_server.py
-   ```
-
-2. Launch multiple chat clients:
-
-   ```bash
-   python chat_client.py
-   ```
-
-3. Clients can send messages to each other in real-time.
-4. Use `/users` to list connected users.
-5. Type `/quit` to disconnect.
-
----
-
-## Key Takeaways
-
-- A **socket** is the endpoint of communication between two programs.
-- **TCP** ensures reliable, ordered, and error-checked delivery of data.
-- **Threading** allows handling multiple clients simultaneously.
-- **Serialization** (e.g., JSON) helps structure and interpret transmitted data.
-- Proper **exception handling** ensures smooth client disconnection and server stability.
-
----
+## Reflection
+Sockets are the lowest level of network programming. Understanding how they work is crucial for building anything from web servers to real-time multiplayer games. The transition from a single-threaded echo server to a multi-threaded chat server highlights the importance of concurrency in networking.

@@ -1,79 +1,34 @@
-# Day 18 - Python Learning Journey
+# Day 18: Working with APIs and Web Data
 
 **Date:** October 9, 2025
 
-## Topic: Working with APIs and Web Data
+## Learning Objective
+To understand how to interact with external web services using REST APIs, handle HTTP requests, and process JSON responses.
 
-**Focus:** Fetching and processing data from external APIs
+## Concepts Covered
+- **HTTP Requests**: Using the `requests` library to perform GET requests.
+- **API Keys**: Managing sensitive credentials using environment variables and the `python-dotenv` package.
+- **JSON Parsing**: Converting web responses into Python dictionaries.
+- **Error Handling in Networking**: Handling timeouts, connection errors, and HTTP status codes (e.g., 401 Unauthorized, 404 Not Found).
+- **Data Logging**: Recording API data to a local log file for history tracking.
 
----
+## Code Explanation
+The `day_eighteen.py` script implements a Weather Application:
+- **`get_weather(city)`**:
+    - Fetches an API key from environment variables.
+    - Constructs a URL for the OpenWeatherMap API.
+    - Sends a request and validates the status using `response.raise_for_status()`.
+    - Parses the temperature, humidity, and wind speed.
+    - Appends the result to `weather_log.txt`.
+- **Environment Management**: Demonstrates the best practice of using a `.env` file instead of hardcoding API keys.
 
-## Activities
-
-1. Learned how to use the `requests` library for making API calls.
-2. Understood how to parse and process JSON responses.
-3. Implemented error handling for network requests and timeouts.
-4. Practiced REST API integration using OpenWeatherMap.
-5. Built a complete **Weather Application** that fetches real-time weather data for any city.
-6. Added data persistence to store and review weather history.
-7. Installed and configured the python-dotenv library.
-8. Created and loaded a .env file to store sensitive environment variables.
-9. Used os.getenv() to securely access API keys from environment variables.
-10. Practiced secure API integration using requests and environment configuration.
-11. Improved code structure for reusability and better security practices.
-
----
-
-## Files Overview
-
-### **1. day_eighteen.py**
-
-Main entry script that initializes and runs the weather application.
-
-- Handles menu navigation
-- Manages user input
-- Calls functions from `weather_app.py`
-
-### **2. weather_app.py**
-
-Contains the `WeatherApp` class and supporting utility functions.
-
-- Handles API requests, JSON processing, and error handling
-- Saves and loads weather data to/from JSON files
-- Includes temperature conversion utility
-
----
-
-## Setup Instructions
-
-### 1. Navigate to your Day 18 folder
-
+## How to Run
+1. Install requirements: `pip install requests python-dotenv`
+2. Create a `.env` file and add: `OPEN_WEATHER_API_KEY=your_key_here`
+3. Run the application:
 ```bash
-cd pythonlearningjourney/day_eighteen
+python week_03/dayeighteen/day_eighteen.py
 ```
 
-## Key Learnings
-
-- Integrated third-party APIs using the requests library.
-- Parsed JSON responses and handled data programmatically.
-- Implemented exception handling for:
-- Timeouts
-- Invalid city names
-- Invalid API keys
-- Network issues
-- Saved and reloaded data using JSON persistence.
-- Created utility functions for temperature conversions and historical data tracking.
-- Never hardcode API keys in your code.
-- Use .env files and python-dotenv for secure key management.
-- Always handle missing environment variables gracefully.
-- Keep .env files private and add them to .gitignore
-
 ## Reflection
-
-This project demonstrated how to connect Python with real-world web data. Building a Weather App reinforced the importance of:
-
-- Proper API error handling
-- JSON serialization and deserialization
-- Data persistence and modular programming.
-
-I successfully built a complete, user-friendly Python application that interacts with a live API and saves user data locally.
+APIs connect Python to the real world. Learning to handle the unpredictability of network requests—like slow connections or invalid inputs—is a critical skill for any modern developer.

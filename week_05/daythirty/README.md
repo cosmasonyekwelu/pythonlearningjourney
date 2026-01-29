@@ -1,89 +1,30 @@
-# Day 30 - Data Visualization & Dashboards
+# Day 30: Financial Data Visualization & Dashboards
 
-This project demonstrates financial data visualization and dashboard creation using Python.
+**Date:** October 21, 2025
 
-## Files
+## Learning Objective
+To master the art of financial data visualization using both static (Matplotlib/Seaborn) and interactive (Plotly) libraries.
 
-- `static_charts.py`: Static charts using Matplotlib and Seaborn
-- `interactive_charts.py`: Interactive charts using Plotly
-- `financial_dashboard.py`: Complete financial dashboard using Dash
-- `technical_indicators.py`: Technical analysis indicators and visualization
-- `data/sample_stock_data.csv`: Sample stock data for testing
+## Concepts Covered
+- **Static Charting**: Creating performance comparisons, volume bars, and correlation heatmaps.
+- **Interactive Candlesticks**: Building OHLC charts with range sliders and hover details.
+- **Technical Dashboards**: Visualizing multiple indicators (SMA, RSI, MACD) in a single synchronized layout.
+- **Portfolio Analytics**: Creating pie charts for allocation and scatter plots for risk-return analysis.
+- **Synthetic Data Generation**: Using random walks and normal distributions to simulate realistic stock behavior.
 
-## Installation
+## Code Explanation
+The `day_thirty.py` script is a visualization masterclass:
+- **`StaticChartGenerator`**: Uses Matplotlib for traditional reporting graphics.
+- **`InteractiveChartGenerator`**: Uses Plotly's `make_subplots` to create a 4-panel technical analysis dashboard where zooming on the price also zooms the RSI and MACD.
+- **`PortfolioVisualizer`**: Implements specialized charts for portfolio management, including a "Sharpe Ratio" bubble chart.
+- **Technical Indicators**: Includes manual implementations of RSI and MACD to demonstrate the underlying math.
 
-1. Install required packages:
-
+## How to Run
+1. Install dependencies: `pip install pandas numpy matplotlib seaborn plotly yfinance`
+2. Run the demonstration:
 ```bash
-pip install -r requirements.txt
+python week_05/daythirty/day_thirty.py
 ```
 
-2. Run individual modules:
-
-```bash
-python static_charts.py
-python interactive_charts.py
-python financial_dashboard.py
-python technical_indicators.py
-```
-
-## Features
-
-### Static Charts
-
-- Line charts for stock price trends
-- OHLC charts
-- Correlation heatmaps
-- Technical indicator charts
-
-### Interactive Charts
-
-- Interactive candlestick charts
-- Technical analysis dashboards
-- Stock comparison charts
-- Real-time data updates
-
-### Financial Dashboard
-
-- Multi-stock selection
-- Different chart types
-- Technical indicators
-- Stock performance comparison
-- Automatic data updates
-
-### Technical Indicators
-
-- Moving averages (SMA, EMA)
-- Relative Strength Index (RSI)
-- MACD indicator
-- Bollinger Bands
-
-## Usage
-
-1. Start the dashboard:
-
-```bash
-python financial_dashboard.py
-```
-
-2. Open http://localhost:8050 in your browser
-
-3. Select stocks and time periods to visualize
-
-## Data Sources
-
-- Yahoo Finance API (yfinance)
-- Sample data provided for testing
-
-## Learning Resources
-
-- Plotly Python Documentation: https://plotly.com/python/
-- Dash Official Documentation: https://dash.plotly.com/
-- Matplotlib Financial Charts: https://matplotlib.org/stable/api/finance_api.html
-- Seaborn Statistical Visualization: https://seaborn.pydata.org/
-- Real Python Data Visualization Guide: https://realpython.com/python-data-visualization/
-
-```
-
-This completes the Day 30 Data Visualization & Dashboards project with all necessary files and content. The project covers static charts, interactive visualizations, financial dashboards, and technical indicator visualization as specified.
-```
+## Reflection
+Data visualization is the bridge between raw numbers and actionable insights. Interactive charts, in particular, allow traders to "feel" the data by exploring different timeframes and indicators dynamically.

@@ -1,58 +1,32 @@
-# Day 45: Trade Execution APIs
+# Day 45: Paper Trading API Integration
 
-## Objective
-Connect your scripts to real (or simulated) broker/exchange APIs to place, monitor, and manage trades programmatically.
+**Date:** November 5, 2025
 
-## Features
-- **Paper Trading Integration**: Connect to Alpaca Paper Trading API
-- **Order Management**: Place, check, and cancel orders programmatically
-- **Account Monitoring**: Track portfolio value, buying power, and positions
-- **Trade Logging**: SQLite database integration for audit trail
-- **Error Handling**: Robust error handling for API failures
+## Learning Objective
+To integrate with a real-world brokerage API (Alpaca) for paper trading and implement a local trade logging system for auditing.
 
-## Core Concepts Demonstrated
-- **API Authentication**: Handling API keys and request signing
-- **RESTful API Integration**: Making HTTP requests to trading endpoints
-- **Order Lifecycle**: Managing orders from creation to execution
-- **Data Persistence**: SQLite integration for trade history
-- **Paper Trading**: Safe environment for strategy testing
+## Concepts Covered
+- **Brokerage APIs**: Authenticating and interacting with the Alpaca Paper Trading environment.
+- **Order Execution**: Placing market and limit orders programmatically.
+- **Account Management**: Fetching equity, buying power, and current positions.
+- **Trade Logging**: Using `sqlite3` to maintain a local record of all trade attempts and fills.
+- **Error Handling**: Managing network issues and API rejection codes.
 
-## Installation Requirements
+## Code Explanation
+The `day_fortyfive.py` script features the `PaperTradingAPI` class:
+- **`place_order()`**: Sends a POST request to Alpaca and logs the resulting order ID to the database.
+- **`get_trade_history()`**: Queries the local SQLite database to show recent activities.
+- **`init_database()`**: Ensures the local `trading_log.db` is set up with the correct schema.
+- **`BinanceTestnetAPI`**: A skeleton class showing how the logic would differ for a crypto exchange.
+
+## How to Run
+1. Install dependencies: `pip install requests pandas`
+2. Obtain an API Key from [Alpaca](https://alpaca.markets/).
+3. Update the constants in the script.
+4. Run the trading system:
 ```bash
-pip install requests pandas sqlite3
+python week_07/dayfortyfive/day_fortyfive.py
 ```
 
-## Setup Requirements
-1. Sign up for Alpaca Paper Trading account
-2. Get API keys from Alpaca dashboard
-3. Update credentials in `main()` function
-
-## Configuration
-```python
-ALPACA_API_KEY = "your_actual_api_key"
-ALPACA_SECRET_KEY = "your_actual_secret_key"
-```
-
-## Safety Features
-- Paper trading only (no real money involved)
-- Database logging for complete audit trail
-- Comprehensive error handling
-- Commented-out trade execution for safety
-
-## Usage
-```bash
-python day_fortyfive.py
-```
-
-## API Endpoints Used
-- `/v2/account` - Account information and balances
-- `/v2/orders` - Order placement and management
-- `/v2/positions` - Current portfolio positions
-- `/v2/assets/{symbol}` - Asset information
-
-## Supported Order Types
-- Market orders
-- Limit orders
-- Stop orders
-- Stop-limit orders
-```
+## Reflection
+Paper trading is the safest way to develop algorithms. By integrating a local database with a remote API, we create a robust system where we can audit our bot's behavior against actual market data without financial risk.

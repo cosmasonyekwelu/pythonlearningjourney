@@ -1,76 +1,36 @@
-# Day 03 - Python Learning Journey.
+# Day 03: Core Python Concepts Deep Dive
 
 **Date:** September 24, 2025
 
-## Activities
+## Learning Objective
+To reinforce fundamental Python concepts and explore advanced features like type annotations, classes, and special "dunder" methods.
 
-1. Orientation Day Three
+## Concepts Covered
+1. **Variables & Basic Assignment**: Storing data.
+2. **Data Types**: Integers, Floats, Strings, Booleans.
+3. **Collections**: Lists (mutable), Tuples (immutable), Sets (unique), Dictionaries (key-value).
+4. **Type Annotations**: Adding clarity to function signatures.
+5. **Constants**: Using uppercase for fixed values.
+6. **Functions**: Modularizing code with parameters and returns.
+7. **Object-Oriented Programming (OOP)**: Creating classes and constructors.
+8. **Inheritance**: Extending classes.
+9. **Dunder Methods**: Implementing `__str__`, `__add__`, and `__eq__`.
+10. **Main Execution Block**: Using `if __name__ == "__main__":`.
 
-2. Core Python Concepts
+## Code Explanation
+The `day_three.py` script provides a practical demonstration of 10 essential Python concepts.
+- `square(number: int) -> int`: Demonstrates type hints and basic arithmetic.
+- `Student` Class: A base class representing a student with a name and age.
+- `AdvancedStudent` Class: Inherits from `Student` and implements:
+    - `__str__`: Custom string representation.
+    - `__add__`: Allows adding two students together (returns sum of ages).
+    - `__eq__`: Compares two students for equality based on name and age.
 
-Today, I had another **Zoom orientation session** and continued learning through the video
-["10 Important Python Concepts in 20 Minutes"](https://youtu.be/Gx5qb1uHss4).
-
-I practiced the concepts in [`daythree.py`](daythree.py), where each section is clearly labeled (1–10).
-
-### Concepts Covered:
-
-1. **Creating a Python file and running it**
-
-   - Learned to create `.py` files, save them, and run using `python filename.py`.
-
-2. **Variables & Assignment**
-
-   - Using variables to store data (e.g., `name = "Cosmas"`, `age = 25`).
-
-3. **Basic Data Types**
-
-   - Common types: `int`, `float`, `str`, `bool`.
-
-4. **Collections**
-
-   - `list` (ordered, mutable),
-   - `tuple` (ordered, immutable),
-   - `set` (unordered, unique values),
-   - `dict` (key-value pairs).
-
-5. **Type Annotations**
-
-   - Adding hints like `def square(number: int) -> int:` for clarity and maintainability.
-
-6. **Constants**
-
-   - Declaring constants with `Final` (e.g., `PI: Final[float] = 3.14159`).
-
-7. **Functions with Parameters and Return Types**
-
-   - Writing reusable functions with input parameters and return values.
-
-8. **Classes and `__init__`**
-
-   - Defining classes with constructors and methods.
-
-9. **Dunder (Magic) Methods**
-
-   - Overriding methods like `__str__`, `__add__`, and `__eq__` to make objects more powerful.
-
-10. **Writing Clean, Reusable Code**
-    - Using `if __name__ == "__main__":` to control script execution and keep modules reusable.
-
----
-
-### Files
-
-- `daythree.py`: Python practice file with all 10 concepts implemented.
-- `README.md`: Documentation of learning journey.
-
-## Key Learnings
-
-- Gained hands-on practice with **fundamental Python building blocks**.
-- Learned how to structure code for **readability and reusability**.
-- Understood the importance of **dunder methods** in making objects behave like built-ins.
-- Practiced creating functions, classes, and constants to organize logic.
+## How to Run
+Run the script using Python:
+```bash
+python week_01/daythree/day_three.py
+```
 
 ## Reflection
-
-Day Three was a big step forward in Python. I now feel more confident writing structured, reusable code using functions and classes. I also realized the importance of clean coding practices, which will help me as I build larger projects.
+Moving from basic scripts to Object-Oriented Programming is a big step. Dunder methods are particularly powerful for making custom classes behave like built-in Python types.
